@@ -10,9 +10,9 @@ print("Vil du justere hastighed?: j/n")
 hastighed = input()
 if hastighed == "j":
   print("Left wheel: ")
-  leftSpeed = int(input())
+  leftSpeed = float(input())
   print("Right wheel: ")
-  rightSpeed = int(input())
+  rightSpeed = float(input())
 elif hastighed == "n" :
   print("Sætter fart til standard lige")
   leftSpeed = 58
