@@ -24,22 +24,21 @@ def drej(sekunder, h_left, h_right):
 print("Jytte, mindre press på speederen! ...")
 sleep(1)
 lige_ud(4, 63, 64)
-sleep(1)
+
 drej(0.5, 63, 63.5)
-sleep(1)
-sleep(1)
+
 lige_ud(4, 63, 64)
-sleep(1)
+
 drej(0.5, 63, 63.5)
-sleep(1)
-sleep(1)
+
+
 lige_ud(4, 63, 64)
-sleep(1)
+
 drej(0.5, 63, 63.5)
-sleep(1)
-sleep(1)
+
+
 lige_ud(4, 63, 64)
-sleep(1)
+
 drej(0.5, 63, 63.5)
-sleep(1)
+
 print(arlo.stop())
