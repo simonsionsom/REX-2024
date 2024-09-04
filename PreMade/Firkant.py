@@ -1,8 +1,3 @@
-from time import sleep
-
-import robot
-
-# Create a robot object and initialize
 arlo = robot.Robot()
 tændt = 0 
 print("Running ...")
@@ -26,7 +21,6 @@ retning = input()
 
 print("Duration: ")
 duration = float(input())
-
 while tændt > 0 :
   print(arlo.go_diff(leftSpeed, rightSpeed, 1, 1))
   sleep(3)
@@ -38,7 +32,6 @@ while tændt > 0 :
   print(arlo.stop())
   tændt = tændt -1
   #din mor
-
 if retning == "l":
   print(arlo.go_diff(leftSpeed, rightSpeed, 1, 1))
   sleep(duration)
