@@ -34,18 +34,17 @@ sleep(1)
 for rotation in range(1, 4):
 
     lige_ud(sekunder_lige, hastighed_kør_l, hastighed_kør_r)
-
+    print(arlo.stop())
     drej(sekunder_drej, hastighed_drej_l, hastighed_drej_r)
-
+    print(arlo.stop())
     lige_ud(sekunder_lige, hastighed_kør_l, hastighed_kør_r)
-
+    print(arlo.stop())
     drej(sekunder_drej, hastighed_drej_l, hastighed_drej_r)
-
-
+    print(arlo.stop())
     lige_ud(sekunder_lige, hastighed_kør_l, hastighed_kør_r)
-
+    print(arlo.stop())
     drej(sekunder_drej, hastighed_drej_l, hastighed_drej_r)
-
+    print(arlo.stop())
 
     lige_ud(sekunder_lige, hastighed_kør_l, hastighed_kør_r)
 
