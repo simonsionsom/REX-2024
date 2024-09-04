@@ -10,6 +10,8 @@ print("Left wheel: ")
 leftSpeed = input()
 print("Right wheel: ")
 rightSpeed = input()
+print("Duration: ")
+duration = input()
 while tændt > 0 :
   print(arlo.go_diff(leftSpeed, rightSpeed, 1, 1))
   sleep(3)
@@ -22,7 +24,7 @@ while tændt > 0 :
   tændt = tændt -1
   #din mor
 print(arlo.go_diff(leftSpeed, rightSpeed, 1, 1))
-sleep(2)
+sleep(duration)
 
 
 
