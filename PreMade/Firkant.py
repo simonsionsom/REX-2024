@@ -19,6 +19,8 @@ elif hastighed == "n" :
   rightSpeed = 64
 else :
   print("Så stopper legen fister")
+  sleep(1)
+  print("Finished")
   print(arlo.stop())
 
 print("Drej: d | Eller ligeud: l")
@@ -52,7 +54,10 @@ elif retning == "d" :
     sleep(duration)
   else:
     print("Så stopper legen fister")
+    sleep(1)
+    print("Finished")
     print(arlo.stop())
+
 else :
   print("surt show sunnyboy")
   print(arlo.stop())
