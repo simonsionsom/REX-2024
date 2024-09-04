@@ -21,12 +21,12 @@ def drej(sekunder, h_left, h_right):
     sleep(sekunder)
 
 
-sekunder_drej = 0.75
-sekunder_lige = 2.5
-hastighed_kør_r = 64
+sekunder_drej = 0.55
+sekunder_lige = 3
+hastighed_kør_r = 63
 hastighed_kør_l = 63
-hastighed_drej_l = 35.5
-hastighed_drej_r = 35.5
+hastighed_drej_l = 35
+hastighed_drej_r = 35
 
 print("Jytte, mindre press på speederen! ...")
 sleep(1)
