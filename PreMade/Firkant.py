@@ -11,7 +11,9 @@ leftSpeed = int(input())
 print("Right wheel: ")
 rightSpeed = int(input())
 print("Duration: ")
-duration = int(input())
+duration = float(input())
+#print("Drej: d | Eller ligeud: u")
+
 while tændt > 0 :
   print(arlo.go_diff(leftSpeed, rightSpeed, 1, 1))
   sleep(3)
