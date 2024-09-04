@@ -18,6 +18,7 @@ while tændt > 0 :
   sleep(2)
   print(arlo.stop())
   tændt = tændt -1
+  #din mor
 
 
 
