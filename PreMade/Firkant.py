@@ -19,9 +19,9 @@ elif hastighed == "n" :
   rightSpeed = 64
 else :
   print("Så stopper legen fister")
-  sleep(1)
   print("Finished")
   print(arlo.stop())
+  sleep(1)
 
 print("Drej: d | Eller ligeud: l")
 retning = input()
@@ -45,6 +45,7 @@ if retning == "l":
   sleep(duration)
   print(arlo.stop())
   print("Finished")
+  sleep(1)
 elif retning == "d" :
   print("For højre: 1 |For venstre: 0")
   drejning = int(input())
@@ -53,22 +54,25 @@ elif retning == "d" :
     sleep(duration)
     print(arlo.stop())
     print("Finished")
+    sleep(1)
   elif drejning == 0:
     print(arlo.go_diff(leftSpeed, rightSpeed, 0, 1))
     sleep(duration)
+
     print(arlo.stop())
     print("Finished")
+    sleep(1)
   else:
     print("Så stopper legen fister")
-    sleep(1)
     print("Finished")
     print(arlo.stop())
-    print("Finished")
+    sleep(1)
 
 else :
   print("surt show sunnyboy")
   print(arlo.stop())
   print("Finished")
+  sleep(1)
 
 
 
