@@ -22,7 +22,7 @@ def drej(sekunder, h_left, h_right):
 
 
 sekunder_drej = 0.75
-sekunder_lige = 4
+sekunder_lige = 2.5
 
 print("Jytte, mindre press på speederen! ...")
 sleep(1)
