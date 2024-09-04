@@ -24,25 +24,27 @@ def drej(sekunder, h_left, h_right):
 sekunder_drej = 0.75
 sekunder_lige = 4
 
-
 print("Jytte, mindre press på speederen! ...")
 sleep(1)
-lige_ud(sekunder_lige, 63, 64)
 
-drej(sekunder_drej, 63, 63.5)
+for rotation in range(1, 4):
 
-lige_ud(sekunder_lige, 63, 64)
+    lige_ud(sekunder_lige, 63, 64)
 
-drej(sekunder_drej, 63, 63.5)
+    drej(sekunder_drej, 63, 63.5)
 
+    lige_ud(sekunder_lige, 63, 64)
 
-lige_ud(sekunder_lige, 63, 64)
-
-drej(sekunder_drej, 63, 63.5)
+    drej(sekunder_drej, 63, 63.5)
 
 
-lige_ud(sekunder_lige, 63, 64)
+    lige_ud(sekunder_lige, 63, 64)
 
-drej(sekunder_drej, 63, 63.5)
+    drej(sekunder_drej, 63, 63.5)
+
+
+    lige_ud(sekunder_lige, 63, 64)
+
+    drej(sekunder_drej, 63, 63.5)
 
 print(arlo.stop())
