@@ -13,10 +13,14 @@ if hastighed == "j":
   leftSpeed = int(input())
   print("Right wheel: ")
   rightSpeed = int(input())
-else :
+elif hastighed == "n" :
   print("Sætter fart til standard lige")
   leftSpeed = 58
   rightSpeed = 64
+else :
+  print("Så stopper legen fister")
+  print(arlo.stop())
+
 print("Drej: d | Eller ligeud: l")
 retning = input()
 
@@ -44,11 +48,15 @@ elif retning == "d" :
   if drejning == 1:
     print(arlo.go_diff(leftSpeed, rightSpeed, 1, 0))
     sleep(duration)
-  else :
+  elif drejning == 0:
     print(arlo.go_diff(leftSpeed, rightSpeed, 0, 1))
     sleep(duration)
+  else:
+    print("Så stopper legen fister")
+    print(arlo.stop())
 else :
   print("surt show sunnyboy")
+  print(arlo.stop())
 
 
 
