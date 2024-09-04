@@ -13,19 +13,23 @@ if hastighed == "j":
   leftSpeed = int(input())
   print("Right wheel: ")
   rightSpeed = int(input())
+  print("Drej: d | Eller ligeud: l")
+  retning = input()
+  print("Duration: ")
+  duration = float(input())
 elif hastighed == "n" :
   print("Sætter fart til standard lige")
   leftSpeed = 58
   rightSpeed = 64
+  print("Drej: d | Eller ligeud: l")
+  retning = input()
+  print("Duration: ")
+  duration = float(input())
 else :
   print("Så stopper legen fister")
   print(arlo.stop())
 
-print("Drej: d | Eller ligeud: l")
-retning = input()
 
-print("Duration: ")
-duration = float(input())
 
 while tændt > 0 :
   print(arlo.go_diff(leftSpeed, rightSpeed, 1, 1))
