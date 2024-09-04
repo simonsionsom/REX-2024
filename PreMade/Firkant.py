@@ -6,8 +6,10 @@ import robot
 arlo = robot.Robot()
 tændt = 0 
 print("Running ...")
-leftSpeed = 60
-rightSpeed = 64
+print("Left wheel: ")
+leftSpeed = input()
+print("Right wheel: ")
+rightSpeed = input()
 while tændt > 0 :
   print(arlo.go_diff(leftSpeed, rightSpeed, 1, 1))
   sleep(3)
