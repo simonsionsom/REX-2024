@@ -43,15 +43,18 @@ while tændt > 0 :
 if retning == "l":
   print(arlo.go_diff(leftSpeed, rightSpeed, 1, 1))
   sleep(duration)
+  print(arlo.stop())
 elif retning == "d" :
   print("For højre: 1 |For venstre: 0")
   drejning = int(input())
   if drejning == 1:
     print(arlo.go_diff(leftSpeed, rightSpeed, 1, 0))
     sleep(duration)
+    print(arlo.stop())
   elif drejning == 0:
     print(arlo.go_diff(leftSpeed, rightSpeed, 0, 1))
     sleep(duration)
+    print(arlo.stop())
   else:
     print("Så stopper legen fister")
     sleep(1)
