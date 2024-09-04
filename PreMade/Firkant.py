@@ -1,8 +1,3 @@
-from time import sleep
-
-import robot
-
-# Create a robot object and initialize
 arlo = robot.Robot()
 tændt = 0 
 print("Running ...")
@@ -37,3 +32,8 @@ else :
 
 
 
+  
+  
+  
+  
+  
