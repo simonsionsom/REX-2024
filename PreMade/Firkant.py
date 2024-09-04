@@ -12,8 +12,8 @@ print("Right wheel: ")
 rightSpeed = int(input())
 print("Duration: ")
 duration = float(input())
-#print("Drej: d | Eller ligeud: u")
-
+print("Drej: d | Eller ligeud: l")
+retning = input()
 while tændt > 0 :
   print(arlo.go_diff(leftSpeed, rightSpeed, 1, 1))
   sleep(3)
@@ -25,8 +25,14 @@ while tændt > 0 :
   print(arlo.stop())
   tændt = tændt -1
   #din mor
-print(arlo.go_diff(leftSpeed, rightSpeed, 1, 1))
-sleep(duration)
+if retning == "l":
+  print(arlo.go_diff(leftSpeed, rightSpeed, 1, 1))
+  sleep(duration)
+elif retning == "d" :
+  print(arlo.go_diff(leftSpeed, rightSpeed, 1, 0))
+  sleep(duration)
+else :
+  print("sur show sunnyboy")
 
 
 
