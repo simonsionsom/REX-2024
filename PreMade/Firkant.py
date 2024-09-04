@@ -20,7 +20,7 @@ while tændt > 0 :
   tændt = tændt -1
   #din mor
 print(arlo.go_diff(leftSpeed, rightSpeed, 1, 1))
-sleep(1)
+sleep(2)
 
 
 
