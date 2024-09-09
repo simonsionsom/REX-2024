@@ -54,7 +54,7 @@ def recursivesensor(front):
     ping()
     lige_ud(2,63,63)
     sleep(1)
-    if front < 400:
+    while front > 400:
         drej(3, 63, 63)
     recursivesensor(front)
 recursivesensor(front)
