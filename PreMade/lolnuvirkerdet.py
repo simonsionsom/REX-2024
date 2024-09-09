@@ -20,7 +20,7 @@ sleep(0.7)
 print("Drejer med hastighederne: ")
 print("Venstre: {h_left}, Højre: {h_right}")
 print("I {sekunder_drej} sekunder")
-sleep(0.041)
+sleep(1)
 print(arlo.go_diff(hastighed_drej_l, hastighed_drej_r, 1, 0))
 sleep(float(0.55))
 
