@@ -19,7 +19,7 @@ def drej(sekunder, h_left, h_right):
     print("I {sekunder} sekunder")
     sleep(0.041)
     print(arlo.go_diff(h_left, h_right, 1, 0))
-    sleep(sekunder)
+    sleep(0.55)
 
 
 sekunder_drej = 0.55
