@@ -54,8 +54,8 @@ def recursivesensor(front):
     for _ in range(3):
         ping()
         sleep(1)
-        lige_ud(2, 63, 63)
-        print(arlo.stop())
+        lige_ud(2, 40, 40)
+        arlo.stop()
         sleep(1)
         while front > 400:
             drej(3, 63, 63)
