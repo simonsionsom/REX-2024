@@ -35,7 +35,7 @@ straight = left/right
 leftSpeed = 63
 rightSpeed = 63.5
 
-if (straight > 1.10) or (straight < 0.9):
+if (straight > 1.10) and (straight < 0.9):
     arlo.go_diff(leftSpeed, rightSpeed, 1, 0)
     sleep(1)
 else:
