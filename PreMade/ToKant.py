@@ -35,9 +35,12 @@ print(f"Straight calculation: {straight}")
 leftSpeed = 63
 rightSpeed = 63.5
 
-if (straight > 1.10) and (straight < 0.9):
+if (left > 2500) and (right > 2500):
+    while left > 900:
     arlo.go_diff(leftSpeed, rightSpeed, 1, 0)
-    sleep(1)
+    sleep(0.3)
+    left = arlo.read_left_ping_sensor()
+    sleep(0.041)
 else:
     arlo.stop()
 
