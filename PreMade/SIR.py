@@ -57,7 +57,7 @@ def recursivesensor(front):
         lige_ud(2, 40, 40)
         arlo.stop()
         sleep(1)
-        while front > 400:
+        while front < 400:
             drej(3, 63, 63)
     recursivesensor(front)
 recursivesensor(front)
