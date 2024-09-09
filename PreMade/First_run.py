@@ -21,24 +21,40 @@ def drej(sekunder, h_left, h_right):
     sleep(sekunder)
 
 
+sekunder_drej = 0.55
+sekunder_lige = 3
+hastighed_kør_r = 63
+hastighed_kør_l = 63
+hastighed_drej_l = 35
+hastighed_drej_r = 35
+
 print("Jytte, mindre press på speederen! ...")
 sleep(1)
-lige_ud(4, 63, 64)
 
-drej(0.5, 63, 63.5) 
+for rotation in range(1, 4):
 
-lige_ud(4, 63, 64)
-
-drej(0.5, 63, 63.5)
-
-
-lige_ud(4, 63, 64)
-
-drej(0.5, 63, 63.5)
-
-
-lige_ud(4, 63, 64)
-
-drej(0.5, 63, 63.5)
-
+    lige_ud(sekunder_lige, hastighed_kør_l, hastighed_kør_r)
+    print(arlo.stop())
+    sleep(0.041)
+    drej(sekunder_drej, hastighed_drej_l, hastighed_drej_r)
+    print(arlo.stop())
+    sleep(0.041)
+    lige_ud(sekunder_lige, hastighed_kør_l, hastighed_kør_r)
+    print(arlo.stop())
+    sleep(0.041)
+    drej(sekunder_drej, hastighed_drej_l, hastighed_drej_r)
+    print(arlo.stop())
+    sleep(0.041)
+    lige_ud(sekunder_lige, hastighed_kør_l, hastighed_kør_r)
+    print(arlo.stop())
+    sleep(0.041)
+    drej(sekunder_drej, hastighed_drej_l, hastighed_drej_r)
+    print(arlo.stop())
+    sleep(0.041)
+    lige_ud(sekunder_lige, hastighed_kør_l, hastighed_kør_r)
+    print(arlo.stop())
+    sleep(0.041)
+    drej(sekunder_drej, hastighed_drej_l, hastighed_drej_r)
+    print(arlo.stop())
+    sleep(0.041)
 print(arlo.stop())
