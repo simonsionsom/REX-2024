@@ -31,7 +31,7 @@ right = arlo.read_right_ping_sensor()
 left = arlo.read_left_ping_sensor()
 
 straight = left/right
-
+print(f"Straight calculation: {straight}")
 leftSpeed = 63
 rightSpeed = 63.5
 
