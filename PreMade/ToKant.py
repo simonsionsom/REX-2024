@@ -25,7 +25,8 @@ sleep(0.041)
 print("Left sensor = ", arlo.read_left_ping_sensor())
 sleep(0.041)
 
-""" # send a go_diff command to drive forward
-leftSpeed = 58
-rightSpeed = 64
-print(arlo.go_diff(leftSpeed, rightSpeed, 1, 1)) """
+# send a go_diff command to drive forward
+leftSpeed = 34
+rightSpeed = 34
+print(arlo.go_diff(leftSpeed, rightSpeed, 1, 1))
+sleep(1)
