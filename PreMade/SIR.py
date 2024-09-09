@@ -46,8 +46,13 @@ back = arlo.read_back_ping_sensor()
 right = arlo.read_right_ping_sensor()
 left = arlo.read_left_ping_sensor()
 
-def recursivesensor(front):
+def recursiveping():
     ping()
+    recursiveping()
+    return ping
+
+def recursivesensor(front):
+    recursiveping()
     lige_ud(2,63,63)
     sleep(0.041)
     if front < 400:
