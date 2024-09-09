@@ -17,7 +17,8 @@ def drej(sekunder, h_left, h_right):
     print("Drejer med hastighederne: ")
     print("Venstre: {h_left}, Højre: {h_right}")
     print("I {sekunder} sekunder")
-    print(arlo.go_diff(h_left, h_right, 0, 1))
+    sleep(0.041)
+    print(arlo.go_diff(h_left, h_right, 1, 0))
     sleep(sekunder)
 
 
