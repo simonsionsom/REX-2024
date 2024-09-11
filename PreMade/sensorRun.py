@@ -24,7 +24,7 @@ def Scan(F,L,R,B):
 def kør(dir):
   while True:
     f,l,r,b = Scan(Front,Left,Right,Behind)
-    if dir == 'front' and f <= 500 :
+    if dir == 'Front' and f <= 500 :
       break
     elif dir == 'Back' and b <= 500:
       break
