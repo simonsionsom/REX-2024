@@ -57,14 +57,15 @@ while True:
     print(f"front_dist: {front_dist} left_dist: {left_dist} right_dist: {right_dist}")
     if front_dist < thresholdDistance:
         stop_robot()
-        if left_dist > thresholdDistance:
+        if left_dist > thresholdDistance and left_dist > right_dist:
             turn_left()
             # fix()
-        elif right_dist > thresholdDistance:
+        elif right_dist > thresholdDistance and right_dist > left_dist:
             turn_right()
             # fix()
         else:
             go_backward()
+            turn_left()
     else:
         go_forward()
     sleep(0.041)
