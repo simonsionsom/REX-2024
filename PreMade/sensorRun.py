@@ -8,5 +8,5 @@ arlo = robot.Robot()
 tændt = True
 
 while tændt:
-  sleep(2)
   
+  sleep(2)

@@ -4,7 +4,7 @@ import robot
 
 # Create a robot object and initialize
 arlo = robot.Robot()
-tændt = 0 
+tændt = 4 
 print("Running ...")
 print("Vil du justere hastighed?: j/n")
 hastighed = input()
@@ -23,13 +23,13 @@ else :
   print(arlo.stop())
   sleep(1)
 
-print("Drej: d | Eller ligeud: l")
-retning = input()
+'''print("Drej: d | Eller ligeud: l")
+retning = input()'''
 print("Duration: ")
 duration = float(input())
 
 while tændt > 0 :
-  print(arlo.go_diff(leftSpeed, rightSpeed, 1, 1))
+  print(arlo.go_diff(63, 63, 1, 1))
   sleep(3)
   print(arlo.stop())
   # Wait a bit before next command
@@ -39,7 +39,7 @@ while tændt > 0 :
   print(arlo.stop())
   tændt = tændt -1
   #din mor
-
+'''
 if retning == "l":
   sleep(1)
   print(arlo.go_diff(leftSpeed, rightSpeed, 1, 1))
@@ -74,6 +74,6 @@ else :
   print(arlo.stop())
   print("Finished")
   sleep(1)
-
+'''
 
 
