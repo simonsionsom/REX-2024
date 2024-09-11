@@ -25,10 +25,9 @@ while tændt <4:
   Front, Left, Right, Behind = Scan(Front,Left,Right,Behind)
   sleep(0.41)
   print(Front)
-  if Front >1500:
-    print(arlo.go_diff(40,40,1,1))
-    sleep(1)
-  elif Front < 1600 & stop == False:
+  print(arlo.go_diff(40,40,1,1))
+  sleep(1)
+  if Front < 1000 & stop == False:
     print(arlo.go_diff(45, 46, 1, 0))
     print("har drejet")
     sleep(1)
