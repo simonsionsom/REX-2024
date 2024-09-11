@@ -45,4 +45,4 @@ def kør(dir):
     kør("Front")
   else:
     kør("Back")
-
+kør("Front")
