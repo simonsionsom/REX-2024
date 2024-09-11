@@ -50,15 +50,18 @@ left = arlo.read_left_ping_sensor()
 
 
 def recursivesensor():
-    while front > 500:
+    while True:
+        front = arlo.read_front_ping_sensor()  # Update front sensor inside the loop
+        if front <= 500:  # Base case to stop recursion
+            break
         ping()
-        front = arlo.read_front_ping_sensor()
         sleep(1)
         lige_ud(2, 40, 40)
         arlo.stop()
         sleep(1)
     drej(3, 63, 63)
-    recursivesensor()
+    recursivesensor()  # Only call recursion if necessary
+
 recursivesensor()
 
 
