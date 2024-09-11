@@ -26,6 +26,7 @@ while tændt <3:
   sleep(0.41)
   print(arlo.go_diff(40,40,1,1))
   sleep(2)
+  print(Front)
   if Front < 1000 & stop == False:
     print(arlo.go_diff(45, 46, 1, 0))
     sleep(1)
