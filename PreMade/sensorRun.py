@@ -24,7 +24,7 @@ while tændt <3:
   stop = False
   Front, Left, Right, Behind = Scan(Front,Left,Right,Behind)
   sleep(0.41)
-  print(arlo.go_diff(63,63,1,1))
+  print(arlo.go_diff(40,40,1,1))
   sleep(2)
   if Front < 1000 & stop == False:
     print(arlo.go_diff(45, 46, 1, 0))
