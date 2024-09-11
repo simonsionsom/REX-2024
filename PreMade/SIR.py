@@ -56,7 +56,7 @@ def recursivesensor():
             break
         ping()
         sleep(1)
-        lige_ud(2, 40, 40)
+        lige_ud(1, 40, 40)
         arlo.stop()
         sleep(1)
     drej(1, 34, 35)
