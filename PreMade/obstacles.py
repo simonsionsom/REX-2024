@@ -15,13 +15,13 @@ def stop_robot():
 def turn_left():
     print("Turning left")
     print(arlo.go_diff(leftSpeed, rightSpeed, 0, 1))
-    sleep(1)
+    sleep(1.2)
     stop_robot()
 
 def turn_right():
     print("Turning right")
     print(arlo.go_diff(leftSpeed, rightSpeed, 1, 0))
-    sleep(1)
+    sleep(1.2)
     stop_robot()
 
 def go_forward():
