@@ -43,6 +43,9 @@ def kør(d,lr):
   if d == False:
     print(arlo.go_diff(44,44,1,0))
   else :
+    print(arlo.go_diff(45,45,1,1))
+    sleep(2)
+    arlo.stop()
     print(arlo.go_diff(44,44,0,1))
     lr = lr + 1
   sleep(1)
