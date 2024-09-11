@@ -43,7 +43,7 @@ while True:
     sleep(0.041)
     right_dist = arlo.read_right_ping_sensor()
     sleep(0.041)
-    print(f"front_dist: {front_dist}")
+    print(f"front_dist: {front_dist} left_dist: {left_dist} right_dist: {right_dist}")
     if front_dist < thresholdDistance:
         if left_dist > thresholdDistance:
             turn_left()
