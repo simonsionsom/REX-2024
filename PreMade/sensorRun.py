@@ -21,7 +21,7 @@ def Scan(F,L,R,B):
   B = arlo.read_back_ping_sensor()
   return F, L, R, B
 
-def kør(dir):
+def kør(dir,f,l,r,b):
   while True:
     f,l,r,b = Scan(Front,Left,Right,Behind)
     if dir == 'Front' and f <= 500 :
@@ -42,7 +42,7 @@ def kør(dir):
     print(arlo.go_diff(45,46,0,1))
   sleep(1)
   if f>b:
-    kør("Front")
+    kør("Front",f,l,r,b)
   else:
-    kør("Back")
+    kør("Back",f,l,r,b)
 kør("Front")
