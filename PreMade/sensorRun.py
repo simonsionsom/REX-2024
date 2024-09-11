@@ -22,7 +22,7 @@ def Scan(F,L,R,B):
   return F, L, R, B
 
 drejet = False
-def kør():
+def kør(d):
   LR = 0
   while True :
     F = arlo.read_front_ping_sensor()
@@ -50,4 +50,4 @@ def kør():
   arlo.stop()
   kør()
 
-kør()
+kør(drejet)
