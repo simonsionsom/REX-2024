@@ -39,9 +39,10 @@ while tændt <4:
     Front, Left, Right, Behind = Scan(Front,Left,Right,Behind)
     if Front > Behind:
       print(arlo.go_diff(63,63,1,1))
-      sleep(2)
+      sleep(1)
     else: 
       print(arlo.go_diff(63,63,0,0))
+      sleep(1)
     print(arlo.go_diff(45,46,0,1))
     sleep(1)
     stop2 = False
