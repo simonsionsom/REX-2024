@@ -21,34 +21,25 @@ def Scan(F,L,R,B):
   B = arlo.read_back_ping_sensor()
   return F, L, R, B
 
-while tændt <4:
-  stop = False
-  Front, Left, Right, Behind = Scan(Front,Left,Right,Behind)
-  sleep(0.41)
-  print(Front)
-  print(arlo.go_diff(40,40,1,1))
-  sleep(1)
-  print(stop)
-  if Front < 1000 and stop == False:
-    print(arlo.go_diff(45, 46, 1, 0))
-    print("har drejet")
+def kør(dir):
+  while True:
+    f,l,r,b = Scan(Front,Left,Right,Behind)
+    if dir == 'front' and f <= 500 :
+      break
+    elif dir == 'Back' and b <= 500:
+      break
+    else:
+      print(l,r)
+    arlo.stop
     sleep(1)
-    stop2 = True
-  if stop2 == True:
-    print("Her scanner den igen")
-    Front, Left, Right, Behind = Scan(Front,Left,Right,Behind)
-    if Front > Behind:
+    if dir =="Front":
       print(arlo.go_diff(63,63,1,1))
-      sleep(1)
-    else: 
+    else :
       print(arlo.go_diff(63,63,0,0))
-      sleep(1)
-    print(arlo.go_diff(45,46,0,1))
-    sleep(1)
-    stop2 = False
-    stop = False
-  else: 
-    print("Hej haj hallo")
-  tændt= tændt + 1
-  print(tændt)
+  print(arlo.go_diff(45,46,1,0))
+  sleep(1)
+  if f>b:
+    kør("Front")
+  else:
+    kør("Back")
 
