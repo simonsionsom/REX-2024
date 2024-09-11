@@ -4,8 +4,8 @@ import robot
 arlo = robot.Robot()
 print("Running robot...")
 
-leftSpeed = 40
-rightSpeed = 40
+leftSpeed = 44
+rightSpeed = 44
 thresholdDistance = 400
 
 def stop_robot():
@@ -15,13 +15,13 @@ def stop_robot():
 def turn_left():
     print("Turning left")
     print(arlo.go_diff(leftSpeed, rightSpeed, 0, 1))
-    sleep(1.5)
+    sleep(1)
     stop_robot()
 
 def turn_right():
     print("Turning right")
     print(arlo.go_diff(leftSpeed, rightSpeed, 1, 0))
-    sleep(1.5)
+    sleep(1)
     stop_robot()
 
 def go_forward():
