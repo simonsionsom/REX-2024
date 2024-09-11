@@ -32,8 +32,8 @@ while tændt <4:
     print(arlo.go_diff(45, 46, 1, 0))
     print("har drejet")
     sleep(1)
-    stop = True
-  if stop == True:
+    stop2 = True
+  if stop2 == True:
     print("Her scanner den igen")
     Front, Left, Right, Behind = Scan(Front,Left,Right,Behind)
     if Front > Behind:
@@ -43,6 +43,7 @@ while tændt <4:
       print(arlo.go_diff(63,63,0,0))
     print(arlo.go_diff(45,46,0,1))
     sleep(1)
+    stop2 = False
     stop = False
   else: 
     print("Hej haj hallo")
