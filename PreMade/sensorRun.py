@@ -41,13 +41,13 @@ def kør(d):
       return print("Færdig")
   if drejet == False:
     print(arlo.go_diff(42,42,1,0))
-    drejet = True
+    d = True
   
   else :
     print(arlo.go_diff(42,42,0,1))
     LR = LR + 1
   sleep(1)
   arlo.stop()
-  kør()
+  kør(d)
 
 kør(drejet)
