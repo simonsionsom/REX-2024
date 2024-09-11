@@ -39,5 +39,6 @@ while tændt <3:
       print(arlo.go_diff(63,63,0,0))
     print(arlo.go_diff(45,46,0,1))
     sleep(1)
+    stop = False
   tændt= tændt + 1
 
