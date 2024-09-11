@@ -40,8 +40,7 @@ def ping():
 
     print("Left sensor = ", arlo.read_left_ping_sensor())
     sleep(0.041)
-    front = arlo.read_front_ping_sensor()
-    return front
+
 
 
 front = arlo.read_front_ping_sensor()
