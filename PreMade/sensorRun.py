@@ -27,7 +27,8 @@ while tændt <4:
   print(Front)
   print(arlo.go_diff(40,40,1,1))
   sleep(1)
-  if Front < 1000 & stop == False:
+  print(stop)
+  if Front < 1000 and stop == False:
     print(arlo.go_diff(45, 46, 1, 0))
     print("har drejet")
     sleep(1)
