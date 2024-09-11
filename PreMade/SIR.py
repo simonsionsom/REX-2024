@@ -55,7 +55,7 @@ def recursivesensor():
         right = arlo.read_right_ping_sensor()
         left = arlo.read_left_ping_sensor()
         if front <= 500 or left <= 500 or right <= 500:
-            drej(2, 44, 45)
+            drej(1, 30, 30)
             sleep(1)
             ping()
         else:
