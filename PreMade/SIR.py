@@ -40,8 +40,7 @@ def ping():
 
     print("Left sensor = ", arlo.read_left_ping_sensor())
     sleep(0.041)
-    front = arlo.read_front_ping_sensor()
-    return front
+
 
 
 front = arlo.read_front_ping_sensor()
@@ -50,17 +49,21 @@ right = arlo.read_right_ping_sensor()
 left = arlo.read_left_ping_sensor()
 
 
-def recursivesensor(front):
-    for _ in range(3):
+def recursivesensor():
+    while True:
+        front = arlo.read_front_ping_sensor()
+        if front <= 500:
+            break
         ping()
         sleep(1)
         lige_ud(2, 40, 40)
         arlo.stop()
         sleep(1)
-        while front < 400:
-            drej(3, 63, 63)
-    recursivesensor(front)
-recursivesensor(front)
+    drej(1, 45, 46)
+    sleep(1)
+    recursivesensor()
+
+recursivesensor()
 
 
 
