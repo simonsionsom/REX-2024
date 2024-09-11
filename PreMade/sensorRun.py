@@ -20,14 +20,14 @@ def Scan(F,L,R,B):
   B = arlo.read_back_ping_sensor()
   return F, L, R, B
 
-while tændt <3:
+while tændt <4:
   stop = False
   Front, Left, Right, Behind = Scan(Front,Left,Right,Behind)
   sleep(0.41)
   print(arlo.go_diff(40,40,1,1))
-  sleep(2)
+  sleep(1)
   print(Front)
-  if Front < 1000 & stop == False:
+  if Front < 1600 & stop == False:
     print(arlo.go_diff(45, 46, 1, 0))
     sleep(1)
     stop = True
