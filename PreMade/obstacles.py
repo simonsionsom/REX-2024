@@ -68,4 +68,3 @@ while True:
             turn_left()
     else:
         go_forward()
-    sleep(0.041)
