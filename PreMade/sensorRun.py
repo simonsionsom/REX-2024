@@ -28,7 +28,7 @@ def kør(d):
     F = arlo.read_front_ping_sensor()
     L = arlo.read_left_ping_sensor()
     R = arlo.read_right_ping_sensor()
-    if F <= 500 :
+    if F <= 800 :
       break
     sleep(1)
     print(arlo.go_diff(45,45,1,1))
