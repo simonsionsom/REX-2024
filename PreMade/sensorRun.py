@@ -11,6 +11,7 @@ Front = 0
 Left = 0
 Right = 0
 Behind = 0
+stop2 = False
 
 
 def Scan(F,L,R,B):
