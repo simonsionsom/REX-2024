@@ -28,10 +28,7 @@ def kør(f,l,r,b):
       break
     arlo.stop
     sleep(1)
-    if dir =="Front":
-      print(arlo.go_diff(63,63,1,1))
-    else :
-      print(arlo.go_diff(63,63,0,0))
+    print(arlo.go_diff(63,63,1,1))
   if r > l:
     print(arlo.go_diff(45,46,1,0))
   else :
