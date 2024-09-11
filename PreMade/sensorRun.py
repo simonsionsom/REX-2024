@@ -47,4 +47,5 @@ while tændt <4:
   else: 
     print("Hej haj hallo")
   tændt= tændt + 1
+  print(tændt)
 
