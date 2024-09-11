@@ -21,18 +21,31 @@ def Scan(F,L,R,B):
   B = arlo.read_back_ping_sensor()
   return F, L, R, B
 
-def kør(f,l,r,b):
-  while True:
-    f,l,r,b = Scan(f,l,r,b)
-    if f <= 500 :
+def kør():
+  LR = 0
+  drejet = False
+  while True :
+    F = arlo.read_front_ping_sensor()
+    L = arlo.read_left_ping_sensor()
+    R = arlo.read_right_ping_sensor()
+    if F <= 500 :
       break
-    print(arlo.go_diff(63,63,1,1))
     sleep(1)
-    print(arlo.go_diff(63,63,1,1))
-  if r > l:
+    print(arlo.go_diff(45,45,1,1))
+    sleep(1)
+    arlo.stop()
+    if LR == 1:
+      print(arlo.go_diff(45,45,1,1))
+      sleep(3)
+      arlo.stop()
+      return print("Færdig")
+  if drejet == False:
     print(arlo.go_diff(45,46,1,0))
+    drejet = True
   else :
     print(arlo.go_diff(45,46,0,1))
+    LR = LR + 1
   sleep(1)
-  kør(f,l,r,b)
-kør(Front,Left,Right,Behind)
+  kør()
+
+kør()
