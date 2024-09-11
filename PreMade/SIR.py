@@ -59,7 +59,7 @@ def recursivesensor():
         lige_ud(1, 40, 40)
         arlo.stop()
         sleep(1)
-    drej(1, 45, 44)
+    drej(1, 30, 30)
     sleep(1)
     recursivesensor()
 
