@@ -52,6 +52,7 @@ left = arlo.read_left_ping_sensor()
 
 def recursivesensor():
     while front > 500:
+        ping()
         front = arlo.read_front_ping_sensor()
         sleep(1)
         lige_ud(2, 40, 40)
