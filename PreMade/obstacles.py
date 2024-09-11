@@ -4,9 +4,9 @@ import robot
 arlo = robot.Robot()
 print("Running robot...")
 
-leftSpeed = 64
-rightSpeed = 64
-thresholdDistance = 300
+leftSpeed = 40
+rightSpeed = 40
+thresholdDistance = 400
 
 def stop_robot():
     arlo.stop()
