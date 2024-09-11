@@ -21,9 +21,9 @@ def Scan(F,L,R,B):
   B = arlo.read_back_ping_sensor()
   return F, L, R, B
 
+drejet = False
 def kør():
   LR = 0
-  drejet = False
   while True :
     F = arlo.read_front_ping_sensor()
     L = arlo.read_left_ping_sensor()
@@ -42,6 +42,7 @@ def kør():
   if drejet == False:
     print(arlo.go_diff(38,38,1,0))
     drejet = True
+  
   else :
     print(arlo.go_diff(38,38,0,1))
     LR = LR + 1
