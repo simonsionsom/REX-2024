@@ -36,6 +36,17 @@ def go_backward():
     sleep(1)
     stop_robot()
 
+def fix():
+    left_dist = arlo.read_left_ping_sensor()
+    sleep(0.041)
+    right_dist = arlo.read_right_ping_sensor()
+    sleep(0.041)
+    if left_dist < thresholdDistance:
+        turn_right
+    elif right_dist < thresholdDistance:
+        turn_left
+    else: None
+
 while True:
     front_dist = arlo.read_front_ping_sensor()
     sleep(0.041)
@@ -48,8 +59,10 @@ while True:
     if front_dist < thresholdDistance:
         if left_dist > thresholdDistance:
             turn_left()
+            fix()
         elif right_dist > thresholdDistance:
             turn_right()
+            fix()
         else:
             go_backward()
     else:
