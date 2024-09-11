@@ -41,9 +41,9 @@ def kør(d,lr):
       arlo.stop()
       return print("Færdig")
   if d == False:
-    print(arlo.go_diff(42,42,1,0))
+    print(arlo.go_diff(44,44,1,0))
   else :
-    print(arlo.go_diff(42,42,0,1))
+    print(arlo.go_diff(44,44,0,1))
     lr = lr + 1
   sleep(1)
   arlo.stop()
