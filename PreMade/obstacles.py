@@ -15,13 +15,13 @@ def stop_robot():
 def turn_left():
     print("Turning left")
     print(arlo.go_diff(leftSpeed, rightSpeed, 0, 1))
-    sleep(1)
+    sleep(1.5)
     stop_robot()
 
 def turn_right():
     print("Turning right")
     print(arlo.go_diff(leftSpeed, rightSpeed, 1, 0))
-    sleep(1)
+    sleep(1.5)
     stop_robot()
 
 def go_forward():
@@ -59,10 +59,10 @@ while True:
     if front_dist < thresholdDistance:
         if left_dist > thresholdDistance:
             turn_left()
-            fix()
+            # fix()
         elif right_dist > thresholdDistance:
             turn_right()
-            fix()
+            # fix()
         else:
             go_backward()
     else:
