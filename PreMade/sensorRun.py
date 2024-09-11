@@ -31,10 +31,16 @@ def kør(d,lr):
     R = arlo.read_right_ping_sensor()
     if F <= 800 :
       break
-    sleep(1)
-    print(arlo.go_diff(45,45,1,1))
-    sleep(1)
-    arlo.stop()
+    if d == True:
+      sleep(1)
+      print(arlo.go_diff(45,45,1,1))
+      sleep(2)
+      arlo.stop()
+    else:
+      sleep(1)
+      print(arlo.go_diff(45,45,1,1))
+      sleep(1)
+      arlo.stop()
     if lr == 1:
       print(arlo.go_diff(45,45,1,1))
       sleep(3)
@@ -43,9 +49,6 @@ def kør(d,lr):
   if d == False:
     print(arlo.go_diff(44,44,1,0))
   else :
-    print(arlo.go_diff(45,45,1,1))
-    sleep(2)
-    arlo.stop()
     print(arlo.go_diff(44,44,0,1))
     lr = lr + 1
   sleep(1)
