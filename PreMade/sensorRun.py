@@ -36,7 +36,10 @@ def kør(dir):
       print(arlo.go_diff(63,63,1,1))
     else :
       print(arlo.go_diff(63,63,0,0))
-  print(arlo.go_diff(45,46,1,0))
+  if r > l:
+    print(arlo.go_diff(45,46,1,0))
+  else :
+    print(arlo.go_diff(45,46,0,1))
   sleep(1)
   if f>b:
     kør("Front")
