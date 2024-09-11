@@ -26,7 +26,7 @@ def kør(f,l,r,b):
     f,l,r,b = Scan(f,l,r,b)
     if f <= 500 :
       break
-    arlo.stop
+    print(arlo.go_diff(63,63,1,1))
     sleep(1)
     print(arlo.go_diff(63,63,1,1))
   if r > l:
