@@ -7,8 +7,9 @@ arlo = robot.Robot()
 
 # Set the minimum speed for safety
 MIN_SPEED = 30
-DEFAULT_LEFT_SPEED = 58
+DEFAULT_LEFT_SPEED = 64
 DEFAULT_RIGHT_SPEED = 64
+DEFAULT_TURN = 45
 
 def stop_robot():
     print(arlo.stop())
@@ -24,12 +25,12 @@ def move_backward(duration):
     stop_robot()
 
 def turn_left(duration):
-    print(arlo.go_diff(DEFAULT_LEFT_SPEED, DEFAULT_RIGHT_SPEED, 1, 0))
+    print(arlo.go_diff(DEFAULT_TURN, DEFAULT_TURN, 1, 0))
     sleep(duration)
     stop_robot()
 
 def turn_right(duration):
-    print(arlo.go_diff(DEFAULT_LEFT_SPEED, DEFAULT_RIGHT_SPEED, 0, 1))
+    print(arlo.go_diff(DEFAULT_TURN, DEFAULT_TURN, 0, 1))
     sleep(duration)
     stop_robot()
 
