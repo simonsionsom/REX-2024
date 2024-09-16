@@ -14,16 +14,12 @@ def p(x):
     return (0.3 * N(x, 2.0, 1.0) + 0.4 * N(x, 5.0, 2.0) + 0.3 * N(x, 9.0, 1.0))
 
 def SIR(N_samples=1000, resample_size=100, prior_func=prior_distribution_uniform):
-    # Step 1: Sample from the proposal distribution (prior)
     theta_samples = prior_func(N_samples)
     
-    # Step 2: Compute importance weights (based on p(x))
     weights = p(theta_samples)
     
-    # Step 3: Normalize the weights
     normalized_weights = weights / np.sum(weights)
     
-    # Step 4: Resample based on weights
     resampled_indices = np.random.choice(np.arange(N_samples), size=resample_size, p=normalized_weights)
     resampled_theta = theta_samples[resampled_indices]
     
@@ -34,26 +30,21 @@ def plot_results(k_values, prior_func):
     px = p(x)
 
     for k in k_values:
-        posterior_samples = SIR(y_obs=2.0, N_samples=k, resample_size=k, prior_func=prior_func)
+        posterior_samples = SIR(N_samples=k, resample_size=k, prior_func=prior_func)
         
-        # Plot histogram of resampled samples
         plt.hist(posterior_samples, bins=30, density=True, alpha=0.7, label=f'k={k} Resampled')
 
-        # Plot the true distribution p(x)
         plt.plot(x, px, 'r-', label='True Distribution p(x)', lw=2)
         
-        # Set title and labels
         plt.title(f'Posterior Distribution (SIR) with k={k}')
         plt.xlabel('Theta')
         plt.ylabel('Density')
         plt.legend()
         plt.show()
 
-# For Question 1: Uniform proposal distribution q(x)
 k_values = [20, 100, 1000]
 print("Question 1: Uniform proposal distribution")
 plot_results(k_values, prior_func=prior_distribution_uniform)
 
-# For Question 2: Normal proposal distribution q(x) ~ N(5, 4)
 print("Question 2: Normal proposal distribution")
 plot_results(k_values, prior_func=prior_distribution_normal)
