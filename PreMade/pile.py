@@ -50,26 +50,42 @@ def show_instructions(stdscr):
 def change_turning_speed(stdscr):
     global left_speed, right_speed
     stdscr.clear()
-    stdscr.addstr(0, 0, "Enter 'l' to change left wheel speed or 'r' to change right wheel speed: ")
+    stdscr.addstr(0, 0, "Press 'l' to change left wheel speed or 'r' to change right wheel speed: ")
 
     key = stdscr.getkey()
 
     if key == 'l':
-        stdscr.addstr(1, 0, f"Current left speed: {left_speed}. Enter new speed (min {MIN_SPEED}): ")
-        new_speed = int(stdscr.getstr().decode('utf-8'))
-        if new_speed >= MIN_SPEED:
-            left_speed = new_speed
-            stdscr.addstr(2, 0, f"Left wheel speed changed to {left_speed}.")
-        else:
-            stdscr.addstr(2, 0, f"Invalid speed! Must be at least {MIN_SPEED}.")
+        stdscr.addstr(1, 0, f"Current left speed: {left_speed}. Press '+' to increase or '-' to decrease speed.")
+        while True:
+            adjust_key = stdscr.getkey()
+            if adjust_key == '+':
+                left_speed += 1
+            elif adjust_key == '-':
+                left_speed -= 1
+            elif adjust_key == '\n':  # Enter key to confirm
+                break
+
+            if left_speed < MIN_SPEED:
+                left_speed = MIN_SPEED
+            stdscr.addstr(2, 0, f"Left speed: {left_speed}     ")
+            stdscr.refresh()
+
     elif key == 'r':
-        stdscr.addstr(1, 0, f"Current right speed: {right_speed}. Enter new speed (min {MIN_SPEED}): ")
-        new_speed = int(stdscr.getstr().decode('utf-8'))
-        if new_speed >= MIN_SPEED:
-            right_speed = new_speed
-            stdscr.addstr(2, 0, f"Right wheel speed changed to {right_speed}.")
-        else:
-            stdscr.addstr(2, 0, f"Invalid speed! Must be at least {MIN_SPEED}.")
+        stdscr.addstr(1, 0, f"Current right speed: {right_speed}. Press '+' to increase or '-' to decrease speed.")
+        while True:
+            adjust_key = stdscr.getkey()
+            if adjust_key == '+':
+                right_speed += 1
+            elif adjust_key == '-':
+                right_speed -= 1
+            elif adjust_key == '\n':  # Enter key to confirm
+                break
+
+            if right_speed < MIN_SPEED:
+                right_speed = MIN_SPEED
+            stdscr.addstr(2, 0, f"Right speed: {right_speed}     ")
+            stdscr.refresh()
+
     else:
         stdscr.addstr(1, 0, "Invalid input! Please try again.")
 
