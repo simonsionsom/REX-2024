@@ -1,6 +1,6 @@
-from time import sleep
 import robot
-import keyboard  # Make sure you have installed this via: pip install keyboard
+import curses
+from time import sleep
 
 # Create a robot object and initialize
 arlo = robot.Robot()
@@ -33,52 +33,42 @@ def turn_right(duration):
     sleep(duration)
     stop_robot()
 
-def show_instructions():
-    print("Control the robot using the following keys:")
-    print("↑ (up arrow) - Move forward")
-    print("↓ (down arrow) - Move backward")
-    print("← (left arrow) - Turn left")
-    print("→ (right arrow) - Turn right")
-    print("'space' - Stop the robot")
-    print("'esc' - Quit the program")
+def main(stdscr):
+    curses.curs_set(0)  # Hide the cursor
+    stdscr.nodelay(1)  # Don't block while waiting for input
+    stdscr.timeout(100)  # Refresh every 100 milliseconds
 
-print("Running ...")
-show_instructions()
+    stdscr.addstr(0, 0, "Control the robot using the arrow keys:")
+    stdscr.addstr(1, 0, "'↑' - Move forward")
+    stdscr.addstr(2, 0, "'↓' - Move backward")
+    stdscr.addstr(3, 0, "'←' - Turn left")
+    stdscr.addstr(4, 0, "'→' - Turn right")
+    stdscr.addstr(5, 0, "'space' - Stop the robot")
+    stdscr.addstr(6, 0, "'esc' - Quit the program")
 
-try:
     while True:
-        # Check for arrow key presses and move accordingly
-        if keyboard.is_pressed('up'):
-            print("Moving forward")
-            move_forward(1)  # You can adjust the duration here
+        key = stdscr.getch()
 
-        elif keyboard.is_pressed('down'):
-            print("Moving backward")
-            move_backward(1)  # Adjust the duration
-
-        elif keyboard.is_pressed('left'):
-            print("Turning left")
-            turn_left(1)  # Adjust the duration
-
-        elif keyboard.is_pressed('right'):
-            print("Turning right")
-            turn_right(1)  # Adjust the duration
-
-        elif keyboard.is_pressed('space'):
-            print("Stopping robot")
+        if key == curses.KEY_UP:
+            move_forward(1)
+        elif key == curses.KEY_DOWN:
+            move_backward(1)
+        elif key == curses.KEY_LEFT:
+            turn_left(1)
+        elif key == curses.KEY_RIGHT:
+            turn_right(1)
+        elif key == ord(' '):  # Space bar
             stop_robot()
-
-        # Check for exit condition
-        if keyboard.is_pressed('esc'):
-            print("Exiting program")
+        elif key == 27:  # Escape key
             break
 
-        # Add a small sleep to avoid high CPU usage
+        # Optional small sleep to prevent high CPU usage
         sleep(0.1)
 
-except Exception as e:
-    print(f"An error occurred: {e}")
-
-finally:
-    # Ensure the robot stops when the program exits
-    stop_robot()
+if __name__ == "__main__":
+    try:
+        curses.wrapper(main)
+    except Exception as e:
+        print(f"An error occurred: {e}")
+    finally:
+        stop_robot()  # Ensure the robot stops when exiting
