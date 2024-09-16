@@ -22,7 +22,7 @@ def drej(sekunder, h_left, h_right):
     sleep(0.55)
 
 
-sekunder_drej = 0.55
+sekunder_drej = 1
 sekunder_lige = 3
 hastighed_kør_r = 63
 hastighed_kør_l = 63
