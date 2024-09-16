@@ -1,5 +1,6 @@
 from time import sleep
 import robot
+import keyboard  # Make sure you have installed this via: pip install keyboard
 
 # Create a robot object and initialize
 arlo = robot.Robot()
@@ -34,48 +35,45 @@ def turn_right(duration):
 
 def show_instructions():
     print("Control the robot using the following keys:")
-    print("'w' - Move forward")
-    print("'s' - Move backward")
-    print("'a' - Turn left")
-    print("'d' - Turn right")
+    print("↑ (up arrow) - Move forward")
+    print("↓ (down arrow) - Move backward")
+    print("← (left arrow) - Turn left")
+    print("→ (right arrow) - Turn right")
     print("'space' - Stop the robot")
-    print("'q' - Quit the program")
+    print("'esc' - Quit the program")
 
 print("Running ...")
 show_instructions()
 
 try:
     while True:
-        command = input("Enter command: ")
+        # Check for arrow key presses and move accordingly
+        if keyboard.is_pressed('up'):
+            print("Moving forward")
+            move_forward(1)  # You can adjust the duration here
 
-        # Get the duration of movement
-        if command in ['w', 's', 'a', 'd']:
-            try:
-                duration = float(input("Enter duration in seconds: "))
-                if duration <= 0:
-                    print("Please enter a positive duration.")
-                    continue
-            except ValueError:
-                print("Invalid input. Please enter a numeric value for duration.")
-                continue
+        elif keyboard.is_pressed('down'):
+            print("Moving backward")
+            move_backward(1)  # Adjust the duration
 
-        if command == 'w':
-            move_forward(duration)
-        elif command == 's':
-            move_backward(duration)
-        elif command == 'a':
-            turn_left(duration)
-        elif command == 'd':
-            turn_right(duration)
-        elif command == ' ':
+        elif keyboard.is_pressed('left'):
+            print("Turning left")
+            turn_left(1)  # Adjust the duration
+
+        elif keyboard.is_pressed('right'):
+            print("Turning right")
+            turn_right(1)  # Adjust the duration
+
+        elif keyboard.is_pressed('space'):
+            print("Stopping robot")
             stop_robot()
-        elif command == 'q':
+
+        # Check for exit condition
+        if keyboard.is_pressed('esc'):
             print("Exiting program")
             break
-        else:
-            print("Invalid command, please try again.")
-        
-        # Optional: add a small delay for smoother control
+
+        # Add a small sleep to avoid high CPU usage
         sleep(0.1)
 
 except Exception as e:
