@@ -2,22 +2,18 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 def prior_distribution_uniform(size):
-    # Uniform distribution for Question 1
     return np.random.uniform(0, 15, size=size)
 
 def prior_distribution_normal(size):
-    # Normal distribution N(5, 4) for Question 2
     return np.random.normal(loc=5, scale=4, size=size)
 
 def N(x, mu, sigma):
-    # Gaussian distribution
     return (1/(np.sqrt(2*np.pi)*sigma) * np.exp(-0.5 * ((x - mu) / sigma) ** 2))
 
 def p(x):
-    # Mixture of 3 Gaussians
     return (0.3 * N(x, 2.0, 1.0) + 0.4 * N(x, 5.0, 2.0) + 0.3 * N(x, 9.0, 1.0))
 
-def SIR(y_obs, N_samples=1000, resample_size=100, prior_func=prior_distribution_uniform):
+def SIR(N_samples=1000, resample_size=100, prior_func=prior_distribution_uniform):
     # Step 1: Sample from the proposal distribution (prior)
     theta_samples = prior_func(N_samples)
     
