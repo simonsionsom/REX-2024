@@ -51,43 +51,30 @@ def change_turning_speed(stdscr):
     global left_speed, right_speed
     stdscr.clear()
     stdscr.addstr(0, 0, "Press 'l' to change left wheel speed or 'r' to change right wheel speed: ")
+    stdscr.refresh()
 
-    key = stdscr.getkey()
+    key = stdscr.getch()
 
-    if key == 'l':
-        stdscr.addstr(1, 0, f"Current left speed: {left_speed}. Press '+' to increase or '-' to decrease speed.")
-        while True:
-            adjust_key = stdscr.getkey()
-            if adjust_key == '+':
-                left_speed += 1
-            elif adjust_key == '-':
-                left_speed -= 1
-            elif adjust_key == '\n':  # Enter key to confirm
-                break
-
-            if left_speed < MIN_SPEED:
-                left_speed = MIN_SPEED
-            stdscr.addstr(2, 0, f"Left speed: {left_speed}     ")
-            stdscr.refresh()
-
-    elif key == 'r':
-        stdscr.addstr(1, 0, f"Current right speed: {right_speed}. Press '+' to increase or '-' to decrease speed.")
-        while True:
-            adjust_key = stdscr.getkey()
-            if adjust_key == '+':
-                right_speed += 1
-            elif adjust_key == '-':
-                right_speed -= 1
-            elif adjust_key == '\n':  # Enter key to confirm
-                break
-
-            if right_speed < MIN_SPEED:
-                right_speed = MIN_SPEED
-            stdscr.addstr(2, 0, f"Right speed: {right_speed}     ")
-            stdscr.refresh()
-
+    if key == ord('l'):
+        stdscr.addstr(1, 0, f"Current left speed: {left_speed}. Use '+' to increase or '-' to decrease speed.")
+        stdscr.refresh()
+        speed_change = stdscr.getch()
+        if speed_change == ord('+'):
+            left_speed = max(left_speed + 1, MIN_SPEED)
+        elif speed_change == ord('-'):
+            left_speed = max(left_speed - 1, MIN_SPEED)
+        stdscr.addstr(2, 0, f"Left speed: {left_speed}")
+    elif key == ord('r'):
+        stdscr.addstr(1, 0, f"Current right speed: {right_speed}. Use '+' to increase or '-' to decrease speed.")
+        stdscr.refresh()
+        speed_change = stdscr.getch()
+        if speed_change == ord('+'):
+            right_speed = max(right_speed + 1, MIN_SPEED)
+        elif speed_change == ord('-'):
+            right_speed = max(right_speed - 1, MIN_SPEED)
+        stdscr.addstr(2, 0, f"Right speed: {right_speed}")
     else:
-        stdscr.addstr(1, 0, "Invalid input! Please try again.")
+        stdscr.addstr(1, 0, "Invalid input!")
 
     stdscr.refresh()
     sleep(2)
