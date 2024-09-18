@@ -1,70 +1,37 @@
-from numpy import random
+import random
 import numpy as np
 from time import sleep
-import robot
+import matplotlib.pyplot as plt
 
-# Create a robot object and initialize
-arlo = robot.Robot()
+def prior(k):
+    sample = np.random.uniform(0, 15, k)
+    return sample
 
-sleep(1)
+def N(x, mu, sigma):
+    N = (1 / (np.sqrt(2 * np.pi) * sigma)) * np.exp(-0.5 * ((x - mu) / sigma) ** 2)
+    return N
 
-# def firstpart(standarddeviationparameter):
-#     np.divide(1, np.multiply(np.sqrt(np.multiply(2,np.pi)),standarddeviationparameter))
-# def nextpart():
-#     np.e**(np.divide(-1,2))
-# def nextnextpart():
-    
-# def normaldistribution():
-def lige_ud(sekunder, h_left, h_right): 
-    print("Kører lige ud: ")
-    print(arlo.go_diff(h_left, h_right, 1, 1))
-    sleep(sekunder)
+def p(x):
+    return (0.3 * N(x, 2.0, 1.0) + 0.4 * N(x, 5.0, 2.0) + 0.3 * N(x, 9.0, 1.0))
 
-def drej(sekunder, h_left, h_right):
-    print("Drejer med hastighederne: ")
-    print("Venstre: {h_left}, Højre: {h_right}")
-    print("I {sekunder} sekunder")
-    print(arlo.go_diff(h_left, h_right, 0, 1))
-    sleep(sekunder)
+def normweights(sample):
+    weights = p(sample)
+    weights = weights / np.sum(weights)
+    return weights
 
-def ping():
-    # request to read sonar ping sensor
-    print("Front sensor = ", arlo.read_front_ping_sensor())
-    sleep(0.041)
+def resampling(weights, N=15):
+    nice_samples = prior(N)
+    nice_weights = p(nice_samples)
+    nice_normweights = normweights(nice_samples)
+    new_sample = np.random.choice(nice_samples, size=N, p=nice_normweights)
+    return new_sample
 
-    print("Back sensor = ", arlo.read_back_ping_sensor())
-    sleep(0.041)
+# Set k as a single integer, not a list
+k = 20
+sample = prior(k)
+weights = normweights(sample)
+new_sample = resampling(weights, N=k)
 
-    print("Right sensor = ", arlo.read_right_ping_sensor())
-    sleep(0.041)
-
-    print("Left sensor = ", arlo.read_left_ping_sensor())
-    sleep(0.041)
-
-
-
-front = arlo.read_front_ping_sensor()
-back = arlo.read_back_ping_sensor()
-right = arlo.read_right_ping_sensor()
-left = arlo.read_left_ping_sensor()
-
-
-def recursivesensor():
-    while True:
-        front = arlo.read_front_ping_sensor()
-        if front <= 500 or left <= 500 or right <= 500:
-            break
-        ping()
-        sleep(1)
-        lige_ud(1, 40, 40)
-        arlo.stop()
-        sleep(1)
-    drej(0.5, 34, 35)
-    sleep(1)
-    recursivesensor()
-
-recursivesensor()
-
-
-
-
+# Plot the sample using matplotlib
+plt.hist(sample, bins=25, facecolor='red')
+plt.show()
