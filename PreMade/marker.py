@@ -12,7 +12,7 @@ except ImportError:
 # Open a camera device for capturing
 imageSize = (1280, 720)
 FPS = 30
-focal_length = 2000  # Provided focal length
+focal_length = 1760  # Provided focal length in pixels
 cam = picamera2.Picamera2()
 frame_duration_limit = int(1 / FPS * 1000000)  # Microseconds
 
@@ -34,22 +34,8 @@ cv2.moveWindow(WIN_RF, 100, 100)
 aruco_dict = cv2.aruco.getPredefinedDictionary(cv2.aruco.DICT_6X6_250)
 parameters = cv2.aruco.DetectorParameters()
 
-# Camera matrix using focal length and image center
-fx = focal_length
-fy = focal_length
-cx = imageSize[0] / 2
-cy = imageSize[1] / 2
-
-# Camera intrinsic matrix
-camera_matrix = np.array([[fx, 0, cx],
-                          [0, fy, cy],
-                          [0,  0,  1]])
-
-# Distortion coefficients (assuming zero distortion)
-dist_coeffs = np.zeros((4, 1))
-
-# Marker size in meters (e.g., if markers are 10 cm, set to 0.1)
-marker_length = 0.145
+# Known real-world height of the marker (14.5 cm = 0.145 meters)
+real_marker_height = 0.145
 
 while cv2.waitKey(4) == -1:  # Wait for a key press
     # Capture frame-by-frame from the picamera
@@ -63,30 +49,30 @@ while cv2.waitKey(4) == -1:  # Wait for a key press
 
     # If markers are detected, estimate the pose
     if ids is not None:
-        # Estimate pose of the markers
-        rvecs, tvecs, _ = cv2.aruco.estimatePoseSingleMarkers(corners, marker_length, camera_matrix, dist_coeffs)
-
         # Draw detected markers on the image
         cv2.aruco.drawDetectedMarkers(image, corners, ids)
 
         for i in range(len(ids)):
-            # Draw the axes for each marker
-            cv2.drawFrameAxes(image, camera_matrix, dist_coeffs, rvecs[i], tvecs[i], 0.1)  # Axis length = 0.1m
+            # Get the four corners of the detected marker
+            corner = corners[i][0]
 
-            # Calculate the distance to the marker
-            # Euclidean distance to the marker from the camera
-            distance = np.linalg.norm(tvecs[i])
+            # Calculate the height of the marker in pixels (h)
+            # We calculate the vertical distance between the top and bottom corners
+            top_left_y = corner[0][1]
+            bottom_left_y = corner[3][1]
+            marker_height_in_pixels = abs(bottom_left_y - top_left_y)  # Height in pixels
 
-            # Alternatively, use only the z-axis value for an approximation
-            z_distance = tvecs[i][0][2]
+            # Calculate distance Z using the formula Z = f * (H / h)
+            if marker_height_in_pixels > 0:  # Prevent division by zero
+                distance = focal_length * (real_marker_height / marker_height_in_pixels)
 
-            # Display the distance on the image
-            cv2.putText(image, f"Distance: {distance:.2f} m",
-                        (int(corners[i][0][0][0]), int(corners[i][0][0][1]) - 10),  # Position of the text
-                        cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
+                # Display the distance on the image
+                cv2.putText(image, f"Distance: {distance:.2f} m",
+                            (int(corner[0][0]), int(corner[0][1]) - 10),  # Position of the text
+                            cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
 
-            # Print marker ID and distance in the console
-            print(f"Marker ID: {ids[i][0]}, Distance: {distance:.2f} m (z-distance: {z_distance:.2f} m)")
+                # Print marker ID and distance in the console
+                print(f"Marker ID: {ids[i][0]}, Distance: {distance:.2f} m")
 
     # Show the frame with detected markers and distance
     cv2.imshow(WIN_RF, image)
