@@ -1,6 +1,6 @@
 from time import sleep
 
-import robot
+import PreMade.robot as robot
 
 
 # Create a robot object and initialize

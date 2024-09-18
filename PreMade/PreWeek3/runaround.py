@@ -1,7 +1,7 @@
 from numpy import random
 import numpy as np
 from time import sleep
-import robot
+import PreMade.robot as robot
 
 # Create a robot object and initialize
 arlo = robot.Robot()

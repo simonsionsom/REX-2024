@@ -7,7 +7,7 @@ hastighed_drej_r = 35
 
 
 from time import sleep
-import robot
+import PreMade.robot as robot
 
 
 arlo = robot.Robot()
