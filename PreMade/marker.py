@@ -1,6 +1,7 @@
 import cv2
 import numpy as np
 import time
+from time import sleep
 
 try:
     import picamera2
@@ -8,6 +9,15 @@ try:
 except ImportError:
     print("Camera.py: picamera2 module not available")
     exit(-1)
+
+import robot  # Import your robot module
+
+# Create a robot object and initialize
+arlo = robot.Robot()
+
+# Define the speed for rotation
+leftSpeed = 32
+rightSpeed = 32
 
 # Open a camera device for capturing
 imageSize = (1280, 720)
@@ -20,7 +30,7 @@ frame_duration_limit = int(1 / FPS * 1000000)  # Microseconds
 picam2_config = cam.create_video_configuration({"size": imageSize, "format": 'RGB888'},
                                                 controls={"FrameDurationLimits": (frame_duration_limit, frame_duration_limit)},
                                                 queue=False)
-cam.configure(picam2_config)  # Not really necessary
+cam.configure(picam2_config)
 cam.start(show_preview=False)
 
 time.sleep(1)  # wait for the camera to setup
@@ -37,6 +47,21 @@ parameters = cv2.aruco.DetectorParameters()
 # Known real-world height of the marker (14.5 cm = 0.145 meters)
 real_marker_height = 0.145
 
+# Robot control functions (using your current rotate function)
+def rotate_robot():
+    print("Rotating robot...")
+    # Rotate robot to the left
+    arlo.go_diff(leftSpeed, rightSpeed, 1, 0)  # 1, 0 makes the robot rotate to the left
+    sleep(0.3)
+    arlo.stop()
+    sleep(0.2)
+
+
+def stop_rotation():
+    print("Stopping robot rotation...")
+    # Stop the robot
+    arlo.stop()
+
 while cv2.waitKey(4) == -1:  # Wait for a key press
     # Capture frame-by-frame from the picamera
     image = cam.capture_array("main")
@@ -47,8 +72,10 @@ while cv2.waitKey(4) == -1:  # Wait for a key press
     # Detect ArUco markers in the grayscale image
     corners, ids, rejectedImgPoints = cv2.aruco.detectMarkers(gray, aruco_dict, parameters=parameters)
 
-    # If markers are detected, estimate the pose
+    # Check if any markers are detected
     if ids is not None:
+        stop_rotation()  # Stop robot rotation if a marker is detected
+
         # Draw detected markers on the image
         cv2.aruco.drawDetectedMarkers(image, corners, ids)
 
@@ -57,7 +84,6 @@ while cv2.waitKey(4) == -1:  # Wait for a key press
             corner = corners[i][0]
 
             # Calculate the height of the marker in pixels (h)
-            # We calculate the vertical distance between the top and bottom corners
             top_left_y = corner[0][1]
             bottom_left_y = corner[3][1]
             marker_height_in_pixels = abs(bottom_left_y - top_left_y)  # Height in pixels
@@ -73,6 +99,9 @@ while cv2.waitKey(4) == -1:  # Wait for a key press
 
                 # Print marker ID and distance in the console
                 print(f"Marker ID: {ids[i][0]}, Distance: {distance:.2f} m")
+
+    else:
+        rotate_robot()  # Rotate the robot if no markers are detected
 
     # Show the frame with detected markers and distance
     cv2.imshow(WIN_RF, image)
