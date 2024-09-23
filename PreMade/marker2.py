@@ -52,7 +52,7 @@ real_marker_height = 0.145
 
 # Frame size
 frame_center_x = imageSize[0] // 2
-center_threshold = 50  # Threshold to consider the marker centered
+center_threshold = 100  # Threshold to consider the marker centered
 
 # Robot control functions (using your current rotate function)
 def rotate_robot():
