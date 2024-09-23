@@ -33,7 +33,6 @@ cv2.moveWindow(WIN_RF, 100, 100)
 # Load the ArUco dictionary and create detector parameters
 aruco_dict = cv2.aruco.getPredefinedDictionary(cv2.aruco.DICT_6X6_250)
 parameters = cv2.aruco.DetectorParameters()
-hey = False
 # Known real-world height of the marker (14.5 cm = 0.145 meters)
 real_marker_height = 0.145
 
@@ -51,7 +50,6 @@ while cv2.waitKey(4) == -1:  # Wait for a key press
         # Rotate the robot if no markers are detected
         rotate.rotate()
     else:
-        hey = True
         # If markers are detected, estimate the pose
         # Draw detected markers on the image
         cv2.aruco.drawDetectedMarkers(image, corners, ids)
