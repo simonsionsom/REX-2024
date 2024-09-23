@@ -8,7 +8,5 @@ def rotate():
     leftSpeed = 64
     rightSpeed = 64
     print("Running ...")
-    print(arlo.go_diff(leftSpeed, rightSpeed, 1, 0))
-    sleep(1)
-    print(arlo.stop())
-    print("Stopping...")
+    # Set the left wheel to move forward and the right wheel to move backward
+    print(arlo.go_diff(leftSpeed, rightSpeed, 1, 0))  # Spin in one direction
