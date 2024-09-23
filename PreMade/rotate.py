@@ -11,5 +11,3 @@ def rotate():
     # Set the left wheel to move forward and the right wheel to move backward
     print(arlo.go_diff(leftSpeed, rightSpeed, 1, 0))  # Spin in one direction
     sleep(0.041)
-    print(arlo.stop())
-    print("Stopping...")
