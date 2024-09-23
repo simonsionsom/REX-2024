@@ -94,6 +94,9 @@ while cv2.waitKey(4) == -1:  # Wait for a key press
 
                 # Print marker ID and distance in the console
                 print(f"Marker ID: {ids[i][0]}, Distance: {distance:.2f} m")
+    
+    else:
+        rotate_robot()
 
     # Show the frame with detected markers and distance
     cv2.imshow(WIN_RF, image)
