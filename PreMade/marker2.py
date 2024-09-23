@@ -20,7 +20,7 @@ rightSpeed = 32
 forwardSpeed = 48  # Speed for driving forward
 
 # Define the minimum distance threshold (in meters) to stop the robot
-min_distance = 0.5  # Stop if closer than 50 cm to the marker
+min_distance = 0.3  # Stop if closer than 50 cm to the marker
 
 # Open a camera device for capturing
 imageSize = (1280, 720)
@@ -52,7 +52,7 @@ real_marker_height = 0.145
 
 # Frame size
 frame_center_x = imageSize[0] // 2
-center_threshold = 100  # Threshold to consider the marker centered
+center_threshold = 350  # Threshold to consider the marker centered
 
 # Robot control functions (using your current rotate function)
 def rotate_robot():
@@ -72,6 +72,7 @@ def drive_forward():
     print("Driving forward...")
     # Drive robot forward
     arlo.go_diff(leftSpeed, rightSpeed, 1, 1)  # Move both wheels forward
+    time.sleep(1)
 
 def stop_robot():
     print("Stopping robot due to proximity...")
