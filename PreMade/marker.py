@@ -45,6 +45,9 @@ while cv2.waitKey(4) == -1:  # Wait for a key press
 
     # Detect ArUco markers in the grayscale image
     corners, ids, rejectedImgPoints = cv2.aruco.detectMarkers(gray, aruco_dict, parameters=parameters)
+
+    # Show the frame with detected markers and distance
+    cv2.imshow(WIN_RF, image)
     
     if ids is None:
         # Rotate the robot if no markers are detected
@@ -74,9 +77,6 @@ while cv2.waitKey(4) == -1:  # Wait for a key press
 
                 # Print marker ID and distance in the console
                 print(f"Marker ID: {ids[i][0]}, Distance: {distance:.2f} m")
-
-    # Show the frame with detected markers and distance
-    cv2.imshow(WIN_RF, image)
 
 # Clean up after the loop
 cam.stop()
