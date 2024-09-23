@@ -1,7 +1,6 @@
 import cv2
 import numpy as np
 import time
-from time import sleep
 
 try:
     import picamera2
@@ -43,7 +42,6 @@ cv2.moveWindow(WIN_RF, 100, 100)
 # Load the ArUco dictionary and create detector parameters
 aruco_dict = cv2.aruco.getPredefinedDictionary(cv2.aruco.DICT_6X6_250)
 parameters = cv2.aruco.DetectorParameters()
-
 # Known real-world height of the marker (14.5 cm = 0.145 meters)
 real_marker_height = 0.145
 
@@ -52,9 +50,9 @@ def rotate_robot():
     print("Rotating robot...")
     # Rotate robot to the left
     arlo.go_diff(leftSpeed, rightSpeed, 1, 0)  # 1, 0 makes the robot rotate to the left
-    sleep(0.3)
+    time.sleep(0.3)
     arlo.stop()
-    sleep(0.2)
+    time.sleep(0.2)
 
 
 def stop_rotation():
@@ -72,13 +70,10 @@ while cv2.waitKey(4) == -1:  # Wait for a key press
     # Detect ArUco markers in the grayscale image
     corners, ids, rejectedImgPoints = cv2.aruco.detectMarkers(gray, aruco_dict, parameters=parameters)
 
-    # Check if any markers are detected
+    # If markers are detected, estimate the pose
     if ids is not None:
-        stop_rotation()  # Stop robot rotation if a marker is detected
-
         # Draw detected markers on the image
         cv2.aruco.drawDetectedMarkers(image, corners, ids)
-
         for i in range(len(ids)):
             # Get the four corners of the detected marker
             corner = corners[i][0]
@@ -99,9 +94,6 @@ while cv2.waitKey(4) == -1:  # Wait for a key press
 
                 # Print marker ID and distance in the console
                 print(f"Marker ID: {ids[i][0]}, Distance: {distance:.2f} m")
-
-    else:
-        rotate_robot()  # Rotate the robot if no markers are detected
 
     # Show the frame with detected markers and distance
     cv2.imshow(WIN_RF, image)
