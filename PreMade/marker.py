@@ -46,13 +46,15 @@ while cv2.waitKey(4) == -1:  # Wait for a key press
 
     # Detect ArUco markers in the grayscale image
     corners, ids, rejectedImgPoints = cv2.aruco.detectMarkers(gray, aruco_dict, parameters=parameters)
-    if hey == False:
+    
+    if ids is None:
+        # Rotate the robot if no markers are detected
         rotate.rotate()
-    # If markers are detected, estimate the pose
-    if ids is not None:
+    else:
+        hey = True
+        # If markers are detected, estimate the pose
         # Draw detected markers on the image
         cv2.aruco.drawDetectedMarkers(image, corners, ids)
-        hey = True
         for i in range(len(ids)):
             # Get the four corners of the detected marker
             corner = corners[i][0]
