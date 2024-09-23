@@ -145,7 +145,7 @@ while cv2.waitKey(4) == -1:  # Wait for a key press
         # Loop through all detected markers and draw the axes
         for i in range(len(ids)):
             # Draw the 3D axis for each marker
-            cv2.aruco.drawAxis(image, camera_matrix, dist_coeffs, rvecs[i], tvecs[i], 0.1)
+            cv2.drawFrameAxes(image, camera_matrix, dist_coeffs, rvecs[i], tvecs[i], 0.1)
 
             # Extract the rotation and translation vectors
             rvec = rvecs[i]
