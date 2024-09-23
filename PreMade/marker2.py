@@ -71,9 +71,7 @@ def stop_rotation():
 def drive_forward():
     print("Driving forward...")
     # Drive robot forward
-    arlo.go_diff(forwardSpeed, forwardSpeed, 1, 1)  # Move both wheels forward
-    time.sleep(0.5)
-    arlo.stop()
+    arlo.go_diff(leftSpeed, rightSpeed, 1, 1)  # Move both wheels forward
 
 def stop_robot():
     print("Stopping robot due to proximity...")
