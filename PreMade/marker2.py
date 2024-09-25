@@ -102,7 +102,7 @@ while cv2.waitKey(4) == -1:  # Wait for a key press
 
     # Detect ArUco markers in the grayscale image
     corners, ids, rejectedImgPoints = cv2.aruco.detectMarkers(gray, aruco_dict, parameters=parameters)
-    draw_grid(image, 1, color=(0, 255, 0), thickness=1)
+    draw_grid(image, (1, 1), color=(0, 255, 0), thickness=1)
     # If markers are detected, estimate the pose
     if ids is not None:
         # Draw detected markers on the image
