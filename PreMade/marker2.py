@@ -23,7 +23,7 @@ forwardSpeed = 48  # Speed for driving forward
 min_distance = 0.3  # Stop if closer than 50 cm to the marker
 
 # Open a camera device for capturing
-imageSize = (1280, 720)
+imageSize = (1280/2, 720/2)
 FPS = 30
 focal_length = 1760  # Provided focal length in pixels
 cam = picamera2.Picamera2()
