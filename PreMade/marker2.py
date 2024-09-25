@@ -138,8 +138,9 @@ while cv2.waitKey(4) == -1:  # Wait for a key press
         rotate_robot()
 
     # Show the frame with detected markers and distance
-    cv2.imshow(WIN_RF, image)
     cv2.resize(image,(500,500)) 
+    cv2.imshow(WIN_RF, image)
+    
 
 # Clean up after the loop
 cam.stop()
