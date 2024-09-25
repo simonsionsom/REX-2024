@@ -41,7 +41,8 @@ time.sleep(1)  # wait for the camera to setup
 # Open a window
 WIN_RF = "Aruco Marker Detection"
 cv2.namedWindow(WIN_RF)
-cv2.resize(WIN_RF, 200, 200)
+cv2.moveWindow(WIN_RF, 100, 100)
+
 
 # Load the ArUco dictionary and create detector parameters
 aruco_dict = cv2.aruco.getPredefinedDictionary(cv2.aruco.DICT_6X6_250)
@@ -138,6 +139,7 @@ while cv2.waitKey(4) == -1:  # Wait for a key press
 
     # Show the frame with detected markers and distance
     cv2.imshow(WIN_RF, image)
+    cv2.resize(image,(500,500)) 
 
 # Clean up after the loop
 cam.stop()
