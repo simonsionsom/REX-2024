@@ -41,7 +41,7 @@ time.sleep(1)  # wait for the camera to setup
 # Open a window
 WIN_RF = "Aruco Marker Detection"
 cv2.namedWindow(WIN_RF)
-cv2.moveWindow(WIN_RF, 100, 100)
+cv2.moveWindow(WIN_RF, 50, 50)
 
 # Load the ArUco dictionary and create detector parameters
 aruco_dict = cv2.aruco.getPredefinedDictionary(cv2.aruco.DICT_6X6_250)
