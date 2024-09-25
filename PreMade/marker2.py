@@ -96,13 +96,13 @@ def draw_grid(img, grid_shape, color=(0, 255, 0), thickness=1):
 while cv2.waitKey(4) == -1:  # Wait for a key press
     # Capture frame-by-frame from the picamera
     image = cam.capture_array("main")
+    draw_grid(image, (1, 1), color=(0, 255, 0), thickness=1)
 
     # Convert the image to grayscale (ArUco detection works better in grayscale)
     gray = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
 
     # Detect ArUco markers in the grayscale image
     corners, ids, rejectedImgPoints = cv2.aruco.detectMarkers(gray, aruco_dict, parameters=parameters)
-    draw_grid(image, (1, 1), color=(0, 255, 0), thickness=1)
     # If markers are detected, estimate the pose
     if ids is not None:
         # Draw detected markers on the image
