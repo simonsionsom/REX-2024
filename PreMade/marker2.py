@@ -76,9 +76,23 @@ def drive_forward():
     time.sleep(1)
 
 def stop_robot():
+
     print("Stopping robot due to proximity...")
     arlo.stop()
+def draw_grid(img, grid_shape, color=(0, 255, 0), thickness=1):
+    h, w, _ = img.shape
+    rows, cols = grid_shape
+    dy, dx = h / rows, w / cols
 
+    # draw vertical lines
+    for x in np.linspace(start=dx, stop=w-dx, num=cols-1):
+        x = int(round(x))
+        cv2.line(img, (x, 0), (x, h), color=color, thickness=thickness)
+
+    # draw horizontal lines
+    for y in np.linspace(start=dy, stop=h-dy, num=rows-1):
+        y = int(round(y))
+        cv2.line(img, (0, y), (w, y), color=color, thickness=thickness)
 while cv2.waitKey(4) == -1:  # Wait for a key press
     # Capture frame-by-frame from the picamera
     image = cam.capture_array("main")
@@ -88,7 +102,7 @@ while cv2.waitKey(4) == -1:  # Wait for a key press
 
     # Detect ArUco markers in the grayscale image
     corners, ids, rejectedImgPoints = cv2.aruco.detectMarkers(gray, aruco_dict, parameters=parameters)
-
+    draw_grid(image, 1, color=(0, 255, 0), thickness=1)
     # If markers are detected, estimate the pose
     if ids is not None:
         # Draw detected markers on the image
@@ -105,7 +119,6 @@ while cv2.waitKey(4) == -1:  # Wait for a key press
             top_left_y = corner[0][1]
             bottom_left_y = corner[3][1]
             marker_height_in_pixels = abs(bottom_left_y - top_left_y)  # Height in pixels
-
             # Calculate distance Z using the formula Z = f * (H / h)
             if marker_height_in_pixels > 0:  # Prevent division by zero
                 distance = focal_length * (real_marker_height / marker_height_in_pixels)
@@ -117,7 +130,6 @@ while cv2.waitKey(4) == -1:  # Wait for a key press
 
                 # Print marker ID, center, and distance in the console
                 print(f"Marker ID: {ids[i][0]}, Distance: {distance:.2f} m, Center: ({center_x:.2f}, {center_y:.2f})")
-
                 # Check if the marker is centered within the threshold
                 if abs(center_x - frame_center_x) > center_threshold:
                     # The marker is not centered, keep rotating
