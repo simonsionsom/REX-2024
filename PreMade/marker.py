@@ -134,7 +134,6 @@ while cv2.waitKey(4) == -1:  # Wait for a key press
 
                 update_occupancy_map(center_x, center_y, distance)
                 print(occupancy_map)
-                print(occupancy_map_image)
                 # Check if the marker is centered within the threshold
     else:
         # No markers detected, rotate the robot
