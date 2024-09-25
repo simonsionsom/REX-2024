@@ -23,7 +23,7 @@ forwardSpeed = 48  # Speed for driving forward
 min_distance = 0.3  # Stop if closer than 50 cm to the marker
 
 # Open a camera device for capturing
-imageSize = (1280/2, 720/2)
+imageSize = (1280, 720)
 FPS = 30
 focal_length = 1760  # Provided focal length in pixels
 cam = picamera2.Picamera2()
@@ -41,7 +41,7 @@ time.sleep(1)  # wait for the camera to setup
 # Open a window
 WIN_RF = "Aruco Marker Detection"
 cv2.namedWindow(WIN_RF)
-cv2.moveWindow(WIN_RF, 100, 100)
+cv2.moveWindow(WIN_RF, 50, 50)
 
 # Load the ArUco dictionary and create detector parameters
 aruco_dict = cv2.aruco.getPredefinedDictionary(cv2.aruco.DICT_6X6_250)
