@@ -56,7 +56,7 @@ center_threshold = 350  # Threshold to consider the marker centered
 
 # Define the grid resolution and initialize the occupancy map
 grid_resolution = 0.05  # 5 cm per grid cell
-grid_size = (100, 100)  # 100x100 grid
+grid_size = (500, 500)  # 100x100 grid
 occupancy_map = np.zeros(grid_size, dtype=bool) 
 
 # Robot control functions (using your current rotate function)
@@ -136,23 +136,9 @@ while cv2.waitKey(4) == -1:  # Wait for a key press
                 print(occupancy_map)
                 print(occupancy_map_image)
                 # Check if the marker is centered within the threshold
-                if abs(center_x - frame_center_x) > center_threshold:
-                    # The marker is not centered, keep rotating
-                    rotate_robot()
-                else:
-                    # The marker is centered, check distance before driving
-                    stop_rotation()  # Stop the rotation first
-
-                    # If the robot is too close to the marker, stop driving
-                    if distance < min_distance:
-                        stop_robot()  # Stop the robot if it is too close
-                    else:
-                        # The marker is centered and the robot is not too close, drive forward
-                        drive_forward()
-
     else:
         # No markers detected, rotate the robot
-        rotate_robot()
+        None
     cv2.resizeWindow(WIN_RF, 500, 500)
 
     cv2.imshow(WIN_RF, image)

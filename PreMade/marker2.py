@@ -99,7 +99,6 @@ while cv2.waitKey(4) == -1:  # Wait for a key press
             # Calculate the center of the marker
             center_x = (corner[0][0] + corner[1][0] + corner[2][0] + corner[3][0]) / 4
             center_y = (corner[0][1] + corner[1][1] + corner[2][1] + corner[3][1]) / 4
-
             # Calculate the height of the marker in pixels (h)
             top_left_y = corner[0][1]
             bottom_left_y = corner[3][1]
