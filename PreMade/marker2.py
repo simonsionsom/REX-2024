@@ -141,7 +141,16 @@ while cv2.waitKey(4) == -1:  # Wait for a key press
     cv2.resizeWindow(WIN_RF, 500, 500)
 
     cv2.imshow(WIN_RF, image)
+    resized_image = cv2.resize(image, (320, 240))  # Resize to a smaller size
     
+    # Optionally resize the window if needed
+    cv2.resizeWindow(WIN_RF, 400, 400)  # Set the window size
+
+    # Set the window to normal mode (not fullscreen)
+    cv2.setWindowProperty(WIN_RF, cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_NORMAL)
+
+    # Show the frame with detected markers and distance
+    cv2.imshow(WIN_RF, resized_image)
 
 # Clean up after the loop
 cam.stop()
