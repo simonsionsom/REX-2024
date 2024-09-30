@@ -547,6 +547,9 @@ if (__name__=='__main__'):
         if not isinstance(IDs, type(None)):
             for i in range(len(IDs)):
                 print("Object ID = ", IDs[i], ", Distance = ", dists[i], ", angles = ", angles[i])
+        # Display the distance on the image
+        cv2.putText(colour, f"Distance: {dists:.2f} m",
+                    cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
 
         # Draw detected objects
         cam.draw_aruco_objects(colour)
