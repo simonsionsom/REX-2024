@@ -144,7 +144,7 @@ while cv2.waitKey(4) == -1:  # Wait for a key press
         None
     #cv2.resizeWindow(WIN_RF, 500, 500)
 
-    resized_image = cv2.resize(image, imageSize/3)  # Resize to a smaller size
+    resized_image = cv2.resize(image, (639,360))  # Resize to a smaller size
     
     # Optionally resize the window if needed
     #cv2.resizeWindow(WIN_RF, 400, 400)  # Set the window size
