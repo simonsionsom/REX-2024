@@ -104,6 +104,7 @@ while cv2.waitKey(4) == -1:  # Wait for a key press
 
     # Detect ArUco markers in the grayscale image
     corners, ids, rejectedImgPoints = cv2.aruco.detectMarkers(gray, aruco_dict, parameters=parameters)
+    print(f"corners: {corners}")
     # If markers are detected, estimate the pose
     if ids is not None:
         # Draw detected markers on the image
@@ -111,14 +112,17 @@ while cv2.waitKey(4) == -1:  # Wait for a key press
         for i in range(len(ids)):
             # Get the four corners of the detected marker
             corner = corners[i][0]
+            print(f"corner number {i}: {corner}")
 
             # Calculate the center of the marker
             center_x = (corner[0][0] + corner[1][0] + corner[2][0] + corner[3][0]) / 4
             center_y = (corner[0][1] + corner[1][1] + corner[2][1] + corner[3][1]) / 4
-
+            print(f"the center of the x coordinate marker: {center_x}")
+            print(f"the center of the y coordinate marker: {center_y}")
             # Calculate the height of the marker in pixels (h)
             top_left_y = corner[0][1]
             bottom_left_y = corner[3][1]
+            print(f"marker height top left:{top_left_y}, Marker height buttom left: {bottom_left_y}")
             marker_height_in_pixels = abs(bottom_left_y - top_left_y)  # Height in pixels
             # Calculate distance Z using the formula Z = f * (H / h)
             if marker_height_in_pixels > 0:  # Prevent division by zero
