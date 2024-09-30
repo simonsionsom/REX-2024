@@ -151,12 +151,12 @@ while cv2.waitKey(4) == -1:  # Wait for a key press
     cv2.resizeWindow(WIN_RF, 400, 400)  # Set the window size
 
     # Set the window to normal mode (not fullscreen)
-    cv2.setWindowProperty(WIN_RF, cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_NORMAL)
+    #cv2.setWindowProperty(WIN_RF, cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_NORMAL)
 
     # Show the frame with detected markers and distance
-    cv2.imshow(WIN_RF, resized_image)
+    #cv2.imshow(WIN_RF, resized_image)
     # Show the frame with detected markers and distance
-    cv2.imshow(WIN_RF, image)
+    #cv2.imshow(WIN_RF, image)
 
     # Visualize the occupancy map
     occupancy_map_image = (occupancy_map * 255).astype(np.uint8)
