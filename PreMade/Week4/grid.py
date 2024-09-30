@@ -50,6 +50,9 @@ def update_occupancy_map(center_x, center_y, distance):
     true_dist = int(distance/grid_resolution)
     '''grid_y = int(center_y / grid_resolution)
     radius = int(distance / grid_resolution)'''
+    print(grid_x)
+    print()
+    print(true_dist)
     occupancy_map[grid_x,true_dist] = True
 
 
