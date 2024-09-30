@@ -550,20 +550,8 @@ if (__name__=='__main__'):
 
         # Draw detected objects
         cam.draw_aruco_objects(colour)
-
-        cv2.resizeWindow(WIN_RF1, 500, 500)
-
-        cv2.imshow(WIN_RF1, colour)
         resized_image = cv2.resize(colour, (320, 240))  # Resize to a smaller size
-        
-        # Optionally resize the window if needed
-        cv2.resizeWindow(WIN_RF1, 400, 400)  # Set the window size
 
-        # Set the window to normal mode (not fullscreen)
-        cv2.setWindowProperty(WIN_RF1, cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_NORMAL)
-
-        # Show the frame with detected markers and distance
-        cv2.imshow(WIN_RF1, resized_image)
         # Show the frame with detected markers and distance
         cv2.imshow(WIN_RF1, colour)
 
