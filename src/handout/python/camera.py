@@ -557,7 +557,6 @@ if (__name__=='__main__'):
 
         # Show the frame with detected markers and distance
         cv2.imshow(WIN_RF1, resized_image)
-        cv2.imshow("Map", map)
 
         
     # Close all windows
