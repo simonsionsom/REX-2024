@@ -553,7 +553,7 @@ if (__name__=='__main__'):
         resized_image = cv2.resize(colour, (600, 400))  # Resize to a smaller size
 
         # Show the frame with detected markers and distance
-        cv2.imshow(WIN_RF1, colour)
+        cv2.imshow(WIN_RF1, resized_image)
 
         
     # Close all windows
