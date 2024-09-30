@@ -46,8 +46,8 @@ occupancy_map = np.zeros(grid_size, dtype=bool)
 
 def update_occupancy_map(center_x, center_y, distance):
     # Convert the distance and center coordinates to grid indices
-    grid_x = int(center_x / grid_resolution)
-    true_dist = int(distance)
+    grid_x = int(center_x * grid_resolution)
+    true_dist = int(distance* grid_resolution)
     '''grid_y = int(center_y / grid_resolution)
     radius = int(distance / grid_resolution)'''
     print('Her er grid x: ',grid_x)
