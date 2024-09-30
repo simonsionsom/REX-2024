@@ -53,7 +53,7 @@ def update_occupancy_map(center_x, center_y, distance):
     print('Her er grid x: ',grid_x)
     print()
     print('Her er true_dist: ',true_dist)
-    occupancy_map[grid_x[],true_dist] = True
+    occupancy_map[grid_x,true_dist] = True
 
 
 '''    # Mark the corresponding cells in the occupancy map as occupied
