@@ -112,7 +112,7 @@ while cv2.waitKey(4) == -1:  # Wait for a key press
         for i in range(len(ids)):
             # Get the four corners of the detected marker
             corner = corners[i][0]
-            print(f"corner number {i}: {corner}")
+            print(f"corner number {i}: {corner}, and the shape {corner.shape}")
 
             # Calculate the center of the marker
             center_x = (corner[0][0] + corner[1][0] + corner[2][0] + corner[3][0]) / 4

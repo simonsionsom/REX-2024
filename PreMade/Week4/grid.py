@@ -53,7 +53,7 @@ def update_occupancy_map(center_x, center_y, distance):
     print('Her er grid x: ',grid_x)
     print()
     print('Her er true_dist: ',true_dist)
-    occupancy_map[grid_x,true_dist] = True
+    occupancy_map[grid_x[],true_dist] = True
 
 
 '''    # Mark the corresponding cells in the occupancy map as occupied
@@ -79,7 +79,7 @@ while cv2.waitKey(4) == -1:  # Wait for a key press
         for i in range(len(ids)):
             # Get the four corners of the detected marker
             corner = corners[i][0]
-            print(f"corner number {i}: {corner}")
+            print(f"Box number {i}: {corner}")
 
             # Calculate the center of the marker
             center_x = (corner[0][0] + corner[1][0] + corner[2][0] + corner[3][0]) / 4
