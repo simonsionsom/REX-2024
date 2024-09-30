@@ -49,7 +49,7 @@ def update_occupancy_map(center_x, center_y, distance):
     grid_x = int(center_x / grid_resolution)
     '''grid_y = int(center_y / grid_resolution)
     radius = int(distance / grid_resolution)'''
-    occupancy_map[grid_x,distance] = True
+    occupancy_map[grid_x,int(distance)] = True
 
 
 '''    # Mark the corresponding cells in the occupancy map as occupied
