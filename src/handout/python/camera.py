@@ -5,7 +5,7 @@ import sys
 import threading
 import framebuffer
 from pkg_resources import parse_version
-
+import map
 
 gstreamerCameraFound = False
 piCameraFound = False
@@ -494,7 +494,10 @@ class Camera(object):
             
         return self.patternFound, self.corners
         
-        
+    path_res = 0.05
+    map = map.GridOccupancyMap(low=(-1, 0), high=(1, 2), res=path_res)
+    map.populate()
+    
     def draw_object(self, img):
         """Draw the object if found into img"""
         cv2.drawChessboardCorners(img, self.patternSize, self.corners, self.patternFound)
@@ -547,9 +550,6 @@ if (__name__=='__main__'):
         if not isinstance(IDs, type(None)):
             for i in range(len(IDs)):
                 print("Object ID = ", IDs[i], ", Distance = ", dists[i], ", angles = ", angles[i])
-        # Display the distance on the image
-        cv2.putText(colour, f"Distance: {dists:.2f} m",
-                    cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
 
         # Draw detected objects
         cam.draw_aruco_objects(colour)

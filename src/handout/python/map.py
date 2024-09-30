@@ -63,5 +63,3 @@ if __name__ == '__main__':
     plt.clf()
     map.draw_map()
     plt.show()
-
-        
