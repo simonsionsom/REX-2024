@@ -56,7 +56,7 @@ center_threshold = 350  # Threshold to consider the marker centered
 
 # Define the grid resolution and initialize the occupancy map
 grid_resolution = 0.05  # 5 cm per grid cell
-grid_size = (500, 500)  # 500x500 grid = 2,5 meter
+grid_size = (500, 500)  # 500x500 grid = 2,5
 occupancy_map = np.zeros(grid_size, dtype=bool) 
 
 # Robot control functions (using your current rotate function)
@@ -144,8 +144,7 @@ while cv2.waitKey(4) == -1:  # Wait for a key press
         None
     #cv2.resizeWindow(WIN_RF, 500, 500)
 
-    #cv2.imshow(WIN_RF, image)
-    #resized_image = cv2.resize(image, (320, 240))  # Resize to a smaller size
+    resized_image = cv2.resize(image, (320, 240))  # Resize to a smaller size
     
     # Optionally resize the window if needed
     #cv2.resizeWindow(WIN_RF, 400, 400)  # Set the window size
@@ -154,33 +153,13 @@ while cv2.waitKey(4) == -1:  # Wait for a key press
     #cv2.setWindowProperty(WIN_RF, cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_NORMAL)
 
     # Show the frame with detected markers and distance
-    #cv2.imshow(WIN_RF, resized_image)
+    cv2.imshow(WIN_RF, resized_image)
     # Show the frame with detected markers and distance
-    #cv2.imshow(WIN_RF, image)
 
     # Visualize the occupancy map
-    #occupancy_map_image = (occupancy_map * 255).astype(np.uint8)
-    #cv2.imshow("Occupancy Map", occupancy_map_image)
+    occupancy_map_image = (occupancy_map * 255).astype(np.uint8)
+    cv2.imshow("Occupancy Map", occupancy_map_image)
 
 # Clean up after the loop
-#cam.stop()
-#cv2.destroyAllWindows()
-scale_percent = 50  # percent of original size (adjust as needed)
-
-try:
-    while cv2.waitKey(4) == -1:  # Wait for a key pressed event
-        image = cam.capture_array("main")
-        
-        # Resize the image to the scaled size
-        width = int(image.shape[1] * scale_percent / 100)
-        height = int(image.shape[0] * scale_percent / 100)
-        dim = (width, height)
-        resized_image = cv2.resize(image, dim)
-        
-        # Show frames
-        cv2.imshow(WIN_RF, resized_image)
-
-finally:
-    # Release resources properly when exiting
-    cam.stop()
-    cv2.destroyAllWindows()
+cam.stop()
+cv2.destroyAllWindows()
