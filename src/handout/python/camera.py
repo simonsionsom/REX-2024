@@ -550,7 +550,7 @@ if (__name__=='__main__'):
 
         # Draw detected objects
         cam.draw_aruco_objects(colour)
-        resized_image = cv2.resize(colour, (320, 240))  # Resize to a smaller size
+        resized_image = cv2.resize(colour, (1280/3, 720/3))  # Resize to a smaller size
 
         # Show the frame with detected markers and distance
         cv2.imshow(WIN_RF1, colour)
