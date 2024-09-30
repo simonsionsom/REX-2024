@@ -554,7 +554,14 @@ if (__name__=='__main__'):
     
         # Show frames
         cv2.imshow(WIN_RF1, colour)
+        resized_image = cv2.resize(colour, (320, 240))  # Resize to a smaller size
         
+        # Optionally resize the window if needed
+        cv2.resizeWindow(WIN_RF1, 400, 400)  # Set the window size
+
+        # Set the window to normal mode (not fullscreen)
+        cv2.setWindowProperty(WIN_RF1, cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_NORMAL)
+
         # Show frames
         #cv2.imshow(WIN_RF3, gray)
         
