@@ -76,6 +76,7 @@ def drive_forward():
     time.sleep(1)
 
 def stop_robot():
+
     print("Stopping robot due to proximity...")
     arlo.stop()
 
@@ -88,7 +89,6 @@ while cv2.waitKey(4) == -1:  # Wait for a key press
 
     # Detect ArUco markers in the grayscale image
     corners, ids, rejectedImgPoints = cv2.aruco.detectMarkers(gray, aruco_dict, parameters=parameters)
-
     # If markers are detected, estimate the pose
     if ids is not None:
         # Draw detected markers on the image
@@ -100,12 +100,10 @@ while cv2.waitKey(4) == -1:  # Wait for a key press
             # Calculate the center of the marker
             center_x = (corner[0][0] + corner[1][0] + corner[2][0] + corner[3][0]) / 4
             center_y = (corner[0][1] + corner[1][1] + corner[2][1] + corner[3][1]) / 4
-
             # Calculate the height of the marker in pixels (h)
             top_left_y = corner[0][1]
             bottom_left_y = corner[3][1]
             marker_height_in_pixels = abs(bottom_left_y - top_left_y)  # Height in pixels
-
             # Calculate distance Z using the formula Z = f * (H / h)
             if marker_height_in_pixels > 0:  # Prevent division by zero
                 distance = focal_length * (real_marker_height / marker_height_in_pixels)
@@ -117,7 +115,6 @@ while cv2.waitKey(4) == -1:  # Wait for a key press
 
                 # Print marker ID, center, and distance in the console
                 print(f"Marker ID: {ids[i][0]}, Distance: {distance:.2f} m, Center: ({center_x:.2f}, {center_y:.2f})")
-
                 # Check if the marker is centered within the threshold
                 if abs(center_x - frame_center_x) > center_threshold:
                     # The marker is not centered, keep rotating
