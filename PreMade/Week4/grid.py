@@ -84,7 +84,7 @@ while cv2.waitKey(4) == -1:  # Wait for a key press
             # Calculate the center of the marker
             center_x = (corner[0][0] + corner[1][0] + corner[2][0] + corner[3][0]) / 4
             print()
-            print(f'Here is center x: {center_x:2f}, and here is are the corners: {corner}')
+            print(f'Here is center x: {center_x}, and here is are the corners: {corner}')
             center_y = (corner[0][1] + corner[1][1] + corner[2][1] + corner[3][1]) / 4
             '''print(f"the center of the x coordinate marker: {center_x}")
             print(f"the center of the y coordinate marker: {center_y}")'''
