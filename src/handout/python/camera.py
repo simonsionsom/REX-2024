@@ -564,3 +564,4 @@ if (__name__=='__main__'):
 
     # Clean-up capture thread
     cam.terminateCaptureThread()
+
