@@ -46,6 +46,7 @@ class GridOccupancyMap(object):
                 centroid = np.array([self.map_area[0][0] + self.resolution * (i+0.5), 
                                      self.map_area[0][1] + self.resolution * (j+0.5)])
                 for o, r in zip(origins, radius):
+                    print(f'{centroid},\nden shape er her{centroid.shape}')
                     if np.linalg.norm(centroid - o) <= r:
                         self.grid[i, j] = 1
                         break
