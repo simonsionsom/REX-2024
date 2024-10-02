@@ -70,13 +70,13 @@ while cv2.waitKey(4) == -1:
         for i in range(len(ids)):
             print("Object ID = ", ids[i], ", Distance = ", tvecs[i], ", angles = ", rvecs[i])
         cv2.aruco.drawDetectedMarkers(image, corners, ids)
-    z = tvecs.T[2]
-    x = tvecs.T[0]
+    z = int(tvecs.T[2]*100)
+    x = int(tvecs.T[0]*100)
     print(f'Here is z:{z}\n And here is x:{x}')
     map = np.zeros((50,50))
     for i in range(0,3):
         for j in range(0,3):
-            map[x-i,z-j]=1
+            map[(x/5)-i,(z/5)-j]=1
     print(map)
     resized_image = cv2.resize(image, (320, 240))
     cv2.setWindowProperty(WIN_RF, cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_NORMAL)
