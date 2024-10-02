@@ -127,7 +127,7 @@ cv2.destroyAllWindows()
 
 # Once the frames are captured, proceed with calibration
 camera_matrix = np.array([[1760, 0, 640], [0, 1760, 360], [0, 0, 1]])  # Your existing intrinsic matrix
-dist_coeffs = np.zeros((5, 1))  # Placeholder for distortion coefficients
+dist_coeffs = np.array([0, 0, 0, 0, 0])  # Placeholder for distortion coefficients
 
 # Perform the camera calibration using the ArUco markers
 ret, camera_matrix, dist_coeffs, rvecs, tvecs = aruco.calibrateCameraAruco(
