@@ -89,14 +89,9 @@ def populate(boxes):
                         grid[i, j] = 1
                         break
 
-def find_Lengths(corners):
+#def find_Lengths(corners):
     
-    for x in corners:
-        rvecs, tvecs, objPoints = cv2.aruco.estimatePoseSingleMarkers(corners, real_marker_height, intrinsic_matrix, distortion_coeffs)
-        dist = np.array([tvecs.T[0][0], tvecs.T[2][0]]) / resolution
-        
-        distances.append(dist)
-        print(dist)
+    
 
 
 def draw_map():
@@ -143,7 +138,12 @@ while cv2.waitKey(4) == -1:
     image = cam.capture_array("main")
     gray = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
     corners, ids, rejectedImgPoints = cv2.aruco.detectMarkers(gray, aruco_dict, parameters=parameters)
-    find_Lengths(corners)
+    for x in corners:
+        rvecs, tvecs, objPoints = cv2.aruco.estimatePoseSingleMarkers(corners, real_marker_height, intrinsic_matrix, distortion_coeffs)
+        dist = np.array([tvecs.T[0][0], tvecs.T[2][0]]) / resolution
+        
+        distances.append(dist)
+        print(dist)
     # Find lengths and update grid
     #print(distances)
     populate(distances)
