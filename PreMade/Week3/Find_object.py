@@ -87,7 +87,6 @@ intrinsic_matrix = np.asarray([ 1760, 0, 640,
                                 0, 0, 1. ], dtype = np.float64)
 
 intrinsic_matrix.shape = (3, 3)
-map = np.zeros.array
 distortion_coeffs = np.asarray([0,0,0,0,0])
 
 def draw_aruco_objects(image, corners, ids, rvecs, tvecs):
