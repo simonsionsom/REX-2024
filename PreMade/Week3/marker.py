@@ -64,7 +64,7 @@ extent = [map_area[0][0], map_area[1][0], map_area[0][1], map_area[1][1]]
 # distortion_coeffs = np.asarray([3.37113443e+00, -5.84490229e+01,
 #        -9.99698589e-02, -2.84566227e-02, 1.18763855e+03], dtype = np.float64)
 distortion_coeffs = np.asarray([0,0,0,0,0])
-def draw_aruco_objects(image, corners, ids, rvecs, tvecs,self):
+'''def draw_aruco_objects(image, corners, ids, rvecs, tvecs,self):
     """Draws detected ArUco markers and their orientations on the image."""
     if ids is not None:
         # Draw the detected markers
@@ -75,7 +75,7 @@ def draw_aruco_objects(image, corners, ids, rvecs, tvecs,self):
                                        distortion_coeffs, rvecs[i], tvecs[i], real_marker_height)
     else:
         outimg = image
-    return outimg
+    return outimg'''
 
 def populate(boxes):
     radius=0.25
@@ -99,10 +99,15 @@ def find_Lengths(corners):
     return distances
 
 def draw_map(self):
-        #note the x-y axes difference between imshow and plot
-        plt.imshow(grid.T, cmap="Greys", origin='lower', vmin=0, vmax=1, extent=self.extent, interpolation='none') 
+    display_grid = (grid * 255).astype(np.uint8)
+    
+    # Resize the grid to the same size as the image for visualization
+    resized_grid = cv2.resize(display_grid, imageSize, interpolation=cv2.INTER_NEAREST)
+    
+    # Show the grid using OpenCV's imshow
+    cv2.imshow("Grid Map", resized_grid)
 
-while cv2.waitKey(4) == -1:
+'''while cv2.waitKey(4) == -1:
     image = cam.capture_array("main")
     gray = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
     corners, ids, rejectedImgPoints = cv2.aruco.detectMarkers(gray, aruco_dict, parameters=parameters)
@@ -111,19 +116,44 @@ while cv2.waitKey(4) == -1:
     plt.clf()
     draw_map()
     plt.pause(0.001)
-
-    '''if ids is not None:
-        for i in range(len(ids)):
-            print("Object ID = ", ids[i], ", Distance = ", tvecs[i], ", angles = ", rvecs[i])
-        cv2.aruco.drawDetectedMarkers(image, corners, ids)
-    print(tvecs.T)
-    z = tvecs.T[2][0]*100
-    x = tvecs.T[0][0]*100
-    print(f'Here is z:{z}\n And here is x:{x}')
-    map = np.zeros((40,40))
-    for i in range(0,3):
-        for j in range(0,3):
-            map[int(z/5)-i,int(x/5)-j]=1'''
+    plt.show()
+    '''
+# if ids is not None:
+#        for i in range(len(ids)):
+#            print("Object ID = ", ids[i], ", Distance = ", tvecs[i], ", angles = ", rvecs[i])
+#        cv2.aruco.drawDetectedMarkers(image, corners, ids)
+#    print(tvecs.T)
+#    z = tvecs.T[2][0]*100
+#    x = tvecs.T[0][0]*100
+#    print(f'Here is z:{z}\n And here is x:{x}')
+#    map = np.zeros((40,40))
+#    for i in range(0,3):
+#        for j in range(0,3):
+#            map[int(z/5)-i,int(x/5)-j]=1
+'''
+    resized_image = cv2.resize(image, (320, 240))
+    cv2.imshow(WIN_RF, resized_image)
 print(map)
+cam.stop()
+cv2.destroyAllWindows()
+'''
+
+while cv2.waitKey(4) == -1:
+    image = cam.capture_array("main")
+    gray = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
+    corners, ids, rejectedImgPoints = cv2.aruco.detectMarkers(gray, aruco_dict, parameters=parameters)
+    
+    # Find lengths and update grid
+    distances = find_Lengths(corners)
+    populate(distances)
+    
+    # Use OpenCV to display the grid map instead of plt
+    draw_map()
+
+    # Display the resized image from the camera
+    resized_image = cv2.resize(image, (320, 240))
+    cv2.imshow(WIN_RF, resized_image)
+
+# Clean up when done
 cam.stop()
 cv2.destroyAllWindows()
