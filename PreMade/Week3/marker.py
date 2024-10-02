@@ -72,6 +72,7 @@ while cv2.waitKey(4) == -1:
         cv2.aruco.drawDetectedMarkers(image, corners, ids)
     z = int((tvecs.T[2]*100)/5)
     x = int((tvecs.T[0]*100)/5)
+    print(f'Here is z:{z}\n And here is x:{x}')
     map = np.zeros((25,25))
     for i in range(0,3):
         for j in range(0,3):
