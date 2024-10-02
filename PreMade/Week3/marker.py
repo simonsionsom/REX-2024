@@ -86,7 +86,7 @@ def populate(boxes):
                                      map_area[0][1] + resolution * (j+0.5)])
             for o in boxes:
                     if np.linalg.norm(centroid - o) <= radius:
-                        grid[i, j] = 1
+                        grid[j, i] = 1
                         break
 
 def find_Lengths(corners):
