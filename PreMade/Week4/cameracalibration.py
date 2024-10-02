@@ -68,6 +68,7 @@ board = aruco.GridBoard((5, 7), 0.15, 0.05, aruco_dict)
 # Initialize arrays to store detected corners and marker IDs
 all_corners = []
 all_ids = []
+counter = []
 image_size = None
 
 # Configure the picamera2
@@ -111,6 +112,7 @@ while cv2.waitKey(4) == -1:
         aruco.drawDetectedMarkers(image, corners, ids)  # Draw detected markers on the image
         all_corners.append(corners)
         all_ids.append(ids)
+        counter.append(len(ids))
         capture_count += 1
         print(f"Captured frame {capture_count} for calibration")
 
@@ -131,7 +133,7 @@ dist_coeffs = np.zeros((5, 1))  # Placeholder for distortion coefficients
 
 # Perform the camera calibration using the ArUco markers
 ret, camera_matrix, dist_coeffs, rvecs, tvecs = aruco.calibrateCameraAruco(
-    all_corners, all_ids, board, image_size, camera_matrix, dist_coeffs
+    all_corners, all_ids, counter, board, image_size, camera_matrix, dist_coeffs
 )
 
 # Output the updated camera matrix and distortion coefficients
