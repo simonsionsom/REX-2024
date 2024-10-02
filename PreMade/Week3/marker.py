@@ -44,30 +44,39 @@ intrinsic_matrix = np.asarray([ 1760, 0, 640,
 
 intrinsic_matrix.shape = (3, 3)
 
-distortion_coeffs = np.asarray([3.37113443e+00, -5.84490229e+01,
-       -9.99698589e-02, -2.84566227e-02, 1.18763855e+03], dtype = np.float64)
-# distortion_coeffs = np.asarray([0,0,0,0,0])
-def draw_aruco_objects(image):
-    """Draws detected objects and their orientations on the image given in img."""
-    if not isinstance(ids, type(None)):
+# distortion_coeffs = np.asarray([3.37113443e+00, -5.84490229e+01,
+#        -9.99698589e-02, -2.84566227e-02, 1.18763855e+03], dtype = np.float64)
+distortion_coeffs = np.asarray([0,0,0,0,0])
+def draw_aruco_objects(image, corners, ids, rvecs, tvecs):
+    """Draws detected ArUco markers and their orientations on the image."""
+    if ids is not None:
+        # Draw the detected markers
         outimg = cv2.aruco.drawDetectedMarkers(image, corners, ids)
-        for i in range(ids.shape[0]):
+        # Draw the axis for each detected marker
+        for i in range(len(ids)):
             outimg = cv2.drawFrameAxes(outimg, intrinsic_matrix,
-                                        rvecs[i], tvecs[i], real_marker_height)
+                                       distortion_coeffs, rvecs[i], tvecs[i], real_marker_height)
     else:
         outimg = image
-
     return outimg
+
 while cv2.waitKey(4) == -1:
     image = cam.capture_array("main")
     gray = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
     corners, ids, rejectedImgPoints = cv2.aruco.detectMarkers(gray, aruco_dict, parameters=parameters)
-    rvecs, tvecs, objPoints = cv2.aruco.estimatePoseSingleMarkers(corners, real_marker_height, intrinsic_matrix, distortion_coeffs)
+    # rvecs, tvecs, objPoints = cv2.aruco.estimatePoseSingleMarkers(corners, real_marker_height, intrinsic_matrix, distortion_coeffs)
+
+    # Estimate pose of each marker
     if ids is not None:
+        rvecs, tvecs, objPoints = cv2.aruco.estimatePoseSingleMarkers(corners, real_marker_height, intrinsic_matrix, distortion_coeffs)
+        
+        # Print marker info
         for i in range(len(ids)):
             print("Object ID = ", ids[i], ", Distance = ", tvecs[i], ", angles = ", rvecs[i])
-        cv2.aruco.drawDetectedMarkers(image, corners, ids)
-    print(rvecs)
+        
+        # Draw ArUco markers and their axes
+        image = draw_aruco_objects(image, corners, ids, rvecs, tvecs)
+        
     resized_image = cv2.resize(image, (320, 240))
     cv2.setWindowProperty(WIN_RF, cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_NORMAL)
     cv2.imshow(WIN_RF, resized_image)
