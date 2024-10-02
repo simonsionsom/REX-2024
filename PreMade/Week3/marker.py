@@ -46,6 +46,18 @@ intrinsic_matrix.shape = (3, 3)
 distortion_coeffs = np.asarray([ 1.1911006165076067e-01, -1.0003366233413549e+00,
        1.9287903277399834e-02, -2.3728201444308114e-03, -2.8137265581326476e-01 ], dtype = np.float64)
 
+def draw_aruco_objects(img, intrinsic_matrix, distortion_coeffs, rvecs, tvecs, real_marker_height):
+    """Draws detected objects and their orientations on the image given in img."""
+    if not isinstance(ids, type(None)):
+        outimg = cv2.aruco.drawDetectedMarkers(img, corners, ids)
+        for i in range(ids.shape[0]):
+            outimg = cv2.drawFrameAxes(outimg, intrinsic_matrix, distortion_coeffs,
+                                        rvecs[i], tvecs[i], real_marker_height)
+    else:
+        outimg = img
+
+    return outimg
+
 while cv2.waitKey(4) == -1:
     image = cam.capture_array("main")
     gray = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
@@ -53,7 +65,8 @@ while cv2.waitKey(4) == -1:
 
     rvecs, tvecs, objPoints = cv2.aruco.estimatePoseSingleMarkers(corners, real_marker_height, intrinsic_matrix, distortion_coeffs)
     cv2.aruco.drawDetectedMarkers(image, corners, ids)
-
+    print(rvecs)
+    draw_aruco_objects
     resized_image = cv2.resize(image, (320, 240))
     cv2.setWindowProperty(WIN_RF, cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_NORMAL)
     cv2.imshow(WIN_RF, resized_image)
