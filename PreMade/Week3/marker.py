@@ -55,9 +55,6 @@ while cv2.waitKey(4) == -1:
     if ids is not None:
         for i in range(len(ids)):
             print("Object ID = ", ids[i], ", Distance = ", tvecs[i], ", angles = ", rvecs[i])
-            cv2.putText(image, f"Distance: {distance:.2f} m",
-                        (int(corners[0][0]), int(corners[0][1]) - 10),  # Position of the text
-                        cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
         cv2.aruco.drawDetectedMarkers(image, corners, ids)
     print(rvecs)
     resized_image = cv2.resize(image, (320, 240))
