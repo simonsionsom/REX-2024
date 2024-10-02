@@ -72,7 +72,7 @@ while cv2.waitKey(4) == -1:
         cv2.aruco.drawDetectedMarkers(image, corners, ids)
     print(rvecs)
     print(tvecs.shape)
-    distance = tvecs.T[1]
+    distance = tvecs.T[2]
     print(distance)
     resized_image = cv2.resize(image, (320, 240))
     cv2.setWindowProperty(WIN_RF, cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_NORMAL)
