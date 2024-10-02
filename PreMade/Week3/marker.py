@@ -38,14 +38,26 @@ real_marker_height = 0.145
 
 frame_center_x = imageSize[0] // 2
 center_threshold = 350
-intrinsic_matrix = np.asarray([ 1760, 0, 640, 0,
-       1760, 360, 0, 0, 1. ], dtype = np.float64)
+intrinsic_matrix = np.asarray([ 1760, 0, 640, 
+                                0, 1760, 360, 
+                                0, 0, 1. ], dtype = np.float64)
 
 intrinsic_matrix.shape = (3, 3)
 
-distortion_coeffs = np.asarray([ 1.1911006165076067e-01, -1.0003366233413549e+00,
-       1.9287903277399834e-02, -2.3728201444308114e-03, -2.8137265581326476e-01 ], dtype = np.float64)
+distortion_coeffs = np.asarray([3.37113443e+00, -5.84490229e+01,
+       -9.99698589e-02, -2.84566227e-02, 1.18763855e+03], dtype = np.float64)
 
+def draw_aruco_objects(image):
+    """Draws detected objects and their orientations on the image given in img."""
+    if not isinstance(ids, type(None)):
+        outimg = cv2.aruco.drawDetectedMarkers(image, corners, ids)
+        for i in range(ids.shape[0]):
+            outimg = cv2.drawFrameAxes(outimg, intrinsic_matrix, distortion_coeffs,
+                                        rvecs[i], tvecs[i], real_marker_height)
+    else:
+        outimg = image
+
+    return outimg
 while cv2.waitKey(4) == -1:
     image = cam.capture_array("main")
     gray = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
