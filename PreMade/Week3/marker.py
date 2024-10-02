@@ -51,11 +51,11 @@ while cv2.waitKey(4) == -1:
     gray = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
     corners, ids, rejectedImgPoints = cv2.aruco.detectMarkers(gray, aruco_dict, parameters=parameters)
     rvecs, tvecs, objPoints = cv2.aruco.estimatePoseSingleMarkers(corners, real_marker_height, intrinsic_matrix, distortion_coeffs)
-
+    distance = tvecs[0]
     if ids is not None:
         for i in range(len(ids)):
             print("Object ID = ", ids[i], ", Distance = ", tvecs[i], ", angles = ", rvecs[i])
-            cv2.putText(image, f"Distance: {tvecs[i]:.2f} m",
+            cv2.putText(image, f"Distance: {distance:.2f} m",
                         (int(corners[0][0]), int(corners[0][1]) - 10),  # Position of the text
                         cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
         cv2.aruco.drawDetectedMarkers(image, corners, ids)
