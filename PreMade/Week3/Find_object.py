@@ -1,6 +1,7 @@
 import cv2
 import numpy as np
 import glob
+import os
 
 # Termination criteria for the cornerSubPix function
 criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 30, 0.001)
@@ -17,8 +18,15 @@ imgpoints = []  # 2D points in image plane
 # Load all calibration images (you should have multiple chessboard images from different angles)
 images = glob.glob('calibration_images/*.jpg')
 
+if not images:
+    raise FileNotFoundError("No calibration images found in the specified directory.")
+
 for fname in images:
     img = cv2.imread(fname)
+    if img is None:
+        print(f"Failed to load image {fname}")
+        continue
+
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
     # Find the chessboard corners
@@ -34,15 +42,20 @@ for fname in images:
 
         # Draw and display the corners
         img = cv2.drawChessboardCorners(img, (9, 6), corners2, ret)
-        cv2.imshow('Chessboard', img)
-        cv2.waitKey(500)
+        if os.environ.get('DISPLAY'):
+            cv2.imshow('Chessboard', img)
+            cv2.waitKey(500)
 
-cv2.destroyAllWindows()
+if os.environ.get('DISPLAY'):
+    cv2.destroyAllWindows()
 
 # Calibrate the camera using the object points and image points
-ret, intrinsic_matrix, distortion_coeffs, rvecs, tvecs = cv2.calibrateCamera(objpoints, imgpoints, gray.shape[::-1], None, None)
+if objpoints and imgpoints:
+    ret, intrinsic_matrix, distortion_coeffs, rvecs, tvecs = cv2.calibrateCamera(objpoints, imgpoints, gray.shape[::-1], None, None)
 
-# Print the results
-print("Camera intrinsic matrix:\n", intrinsic_matrix)
-print("Distortion coefficients:\n", distortion_coeffs)
+    # Print the results
+    print("Camera intrinsic matrix:\n", intrinsic_matrix)
+    print("Distortion coefficients:\n", distortion_coeffs)
+else:
+    print("Calibration failed. No chessboard corners found in any image.")
 
