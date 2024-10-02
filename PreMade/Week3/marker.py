@@ -146,7 +146,6 @@ while cv2.waitKey(4) == -1:
     
     # Find lengths and update grid
     distances = find_Lengths(corners)
-    print(find_Lengths(corners))
     #print(distances)
     populate(distances)
     
