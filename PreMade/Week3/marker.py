@@ -38,8 +38,8 @@ real_marker_height = 0.145
 
 frame_center_x = imageSize[0] // 2
 center_threshold = 350
-intrinsic_matrix = np.asarray([ 6.0727040957659040e+02, 0., 3.0757300398967601e+02, 0.,
-       6.0768864690145904e+02, 2.8935674612358201e+02, 0., 0., 1. ], dtype = np.float64)
+intrinsic_matrix = np.asarray([ 1760, 0, 640, 0,
+       1760, 360, 0, 0, 1. ], dtype = np.float64)
 
 intrinsic_matrix.shape = (3, 3)
 
@@ -51,7 +51,6 @@ while cv2.waitKey(4) == -1:
     gray = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
     corners, ids, rejectedImgPoints = cv2.aruco.detectMarkers(gray, aruco_dict, parameters=parameters)
     rvecs, tvecs, objPoints = cv2.aruco.estimatePoseSingleMarkers(corners, real_marker_height, intrinsic_matrix, distortion_coeffs)
-    distance = tvecs[0]
     if ids is not None:
         for i in range(len(ids)):
             print("Object ID = ", ids[i], ", Distance = ", tvecs[i], ", angles = ", rvecs[i])
