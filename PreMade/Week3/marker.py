@@ -98,7 +98,7 @@ def find_Lengths(corners):
         print(dist)
     return distances
 
-def draw_map(self):
+def draw_map():
     display_grid = (grid * 255).astype(np.uint8)
     
     # Resize the grid to the same size as the image for visualization
