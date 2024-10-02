@@ -90,7 +90,7 @@ def populate(boxes):
 
 def find_Lengths(corners):
     distances = np.empty(2)
-    for i in range(len(corners)):
+    for x in range(len(corners)):
         rvecs, tvecs, objPoints = cv2.aruco.estimatePoseSingleMarkers(corners, real_marker_height, intrinsic_matrix, distortion_coeffs)
         dist = np.array(tvecs.T[0][0][0],tvecs.T[2][0][0])
         print(dist)
@@ -149,7 +149,7 @@ while cv2.waitKey(4) == -1:
     
     # Find lengths and update grid
     distances = find_Lengths(corners)
-    print(distances)
+    #print(distances)
     populate(distances)
     
     # Use OpenCV to display the grid map instead of plt
