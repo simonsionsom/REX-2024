@@ -110,6 +110,7 @@ while cv2.waitKey(4) == -1:
 
     if ids is not None:
         aruco.drawDetectedMarkers(image, corners, ids)  # Draw detected markers on the image
+        corners = [np.array(c, dtype=np.float32) for c in corners]
         all_corners.append(corners)
         all_ids.append(ids)
         counter.append(len(ids))
