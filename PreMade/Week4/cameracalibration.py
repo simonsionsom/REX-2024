@@ -138,11 +138,11 @@ while cv2.waitKey(4) == -1:
 cam.stop()
 cv2.destroyAllWindows()
 
-# Initialize your intrinsic matrix (you already have values for focal lengths and principal point)
-camera_matrix = np.array([[1760, 0, 640], [0, 1760, 360], [0, 0, 1]])
+# Initialize your intrinsic matrix (use np.float64 for compatibility)
+camera_matrix = np.array([[1760, 0, 640], [0, 1760, 360], [0, 0, 1]], dtype=np.float64)
 
-# Initialize distortion coefficients as a 2D array with shape (5, 1)
-dist_coeffs = np.zeros((5, 1))  # Placeholder for distortion coefficients (2D array)
+# Initialize distortion coefficients as a 2D array with shape (5, 1) and correct type
+dist_coeffs = np.zeros((5, 1), dtype=np.float64)  # Use np.float64 for compatibility
 
 # Convert ids and counter to numpy arrays before passing to calibrateCameraAruco
 all_ids = np.array(all_ids, dtype=np.int32)
