@@ -132,7 +132,7 @@ def visualize_occupancy_map(robot_position):
     cv2.imshow("Occupancy Map", occupancy_map_image)
 
 
-while cv2.waitKey(4) == -1: 
+while cv2.waitKey(4) == -1:  # Wait for a key press
     image = cam.capture_array("main")
     gray = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
     corners, ids, rejectedImgPoints = cv2.aruco.detectMarkers(gray, aruco_dict, parameters=parameters)
