@@ -86,7 +86,7 @@ def populate(boxes):
                                      map_area[0][1] + resolution * (j+0.5)])
             for o in boxes:
                     if np.linalg.norm(centroid - o) <= radius:
-                        grid[j, i] = 1
+                        grid[i, j] = 1
                         break
 
 def find_Lengths(corners):
@@ -130,5 +130,6 @@ while cv2.waitKey(4) == -1:
     cv2.imshow(WIN_RF, resized_image)
 
 # Clean up when done
+print(grid)
 cam.stop()
 cv2.destroyAllWindows()
