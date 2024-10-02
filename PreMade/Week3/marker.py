@@ -72,6 +72,7 @@ while cv2.waitKey(4) == -1:
         for i in range(len(ids)):
             print("Object ID = ", ids[i], ", Distance = ", tvecs[i], ", angles = ", rvecs[i])
         cv2.aruco.drawDetectedMarkers(image, corners, ids)
+    print(tvecs)
     z = tvecs.T[2][0]*100
     x = tvecs.T[0][0]*100
     print(f'Here is z:{z}\n And here is x:{x}')
