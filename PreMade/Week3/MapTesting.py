@@ -132,21 +132,14 @@ def visualize_occupancy_map(robot_position):
     cv2.imshow("Occupancy Map", occupancy_map_image)
 
 
-while cv2.waitKey(4) == -1:  # Wait for a key press
-    # Capture frame-by-frame from the picamera
+while cv2.waitKey(4) == -1: 
     image = cam.capture_array("main")
-
-    # Convert the image to grayscale (ArUco detection works better in grayscale)
     gray = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
-
-    # Detect ArUco markers in the grayscale image
     corners, ids, rejectedImgPoints = cv2.aruco.detectMarkers(gray, aruco_dict, parameters=parameters)
     obstacle_distance = detect_obstacle()
 
     print(f"corners: {corners}")
-    # If markers are detected, estimate the pose
     if ids is not None:
-        # Draw detected markers on the image
         cv2.aruco.drawDetectedMarkers(image, corners, ids)
         for i in range(len(ids)):
             # Get the four corners of the detected marker
@@ -158,28 +151,26 @@ while cv2.waitKey(4) == -1:  # Wait for a key press
             center_y = (corner[0][1] + corner[1][1] + corner[2][1] + corner[3][1]) / 4
             print(f"the center of the x coordinate marker: {center_x}")
             print(f"the center of the y coordinate marker: {center_y}")
+
             # Calculate the height of the marker in pixels (h)
             top_left_y = corner[0][1]
             bottom_left_y = corner[3][1]
             print(f"marker height top left:{top_left_y}, Marker height buttom left: {bottom_left_y}")
             marker_height_in_pixels = abs(bottom_left_y - top_left_y)  # Height in pixels
+
             # Calculate distance Z using the formula Z = f * (H / h)
-            if marker_height_in_pixels > 0:  # Prevent division by zero
+            if marker_height_in_pixels > 0:
                 distance = focal_length * (real_marker_height / marker_height_in_pixels)
 
-                # Display the distance on the image
                 cv2.putText(image, f"Distance: {distance:.2f} m",
-                            (int(corner[0][0]), int(corner[0][1]) - 10),  # Position of the text
+                            (int(corner[0][0]), int(corner[0][1]) - 10),
                             cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
 
-                # Print marker ID, center, and distance in the console
                 print(f"Marker ID: {ids[i][0]}, Distance: {distance:.2f} m, Center: ({center_x:.2f}, {center_y:.2f})")
 
                 update_occupancy_map(center_x, center_y, distance)
                 print(occupancy_map)
-                # Check if the marker is centered within the threshold
     else:
-        # No markers detected, rotate the robot
         None
     # Update the occupancy map with detected obstacle
     robot_position = (grid_size[0] // 2, grid_size[1] - 1)  # Example robot position
@@ -192,7 +183,5 @@ while cv2.waitKey(4) == -1:  # Wait for a key press
     resized_image = cv2.resize(image, (639, 360))
     cv2.imshow(WIN_RF, resized_image)
 
-
-# Clean up after the loop
 cam.stop()
 cv2.destroyAllWindows()
