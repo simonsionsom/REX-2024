@@ -65,7 +65,7 @@ aruco_dict = aruco.getPredefinedDictionary(aruco.DICT_6X6_250)
 # Correct initialization of GridBoard
 board = aruco.GridBoard((5, 7), 0.15, 0.05, aruco_dict)
 
-# Initialize arrays to store detected corners and marker IDs
+# Initialize arrays to store detected corners, marker IDs, and counters
 all_corners = []
 all_ids = []
 counter = []
@@ -110,10 +110,19 @@ while cv2.waitKey(4) == -1:
 
     if ids is not None:
         aruco.drawDetectedMarkers(image, corners, ids)  # Draw detected markers on the image
+        
+        # Ensure corners are float32
         corners = [np.array(c, dtype=np.float32) for c in corners]
-        all_corners.append(corners)
-        all_ids.append(ids)
+        
+        # Flatten the list of corners and append to the global list
+        all_corners.extend(corners)
+        
+        # Append the marker IDs
+        all_ids.extend(ids)
+        
+        # Append the number of markers detected in this frame
         counter.append(len(ids))
+        
         capture_count += 1
         print(f"Captured frame {capture_count} for calibration")
 
@@ -128,9 +137,11 @@ while cv2.waitKey(4) == -1:
 cam.stop()
 cv2.destroyAllWindows()
 
-# Once the frames are captured, proceed with calibration
-camera_matrix = np.array([[1760, 0, 640], [0, 1760, 360], [0, 0, 1]])  # Your existing intrinsic matrix
-dist_coeffs = np.zeros((5, 1))  # Placeholder for distortion coefficients
+# Initialize your intrinsic matrix (you already have values for focal lengths and principal point)
+camera_matrix = np.array([[1760, 0, 640], [0, 1760, 360], [0, 0, 1]])
+
+# Initialize distortion coefficients as a 2D array with shape (5, 1)
+dist_coeffs = np.zeros((5, 1))  # Placeholder for distortion coefficients (2D array)
 
 # Perform the camera calibration using the ArUco markers
 ret, camera_matrix, dist_coeffs, rvecs, tvecs = aruco.calibrateCameraAruco(
