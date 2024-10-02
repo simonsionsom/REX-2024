@@ -124,8 +124,6 @@ while cv2.waitKey(4) == -1:
     for i in range(0,3):
         for j in range(0,3):
             map[int(z/5)-i,int(x/5)-j]=1'''
-    resized_image = cv2.resize(image, (320, 240))
-    cv2.imshow(WIN_RF, resized_image)
 print(map)
 cam.stop()
 cv2.destroyAllWindows()
