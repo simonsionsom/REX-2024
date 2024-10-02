@@ -155,7 +155,7 @@ while cv2.waitKey(4) == -1:  # Wait for a key press
     cv2.imshow(WIN_RF, image)
 
     # Visualize the occupancy map
-    occupancy_map_image = (occupancy_map * 255).astype(np.uint8)
+    occupancy_map_image = (occupancy_map * 0).astype(np.uint8)
     cv2.imshow("Occupancy Map", occupancy_map_image)
 
 # Clean up after the loop
