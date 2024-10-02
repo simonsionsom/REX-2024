@@ -49,12 +49,12 @@ intrinsic_matrix.shape = (3, 3)
 
 low = (0,0)
 high = (2,2)
-res=0.025
+
 map_area = [low, high]    #a rectangular area    
 map_size = np.array([high[0]-low[0], high[1]-low[1]])
-resolution = res
+resolution = 0.025
 
-n_grids = [ int(s//res) for s in map_size]
+n_grids = [ int(s//resolution) for s in map_size]
 
 grid = np.zeros((n_grids[0], n_grids[1]), dtype=np.uint8)
 
@@ -92,10 +92,14 @@ def find_Lengths(corners):
     distances = []
     for i in range(len(corners)):
         rvecs, tvecs, objPoints = cv2.aruco.estimatePoseSingleMarkers(corners, real_marker_height, intrinsic_matrix, distortion_coeffs)
-        dist = zip(tvecs.T[0][0],tvecs.T[2][0])
+        dist = (tvecs.T[0][0],tvecs.T[2][0])
+        dist = ((round(x/resolution),round(y/resolution)) for x,y in dist)
         distances.append(dist)
     return distances
-    
+
+def draw_map(self):
+        #note the x-y axes difference between imshow and plot
+        plt.imshow(grid.T, cmap="Greys", origin='lower', vmin=0, vmax=1, extent=self.extent, interpolation='none') 
 
 while cv2.waitKey(4) == -1:
     image = cam.capture_array("main")
@@ -103,7 +107,10 @@ while cv2.waitKey(4) == -1:
     corners, ids, rejectedImgPoints = cv2.aruco.detectMarkers(gray, aruco_dict, parameters=parameters)
     distances = find_Lengths(corners)
     populate(distances)
-    if ids is not None:
+    plt.clf()
+    draw_map()
+    plt.show()
+    '''if ids is not None:
         for i in range(len(ids)):
             print("Object ID = ", ids[i], ", Distance = ", tvecs[i], ", angles = ", rvecs[i])
         cv2.aruco.drawDetectedMarkers(image, corners, ids)
@@ -114,8 +121,7 @@ while cv2.waitKey(4) == -1:
     map = np.zeros((40,40))
     for i in range(0,3):
         for j in range(0,3):
-            map[int(z/5)-i,int(x/5)-j]=1
-    populate()
+            map[int(z/5)-i,int(x/5)-j]=1'''
     resized_image = cv2.resize(image, (320, 240))
     cv2.setWindowProperty(WIN_RF, cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_NORMAL)
     cv2.imshow(WIN_RF, resized_image)
