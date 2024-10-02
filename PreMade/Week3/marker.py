@@ -90,7 +90,7 @@ def populate(boxes):
                         break
 
 def find_Lengths(corners):
-    distances = np.empty(2)
+    distances = []
     for i in range(len(corners)):
         rvecs, tvecs, objPoints = cv2.aruco.estimatePoseSingleMarkers(corners, real_marker_height, intrinsic_matrix, distortion_coeffs)
         print(tvecs)
