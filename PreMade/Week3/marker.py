@@ -11,6 +11,8 @@ except ImportError:
 
 import robot
 
+np.set_printoptions(threshold=np.inf)
+
 arlo = robot.Robot()
 
 imageSize = (1280, 720)
@@ -70,17 +72,17 @@ while cv2.waitKey(4) == -1:
         for i in range(len(ids)):
             print("Object ID = ", ids[i], ", Distance = ", tvecs[i], ", angles = ", rvecs[i])
         cv2.aruco.drawDetectedMarkers(image, corners, ids)
+    print(tvecs.T)
     z = tvecs.T[2][0]*100
     x = tvecs.T[0][0]*100
     print(f'Here is z:{z}\n And here is x:{x}')
-    map = np.zeros((50,50))
+    map = np.zeros((40,40))
     for i in range(0,3):
         for j in range(0,3):
-            map[int(x/5)-i,int(z/5)-j]=1
-    print(map)
+            map[int(z/5)-i,int(x/5)-j]=1
     resized_image = cv2.resize(image, (320, 240))
     cv2.setWindowProperty(WIN_RF, cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_NORMAL)
     cv2.imshow(WIN_RF, resized_image)
-
+print(map)
 cam.stop()
 cv2.destroyAllWindows()
