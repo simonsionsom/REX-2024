@@ -11,6 +11,8 @@ except ImportError:
 
 import robot
 
+np.set_printoptions(threshold=np.inf)
+
 arlo = robot.Robot()
 
 imageSize = (1280, 720)
