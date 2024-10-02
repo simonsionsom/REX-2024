@@ -144,8 +144,9 @@ camera_matrix = np.array([[1760, 0, 640], [0, 1760, 360], [0, 0, 1]])
 # Initialize distortion coefficients as a 2D array with shape (5, 1)
 dist_coeffs = np.zeros((5, 1))  # Placeholder for distortion coefficients (2D array)
 
-# Convert ids to numpy array again before passing to calibrateCameraAruco
+# Convert ids and counter to numpy arrays before passing to calibrateCameraAruco
 all_ids = np.array(all_ids, dtype=np.int32)
+counter = np.array(counter, dtype=np.int32)
 
 # Perform the camera calibration using the ArUco markers
 ret, camera_matrix, dist_coeffs, rvecs, tvecs = aruco.calibrateCameraAruco(
@@ -156,4 +157,3 @@ ret, camera_matrix, dist_coeffs, rvecs, tvecs = aruco.calibrateCameraAruco(
 print("Calibration successful!")
 print("Camera Matrix:\n", camera_matrix)
 print("Distortion Coefficients:\n", dist_coeffs)
-
