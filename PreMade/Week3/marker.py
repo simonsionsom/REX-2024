@@ -38,21 +38,42 @@ real_marker_height = 0.145
 
 frame_center_x = imageSize[0] // 2
 center_threshold = 350
-intrinsic_matrix = np.asarray([ 6.0727040957659040e+02, 0., 3.0757300398967601e+02, 0.,
-       6.0768864690145904e+02, 2.8935674612358201e+02, 0., 0., 1. ], dtype = np.float64)
+intrinsic_matrix = np.asarray([ 1760, 0, 640, 
+                                0, 1760, 360, 
+                                0, 0, 1. ], dtype = np.float64)
 
 intrinsic_matrix.shape = (3, 3)
 
-distortion_coeffs = np.asarray([ 1.1911006165076067e-01, -1.0003366233413549e+00,
-       1.9287903277399834e-02, -2.3728201444308114e-03, -2.8137265581326476e-01 ], dtype = np.float64)
+# distortion_coeffs = np.asarray([3.37113443e+00, -5.84490229e+01,
+#        -9.99698589e-02, -2.84566227e-02, 1.18763855e+03], dtype = np.float64)
+distortion_coeffs = np.asarray([0,0,0,0,0])
+def draw_aruco_objects(image, corners, ids, rvecs, tvecs):
+    """Draws detected ArUco markers and their orientations on the image."""
+    if ids is not None:
+        # Draw the detected markers
+        outimg = cv2.aruco.drawDetectedMarkers(image, corners, ids)
+        # Draw the axis for each detected marker
+        for i in range(len(ids)):
+            outimg = cv2.drawFrameAxes(outimg, intrinsic_matrix,
+                                       distortion_coeffs, rvecs[i], tvecs[i], real_marker_height)
+    else:
+        outimg = image
+    return outimg
 
 while cv2.waitKey(4) == -1:
     image = cam.capture_array("main")
     gray = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
     corners, ids, rejectedImgPoints = cv2.aruco.detectMarkers(gray, aruco_dict, parameters=parameters)
-
     rvecs, tvecs, objPoints = cv2.aruco.estimatePoseSingleMarkers(corners, real_marker_height, intrinsic_matrix, distortion_coeffs)
     
+    if ids is not None:
+        for i in range(len(ids)):
+            print("Object ID = ", ids[i], ", Distance = ", tvecs[i], ", angles = ", rvecs[i])
+        cv2.aruco.drawDetectedMarkers(image, corners, ids)
+    print(rvecs)
+    print(tvecs.shape)
+    x,z = tvecs.T[0,2]
+    print(f'{x}\n',z)
     resized_image = cv2.resize(image, (320, 240))
     cv2.setWindowProperty(WIN_RF, cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_NORMAL)
     cv2.imshow(WIN_RF, resized_image)
