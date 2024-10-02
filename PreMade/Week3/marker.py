@@ -108,6 +108,7 @@ while cv2.waitKey(4) == -1:
     corners, ids, rejectedImgPoints = cv2.aruco.detectMarkers(gray, aruco_dict, parameters=parameters)
     distances = find_Lengths(corners)
     populate(distances)
+    cam.stop()
     plt.clf()
     draw_map()
     plt.show()
@@ -127,5 +128,5 @@ while cv2.waitKey(4) == -1:
     cv2.setWindowProperty(WIN_RF, cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_NORMAL)
     cv2.imshow(WIN_RF, resized_image)
 print(map)
-cam.stop()
+
 cv2.destroyAllWindows()
