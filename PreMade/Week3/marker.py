@@ -143,7 +143,7 @@ while cv2.waitKey(4) == -1:
     image = cam.capture_array("main")
     gray = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
     corners, ids, rejectedImgPoints = cv2.aruco.detectMarkers(gray, aruco_dict, parameters=parameters)
-    print(corners)
+    find_Lengths(corners)
     
     # Find lengths and update grid
     #print(distances)
