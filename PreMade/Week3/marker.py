@@ -85,6 +85,8 @@ def populate(boxes):
             centroid = np.array([map_area[0][0] + resolution * (i+0.5), 
                                      map_area[0][1] + resolution * (j+0.5)])
             for o in boxes:
+                    print(o)
+                    print(centroid)
                     if np.linalg.norm(centroid - o) <= radius:
                         grid[i, j] = 1
                         break
@@ -93,7 +95,6 @@ def find_Lengths(corners):
     distances = []
     for i in range(len(corners)):
         rvecs, tvecs, objPoints = cv2.aruco.estimatePoseSingleMarkers(corners, real_marker_height, intrinsic_matrix, distortion_coeffs)
-        print(tvecs)
         dist = np.array((tvecs.T[0][0][0]/resolution,tvecs.T[2][0][0]/resolution))
         print(dist)
         distances.append(dist)
