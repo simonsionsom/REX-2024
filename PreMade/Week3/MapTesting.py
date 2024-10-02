@@ -94,8 +94,22 @@ def update_occupancy_map(center_x, center_y, distance):
         for j in range(max(0, grid_y - radius), min(grid_size[1], grid_y + radius + 1)):
             if (i - grid_x) ** 2 + (j - grid_y) ** 2 <= radius ** 2:
                 occupancy_map[i, j] = True
+# Simulate the obstacle detection using a sensor
+def detect_obstacle():
+    # Replace this with the actual distance sensor reading
+    # This is a dummy value for now. In real code, you would use arlo.read_sensor() or similar.
+    obstacle_distance = arlo.read_sensor()  # Replace with actual function call
+    return obstacle_distance  # Return the distance in meters
 
-def visualize_occupancy_map():
+def update_obstacle_on_map(distance, robot_position):
+    # Convert the distance and robot's current heading to grid coordinates
+    grid_x = int(robot_position[0] + (distance / grid_resolution))  # Adjust this for the robot's heading direction
+    grid_y = int(robot_position[1])  # Assuming the obstacle is directly in front
+
+    if 0 <= grid_x < grid_size[0] and 0 <= grid_y < grid_size[1]:
+        occupancy_map[grid_x, grid_y] = True  # Mark the obstacle cell as occupied
+
+def visualize_occupancy_map(robot_position):
     occupancy_map_image = (occupancy_map * 255).astype(np.uint8)  # Convert to grayscale for visualization
     occupancy_map_image = cv2.cvtColor(occupancy_map_image, cv2.COLOR_GRAY2BGR)  # Convert to BGR for color drawing
 
@@ -105,12 +119,17 @@ def visualize_occupancy_map():
     for j in range(0, grid_size[1], int(1 / grid_resolution)):  # Draw horizontal lines
         cv2.line(occupancy_map_image, (0, j), (grid_size[0], j), (255, 255, 255), 1)
 
-    # Optionally, mark the robot's current position (for example, in the center of the map)
-    robot_position = (grid_size[0], grid_size[1] // 2)
+    # Mark the robot's current position (red circle)
     cv2.circle(occupancy_map_image, robot_position, 5, (0, 0, 255), -1)  # Red dot for robot
+
+    # Mark detected obstacles (green circles)
+    obstacle_pos = np.where(occupancy_map == True)  # Get obstacle positions
+    for i in range(len(obstacle_pos[0])):
+        cv2.circle(occupancy_map_image, (obstacle_pos[0][i], obstacle_pos[1][i]), 5, (0, 255, 0), -1)  # Green dot for obstacles
 
     # Show the map in a window
     cv2.imshow("Occupancy Map", occupancy_map_image)
+
 
 while cv2.waitKey(4) == -1:  # Wait for a key press
     # Capture frame-by-frame from the picamera
@@ -159,22 +178,16 @@ while cv2.waitKey(4) == -1:  # Wait for a key press
     else:
         # No markers detected, rotate the robot
         None
-    #cv2.resizeWindow(WIN_RF, 500, 500)
+    # Update the occupancy map with detected obstacle
+    robot_position = (grid_size[0] // 2, grid_size[1] - 1)  # Example robot position
+    update_obstacle_on_map(obstacle_distance, robot_position)
 
-    resized_image = cv2.resize(image, (639,360))  # Resize to a smaller size
-    
-    # Optionally resize the window if needed
-    #cv2.resizeWindow(WIN_RF, 400, 400)  # Set the window size
+    # Visualize the map with markers and obstacles
+    visualize_occupancy_map(robot_position)
 
-    # Set the window to normal mode (not fullscreen)
-    #cv2.setWindowProperty(WIN_RF, cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_NORMAL)
-
-    # Show the frame with detected markers and distance
+    # Show the camera frame
+    resized_image = cv2.resize(image, (639, 360))
     cv2.imshow(WIN_RF, resized_image)
-    # Show the frame with detected markers and distance
-
-    # Visualize the occupancy map
-    visualize_occupancy_map()
 
 
 # Clean up after the loop
