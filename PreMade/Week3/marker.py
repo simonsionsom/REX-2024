@@ -63,11 +63,12 @@ while cv2.waitKey(4) == -1:
     gray = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
     corners, ids, rejectedImgPoints = cv2.aruco.detectMarkers(gray, aruco_dict, parameters=parameters)
     rvecs, tvecs, objPoints = cv2.aruco.estimatePoseSingleMarkers(corners, real_marker_height, intrinsic_matrix, distortion_coeffs)
-
-    for i in range(len(ids)):
-        print("Object ID = ", ids[i], ", Distance = ", tvecs[i], ", angles = ", rvecs[i])
     
-    cv2.aruco.drawDetectedMarkers(image, corners, ids)
+    if ids is not None:
+        for i in range(len(ids)):
+            print("Object ID = ", ids[i], ", Distance = ", tvecs[i], ", angles = ", rvecs[i])
+        
+        cv2.aruco.drawDetectedMarkers(image, corners, ids)
     print(rvecs)
     resized_image = cv2.resize(image, (320, 240))
     cv2.setWindowProperty(WIN_RF, cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_NORMAL)
