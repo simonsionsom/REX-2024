@@ -108,10 +108,10 @@ while cv2.waitKey(4) == -1:
     corners, ids, rejectedImgPoints = cv2.aruco.detectMarkers(gray, aruco_dict, parameters=parameters)
     distances = find_Lengths(corners)
     populate(distances)
-    cam.stop()
     plt.clf()
     draw_map()
-    plt.show()
+    plt.pause(0.001)
+
     '''if ids is not None:
         for i in range(len(ids)):
             print("Object ID = ", ids[i], ", Distance = ", tvecs[i], ", angles = ", rvecs[i])
@@ -125,8 +125,7 @@ while cv2.waitKey(4) == -1:
         for j in range(0,3):
             map[int(z/5)-i,int(x/5)-j]=1'''
     resized_image = cv2.resize(image, (320, 240))
-    cv2.setWindowProperty(WIN_RF, cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_NORMAL)
     cv2.imshow(WIN_RF, resized_image)
 print(map)
-
+cam.stop()
 cv2.destroyAllWindows()
