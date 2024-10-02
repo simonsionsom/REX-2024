@@ -117,7 +117,8 @@ while cv2.waitKey(4) == -1:
         # Flatten the list of corners and append to the global list
         all_corners.extend(corners)
         
-        # Append the marker IDs
+        # Convert ids to a numpy array of type int32 and flatten
+        ids = np.array(ids, dtype=np.int32)
         all_ids.extend(ids)
         
         # Append the number of markers detected in this frame
@@ -142,6 +143,9 @@ camera_matrix = np.array([[1760, 0, 640], [0, 1760, 360], [0, 0, 1]])
 
 # Initialize distortion coefficients as a 2D array with shape (5, 1)
 dist_coeffs = np.zeros((5, 1))  # Placeholder for distortion coefficients (2D array)
+
+# Convert ids to numpy array again before passing to calibrateCameraAruco
+all_ids = np.array(all_ids, dtype=np.int32)
 
 # Perform the camera calibration using the ArUco markers
 ret, camera_matrix, dist_coeffs, rvecs, tvecs = aruco.calibrateCameraAruco(
