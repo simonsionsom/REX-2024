@@ -3,7 +3,7 @@ import cv2.aruco as aruco
 import numpy as np
 
 # Load the ArUco dictionary
-aruco_dict = aruco.Dictionary_get(aruco.DICT_6X6_250)
+aruco_dict = aruco.getPredefinedDictionary(aruco.DICT_6X6_250)
 
 # Create the GridBoard object
 # markersX = number of markers in X direction, markersY = number in Y direction
