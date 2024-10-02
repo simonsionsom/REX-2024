@@ -8,7 +8,7 @@ aruco_dict = aruco.getPredefinedDictionary(aruco.DICT_6X6_250)
 # Create the GridBoard object
 # markersX = number of markers in X direction, markersY = number in Y direction
 # markerLength = 0.15 meters, markerSeparation = 0.05 meters (assuming 5 cm separation)
-board = aruco.GridBoard_create(markersX=5, markersY=7, markerLength=0.15, markerSeparation=0.05, dictionary=aruco_dict)
+board = cv2.aruco.GridBoard(markersX=5, markersY=7, markerLength=0.15, markerSeparation=0.05, dictionary=aruco_dict)
 
 # Initialize arrays to store detected corners and marker IDs
 all_corners = []
