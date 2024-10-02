@@ -127,7 +127,7 @@ class Camera(object):
              robottype - specify which robot you are using in order to use the correct camera calibration. 
                          Supported types: arlo, frindo, scribbler, macbookpro"""
 
-        print("robottype =", robottype)
+        print(f"robottype ={robottype}" )
         self.useCaptureThread = useCaptureThread
 
         # TODO: Use this in the different camera configurations
