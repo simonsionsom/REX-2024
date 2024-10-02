@@ -116,6 +116,7 @@ while cv2.waitKey(4) == -1:
     resized_image = cv2.resize(image, (320, 240))
     cv2.setWindowProperty(WIN_RF, cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_NORMAL)
     cv2.imshow(WIN_RF, resized_image)
+    print("heyheyhey")
 plt.clf()
 grid_map.draw_map()
 plt.show()
