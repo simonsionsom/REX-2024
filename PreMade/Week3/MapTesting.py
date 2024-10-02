@@ -180,7 +180,7 @@ while cv2.waitKey(4) == -1:  # Wait for a key press
         None
     # Update the occupancy map with detected obstacle
     robot_position = (grid_size[0] // 2, grid_size[1] - 1)  # Example robot position
-    update_obstacle_on_map(obstacle_distance, robot_position)
+    update_obstacle_on_map(detect_obstacle, robot_position)
 
     # Visualize the map with markers and obstacles
     visualize_occupancy_map(robot_position)
