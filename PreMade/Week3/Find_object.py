@@ -2,6 +2,7 @@ import cv2
 import numpy as np
 import time
 import matplotlib.pyplot as plt
+from matplotlib.animation import FFMpegWriter
 try:
     import picamera2
     print("Camera.py: Using picamera2 module")
@@ -98,6 +99,15 @@ def draw_aruco_objects(image, corners, ids, rvecs, tvecs):
     else:
         outimg = image
     return outimg
+def draw_graph(rnd=None):
+    # plt.clf()
+    # # for stopping simulation with the esc key.
+    # plt.gcf().canvas.mpl_connect(
+    #     'key_release_event',
+    #     lambda event: [exit(0) if event.key == 'escape' else None])
+    plt.clf()
+    if rnd is not None:
+        plt.plot(rnd.pos[0], rnd.pos[1], "^k")
 
 grid_map = GridOccupancyMap(low=(0, 0), high=(5, 5), res=0.1)
 
@@ -116,7 +126,19 @@ while cv2.waitKey(4) == -1:
     resized_image = cv2.resize(image, (320, 240))
     cv2.setWindowProperty(WIN_RF, cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_NORMAL)
     cv2.imshow(WIN_RF, resized_image)
-    print("heyheyhey")
+    show_animation = True
+    metadata = dict(title="RRT Test")
+    writer = FFMpegWriter(fps=15, metadata=metadata)
+    fig = plt.figure()
+    path = []
+    # Draw final path
+    if show_animation:
+        draw_graph()
+        plt.plot([x for (x, y) in path], [y for (x, y) in path], '-r')
+        plt.grid(True)
+        plt.pause(0.01)  # Need for Mac
+        plt.show()
+        writer.grab_frame()
 plt.clf()
 grid_map.draw_map()
 plt.show()
