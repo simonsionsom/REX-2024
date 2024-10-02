@@ -46,7 +46,7 @@ intrinsic_matrix.shape = (3, 3)
 
 # distortion_coeffs = np.asarray([3.37113443e+00, -5.84490229e+01,
 #        -9.99698589e-02, -2.84566227e-02, 1.18763855e+03], dtype = np.float64)
-
+distortion_coeffs = np.array[0,0,0,0,0]
 def draw_aruco_objects(image):
     """Draws detected objects and their orientations on the image given in img."""
     if not isinstance(ids, type(None)):
@@ -62,7 +62,7 @@ while cv2.waitKey(4) == -1:
     image = cam.capture_array("main")
     gray = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
     corners, ids, rejectedImgPoints = cv2.aruco.detectMarkers(gray, aruco_dict, parameters=parameters)
-    rvecs, tvecs, objPoints = cv2.aruco.estimatePoseSingleMarkers(corners, real_marker_height, intrinsic_matrix)
+    rvecs, tvecs, objPoints = cv2.aruco.estimatePoseSingleMarkers(corners, real_marker_height, intrinsic_matrix, distortion_coeffs)
     if ids is not None:
         for i in range(len(ids)):
             print("Object ID = ", ids[i], ", Distance = ", tvecs[i], ", angles = ", rvecs[i])
