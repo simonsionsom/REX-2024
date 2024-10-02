@@ -60,6 +60,7 @@ grid = np.zeros((n_grids[0], n_grids[1]), dtype=np.uint8)
 
 extent = [map_area[0][0], map_area[1][0], map_area[0][1], map_area[1][1]]
 
+distances = []
 
 # distortion_coeffs = np.asarray([3.37113443e+00, -5.84490229e+01,
 #        -9.99698589e-02, -2.84566227e-02, 1.18763855e+03], dtype = np.float64)
@@ -89,15 +90,14 @@ def populate(boxes):
                         break
 
 def find_Lengths(corners):
-    distances = []
+    
     for x in corners:
         rvecs, tvecs, objPoints = cv2.aruco.estimatePoseSingleMarkers(corners, real_marker_height, intrinsic_matrix, distortion_coeffs)
         dist = np.array([tvecs.T[0][0], tvecs.T[2][0]]) / resolution
         
-        
         distances.append(dist)
         print(dist)
-    return distances
+
 
 def draw_map():
     display_grid = (grid * 255).astype(np.uint8)
@@ -143,9 +143,8 @@ while cv2.waitKey(4) == -1:
     image = cam.capture_array("main")
     gray = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
     corners, ids, rejectedImgPoints = cv2.aruco.detectMarkers(gray, aruco_dict, parameters=parameters)
-    
+    find_Lengths(corners)
     # Find lengths and update grid
-    distances = find_Lengths(corners)
     #print(distances)
     populate(distances)
     
