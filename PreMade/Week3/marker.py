@@ -46,7 +46,7 @@ intrinsic_matrix.shape = (3, 3)
 
 # distortion_coeffs = np.asarray([3.37113443e+00, -5.84490229e+01,
 #        -9.99698589e-02, -2.84566227e-02, 1.18763855e+03], dtype = np.float64)
-distortion_coeffs = np.array[0,0,0,0,0]
+distortion_coeffs = np.asarray([0,0,0,0,0])
 def draw_aruco_objects(image):
     """Draws detected objects and their orientations on the image given in img."""
     if not isinstance(ids, type(None)):
