@@ -34,12 +34,12 @@ cv2.moveWindow(WIN_RF, 100, 100)
 aruco_dict = cv2.aruco.getPredefinedDictionary(cv2.aruco.DICT_6X6_250)
 parameters = cv2.aruco.DetectorParameters()
 
-real_marker_height = 0.145
+real_marker_height = 0.15
 
 frame_center_x = imageSize[0] // 2
 center_threshold = 350
-intrinsic_matrix = np.asarray([ 1760, 0, 640, 
-                                0, 1760, 360, 
+intrinsic_matrix = np.asarray([focal_length, 0, imageSize[0] / 2.0, 
+                                0, focal_length, imageSize[1] / 2.0, 
                                 0, 0, 1. ], dtype = np.float64)
 
 intrinsic_matrix.shape = (3, 3)
