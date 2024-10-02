@@ -80,7 +80,7 @@ def draw_aruco_objects(image, corners, ids, rvecs, tvecs,self):
 def populate(boxes):
     radius=0.25
     for i in range(n_grids[0]):
-        for j in range(n_grids(1)):
+        for j in range(n_grids[1]):
             centroid = np.array([map_area[0][0] + resolution * (i+0.5), 
                                      map_area[0][1] + resolution * (j+0.5)])
             for o, r in zip(boxes, radius):
