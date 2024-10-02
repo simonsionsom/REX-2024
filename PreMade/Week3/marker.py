@@ -83,8 +83,8 @@ def populate(boxes):
         for j in range(n_grids[1]):
             centroid = np.array([map_area[0][0] + resolution * (i+0.5), 
                                      map_area[0][1] + resolution * (j+0.5)])
-            for o, r in zip(boxes, radius):
-                    if np.linalg.norm(centroid - o) <= r:
+            for o in boxes:
+                    if np.linalg.norm(centroid - o) <= radius:
                         grid[i, j] = 1
                         break
 
