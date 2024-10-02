@@ -44,15 +44,15 @@ intrinsic_matrix = np.asarray([ 1760, 0, 640,
 
 intrinsic_matrix.shape = (3, 3)
 
-distortion_coeffs = np.asarray([1, 1,
-       1, 1, 1], dtype = np.float64)
+# distortion_coeffs = np.asarray([3.37113443e+00, -5.84490229e+01,
+#        -9.99698589e-02, -2.84566227e-02, 1.18763855e+03], dtype = np.float64)
 
 def draw_aruco_objects(image):
     """Draws detected objects and their orientations on the image given in img."""
     if not isinstance(ids, type(None)):
         outimg = cv2.aruco.drawDetectedMarkers(image, corners, ids)
         for i in range(ids.shape[0]):
-            outimg = cv2.drawFrameAxes(outimg, intrinsic_matrix, distortion_coeffs,
+            outimg = cv2.drawFrameAxes(outimg, intrinsic_matrix,
                                         rvecs[i], tvecs[i], real_marker_height)
     else:
         outimg = image
