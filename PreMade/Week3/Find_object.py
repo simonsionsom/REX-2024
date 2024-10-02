@@ -16,7 +16,7 @@ objpoints = []  # 3D points in real world space
 imgpoints = []  # 2D points in image plane
 
 # Load all calibration images (you should have multiple chessboard images from different angles)
-images = glob.glob('calibration_images/*.jpg')
+images = glob.glob('samples/data/left01.jpg–left14.jpg)')
 
 if not images:
     raise FileNotFoundError("No calibration images found in the specified directory.")
