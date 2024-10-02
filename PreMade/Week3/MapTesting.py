@@ -94,11 +94,12 @@ def update_occupancy_map(center_x, center_y, distance):
         for j in range(max(0, grid_y - radius), min(grid_size[1], grid_y + radius + 1)):
             if (i - grid_x) ** 2 + (j - grid_y) ** 2 <= radius ** 2:
                 occupancy_map[i, j] = True
+
 # Simulate the obstacle detection using a sensor
 def detect_obstacle():
     # Replace this with the actual distance sensor reading
     # This is a dummy value for now. In real code, you would use arlo.read_sensor() or similar.
-    obstacle_distance = arlo.read_sensor()  # Replace with actual function call
+    obstacle_distance = arlo.read_front_ping_sensor()  # Replace with actual function call
     return obstacle_distance  # Return the distance in meters
 
 def update_obstacle_on_map(distance, robot_position):
