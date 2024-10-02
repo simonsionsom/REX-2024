@@ -106,7 +106,7 @@ def visualize_occupancy_map():
         cv2.line(occupancy_map_image, (0, j), (grid_size[0], j), (255, 255, 255), 1)
 
     # Optionally, mark the robot's current position (for example, in the center of the map)
-    robot_position = (grid_size[0] // 2, grid_size[1] // 2)
+    robot_position = (grid_size[0], grid_size[1] // 2)
     cv2.circle(occupancy_map_image, robot_position, 5, (0, 0, 255), -1)  # Red dot for robot
 
     # Show the map in a window
