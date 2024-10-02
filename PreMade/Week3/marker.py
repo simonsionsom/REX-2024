@@ -96,7 +96,7 @@ def find_Lengths(corners):
         dist = np.array(tvecs.T[0][0][0],tvecs.T[2][0][0])
         dist = dist/ resolution
         np.append(distances,dist)
-        print(dist)
+    print(distances)
     return distances
 
 
