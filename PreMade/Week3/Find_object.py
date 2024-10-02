@@ -1,61 +1,127 @@
 import cv2
 import numpy as np
-import glob
-import os
+import time
+import matplotlib.pyplot as plt
 
-# Termination criteria for the cornerSubPix function
-criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 30, 0.001)
+try:
+    import picamera2
+    print("Camera.py: Using picamera2 module")
+except ImportError:
+    print("Camera.py: picamera2 module not available")
+    exit(-1)
 
-# Prepare object points (3D points in real world space)
-# In this case, we use a chessboard with 9x6 corners (this can vary based on your chessboard)
-objp = np.zeros((6*9, 3), np.float32)
-objp[:, :2] = np.mgrid[0:9, 0:6].T.reshape(-1, 2)  # x, y coordinates of the chessboard squares
+import robot
 
-# Arrays to store object points and image points from all the images
-objpoints = []  # 3D points in real world space
-imgpoints = []  # 2D points in image plane
+class GridOccupancyMap(object):
+    def __init__(self, low=(0, 0), high=(2, 2), res=0.05) -> None:
+        self.map_area = [low, high]    # a rectangular area    
+        self.map_size = np.array([high[0]-low[0], high[1]-low[1]])
+        self.resolution = res
 
-# Load all calibration images (you should have multiple chessboard images from different angles)
-images = glob.glob('samples/data/left01.jpg–left14.jpg)')
+        self.n_grids = [int(s//res) for s in self.map_size]
 
-if not images:
-    raise FileNotFoundError("No calibration images found in the specified directory.")
+        self.grid = np.zeros((self.n_grids[0], self.n_grids[1]), dtype=np.uint8)
 
-for fname in images:
-    img = cv2.imread(fname)
-    if img is None:
-        print(f"Failed to load image {fname}")
-        continue
+        self.extent = [self.map_area[0][0], self.map_area[1][0], self.map_area[0][1], self.map_area[1][1]]
 
-    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    def in_collision(self, pos):
+        indices = [int((pos[i] - self.map_area[0][i]) // self.resolution) for i in range(2)]
+        for i, ind in enumerate(indices):
+            if ind < 0 or ind >= self.n_grids[i]:
+                return 1
+        
+        return self.grid[indices[0], indices[1]] 
 
-    # Find the chessboard corners
-    ret, corners = cv2.findChessboardCorners(gray, (9, 6), None)
+    def populate(self, n_obs=6):
+        origins = np.random.uniform(
+            low=self.map_area[0] + self.map_size[0]*0.2, 
+            high=self.map_area[0] + self.map_size[0]*0.8, 
+            size=(n_obs, 2))
+        radius = np.random.uniform(low=0.1, high=0.3, size=n_obs)
+        for i in range(self.n_grids[0]):
+            for j in range(self.n_grids[1]):
+                centroid = np.array([self.map_area[0][0] + self.resolution * (i+0.5), 
+                                     self.map_area[0][1] + self.resolution * (j+0.5)])
+                for o, r in zip(origins, radius):
+                    if np.linalg.norm(centroid - o) <= r:
+                        self.grid[i, j] = 1
+                        break
 
-    # If found, add object points and image points (after refining them)
-    if ret:
-        objpoints.append(objp)
+    def update_with_marker(self, tvec):
+        pos = (tvec[0][0], tvec[0][2])  # Assuming tvec is in the form [x, y, z]
+        indices = [int((pos[i] - self.map_area[0][i]) // self.resolution) for i in range(2)]
+        if 0 <= indices[0] < self.n_grids[0] and 0 <= indices[1] < self.n_grids[1]:
+            self.grid[indices[0], indices[1]] = 1
 
-        # Refine corner locations
-        corners2 = cv2.cornerSubPix(gray, corners, (11, 11), (-1, -1), criteria)
-        imgpoints.append(corners2)
+    def draw_map(self):
+        plt.imshow(self.grid.T, cmap="Greys", origin='lower', vmin=0, vmax=1, extent=self.extent, interpolation='none')
 
-        # Draw and display the corners
-        img = cv2.drawChessboardCorners(img, (9, 6), corners2, ret)
-        if os.environ.get('DISPLAY'):
-            cv2.imshow('Chessboard', img)
-            cv2.waitKey(500)
+arlo = robot.Robot()
 
-if os.environ.get('DISPLAY'):
-    cv2.destroyAllWindows()
+imageSize = (1280, 720)
+FPS = 30
+focal_length = 1760
+cam = picamera2.Picamera2()
+frame_duration_limit = int(1 / FPS * 1000000)
 
-# Calibrate the camera using the object points and image points
-if objpoints and imgpoints:
-    ret, intrinsic_matrix, distortion_coeffs, rvecs, tvecs = cv2.calibrateCamera(objpoints, imgpoints, gray.shape[::-1], None, None)
+picam2_config = cam.create_video_configuration({"size": imageSize, "format": 'RGB888'},
+                                                controls={"FrameDurationLimits": (frame_duration_limit, frame_duration_limit)},
+                                                queue=False)
+cam.configure(picam2_config)
+cam.start(show_preview=False)
 
-    # Print the results
-    print("Camera intrinsic matrix:\n", intrinsic_matrix)
-    print("Distortion coefficients:\n", distortion_coeffs)
-else:
-    print("Calibration failed. No chessboard corners found in any image.")
+time.sleep(1)
 
+WIN_RF = "Aruco Marker Detection"
+cv2.namedWindow(WIN_RF)
+cv2.moveWindow(WIN_RF, 100, 100)
+
+aruco_dict = cv2.aruco.getPredefinedDictionary(cv2.aruco.DICT_6X6_250)
+parameters = cv2.aruco.DetectorParameters()
+
+real_marker_height = 0.145
+
+frame_center_x = imageSize[0] // 2
+center_threshold = 350
+intrinsic_matrix = np.asarray([ 1760, 0, 640, 
+                                0, 1760, 360, 
+                                0, 0, 1. ], dtype = np.float64)
+
+intrinsic_matrix.shape = (3, 3)
+map = np.zeros.array
+distortion_coeffs = np.asarray([0,0,0,0,0])
+
+def draw_aruco_objects(image, corners, ids, rvecs, tvecs):
+    if ids is not None:
+        outimg = cv2.aruco.drawDetectedMarkers(image, corners, ids)
+        for i in range(len(ids)):
+            outimg = cv2.drawFrameAxes(outimg, intrinsic_matrix,
+                                       distortion_coeffs, rvecs[i], tvecs[i], real_marker_height)
+    else:
+        outimg = image
+    return outimg
+
+grid_map = GridOccupancyMap(low=(0, 0), high=(5, 5), res=0.1)
+
+while cv2.waitKey(4) == -1:
+    image = cam.capture_array("main")
+    gray = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
+    corners, ids, rejectedImgPoints = cv2.aruco.detectMarkers(gray, aruco_dict, parameters=parameters)
+    rvecs, tvecs, objPoints = cv2.aruco.estimatePoseSingleMarkers(corners, real_marker_height, intrinsic_matrix, distortion_coeffs)
+    
+    if ids is not None:
+        for i in range(len(ids)):
+            print("Object ID = ", ids[i], ", Distance = ", tvecs[i], ", angles = ", rvecs[i])
+            grid_map.update_with_marker(tvecs[i])
+        cv2.aruco.drawDetectedMarkers(image, corners, ids)
+    
+    resized_image = cv2.resize(image, (320, 240))
+    cv2.setWindowProperty(WIN_RF, cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_NORMAL)
+    cv2.imshow(WIN_RF, resized_image)
+
+cam.stop()
+cv2.destroyAllWindows()
+
+plt.clf()
+grid_map.draw_map()
+plt.show()

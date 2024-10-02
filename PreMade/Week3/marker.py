@@ -43,7 +43,7 @@ intrinsic_matrix = np.asarray([ 1760, 0, 640,
                                 0, 0, 1. ], dtype = np.float64)
 
 intrinsic_matrix.shape = (3, 3)
-
+map = np.zeros.array
 # distortion_coeffs = np.asarray([3.37113443e+00, -5.84490229e+01,
 #        -9.99698589e-02, -2.84566227e-02, 1.18763855e+03], dtype = np.float64)
 distortion_coeffs = np.asarray([0,0,0,0,0])
@@ -70,7 +70,6 @@ while cv2.waitKey(4) == -1:
         for i in range(len(ids)):
             print("Object ID = ", ids[i], ", Distance = ", tvecs[i], ", angles = ", rvecs[i])
         cv2.aruco.drawDetectedMarkers(image, corners, ids)
-
     z = tvecs.T[2]
     resized_image = cv2.resize(image, (320, 240))
     cv2.setWindowProperty(WIN_RF, cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_NORMAL)
