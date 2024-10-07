@@ -48,7 +48,7 @@ intrinsic_matrix = np.asarray([focal_length, 0, imageSize[0] / 2.0,
 intrinsic_matrix.shape = (3, 3)
 
 low = (0,0)
-high = (5,5)
+high = (2,2)
 
 map_area = [low, high]    #a rectangular area    
 map_size = np.array([high[0]-low[0], high[1]-low[1]])
@@ -113,7 +113,7 @@ def draw_map():
     cv2.imshow("Grid Map", resized_grid)
 
 
-while cv2.waitKey(4) == -1:
+while True:
     image = cam.capture_array("main")
     gray = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
     corners, ids, rejectedImgPoints = cv2.aruco.detectMarkers(gray, aruco_dict, parameters=parameters)
@@ -130,6 +130,7 @@ while cv2.waitKey(4) == -1:
     resized_image = cv2.resize(image, (320, 240))
 
     cv2.imshow(WIN_RF, resized_image)
+    break
 
 # Clean up when done
 print(grid)
