@@ -69,9 +69,9 @@ while cv2.waitKey(4) == -1:
         for i in range(len(ids)):
             print("Object ID = ", ids[i], ", Distance = ", tvecs[i], ", angles = ", rvecs[i])
         cv2.aruco.drawDetectedMarkers(image, corners, ids)
-    z = tvecs.T[2]
+    print(tvecs.T)
     x = tvecs.T[0]
-    for i in range(z):
+    for i in range(x):
         map = np.zeros((i,x))
         print(map)
     resized_image = cv2.resize(image, (320, 240))
