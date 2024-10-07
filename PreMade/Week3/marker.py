@@ -72,7 +72,7 @@ while cv2.waitKey(4) == -1:
     print(tvecs)
     x = tvecs
     for i in range(4):
-        map = np.zeros((i,x))
+        map = np.zeros((i,))
         print(map)
     resized_image = cv2.resize(image, (320, 240))
     cv2.setWindowProperty(WIN_RF, cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_NORMAL)
