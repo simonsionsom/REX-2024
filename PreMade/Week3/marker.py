@@ -87,7 +87,7 @@ def populate(boxes):
                                      map_area[0][1] + resolution * (j+0.5)])
             for o in boxes:
                     #print(f'Her er o: {o},\n Her er centroid: {centroid}')
-                    if np.linalg.norm(centroid*resolution - o) <= radius:
+                    if np.linalg.norm(centroid*gridSize - o) <= radius:
                         print('vi gjorde det')
                         grid[i, j] = 1
                         break
