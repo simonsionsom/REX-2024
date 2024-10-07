@@ -131,7 +131,6 @@ while cv2.waitKey(4) == -1:
 
     cv2.imshow(WIN_RF, resized_image)
     
-    break
 
 # Clean up when done
 print(grid)
