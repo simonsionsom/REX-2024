@@ -113,7 +113,7 @@ def draw_map():
     cv2.imshow("Grid Map", resized_grid)
 
 
-while True:
+while cv2.waitKey(4) == -1:
     image = cam.capture_array("main")
     gray = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
     corners, ids, rejectedImgPoints = cv2.aruco.detectMarkers(gray, aruco_dict, parameters=parameters)
@@ -130,7 +130,7 @@ while True:
     resized_image = cv2.resize(image, (320, 240))
 
     cv2.imshow(WIN_RF, resized_image)
-    sleep(10)
+    
     break
 
 # Clean up when done
