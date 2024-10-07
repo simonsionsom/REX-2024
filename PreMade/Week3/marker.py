@@ -80,15 +80,15 @@ distortion_coeffs = np.asarray([0,0,0,0,0])
     return outimg'''
 
 def populate(boxes):
-    radius=5
+    radius=2
     for i in range(n_grids[0]):
         for j in range(n_grids[1]):
             centroid = np.array([map_area[0][0] + resolution * (i+0.5), 
                                      map_area[0][1] + resolution * (j+0.5)])
             for o in boxes:
-                    print(f'Her er o: {o},\n Her er centroid: {centroid}')
+                    #print(f'Her er o: {o},\n Her er centroid: {centroid}')
                     if np.linalg.norm(centroid*gridSize - o) <= radius:
-                        print('vi gjorde det')
+                        print(f'vi gjorde det her er normen {np.linalg.norm(centroid*gridSize - o)}')
                         grid[i, j] = 1
                         break
 
@@ -130,6 +130,7 @@ while cv2.waitKey(4) == -1:
     resized_image = cv2.resize(image, (320, 240))
 
     cv2.imshow(WIN_RF, resized_image)
+    time.sleep(2)
     
 
 # Clean up when done
