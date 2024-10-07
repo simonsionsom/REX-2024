@@ -109,7 +109,7 @@ def draw_map():
     display_grid = (grid * 255).astype(np.uint8)
     
     # Resize the grid to the same size as the image for visualization
-    resized_grid = cv2.resize(display_grid, (100,100), interpolation=cv2.INTER_NEAREST)
+    resized_grid = cv2.resize(display_grid, (400,400), interpolation=cv2.INTER_NEAREST)
     
     # Show the grid using OpenCV's imshow
     cv2.imshow("Grid Map", resized_grid)
@@ -132,7 +132,7 @@ while cv2.waitKey(4) == -1:
     resized_image = cv2.resize(image, (320, 240))
 
     cv2.imshow(WIN_RF, resized_image)
-    time.sleep(2)
+    time.sleep(10)
     
 
 # Clean up when done
