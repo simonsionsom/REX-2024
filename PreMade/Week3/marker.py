@@ -89,7 +89,8 @@ def populate(boxes):
                     #print(f'Her er o: {o},\n Her er centroid: {centroid}')
                     if np.linalg.norm(centroid*gridSize - o) <= radius:
                         print(f'vi gjorde det her er normen {np.linalg.norm(centroid*gridSize - o)}')
-                        grid[i, j] = 1
+                        grid[i+49, j] = 1
+                        print(grid[i,j])
                         break
 
 def find_Lengths(corners):
