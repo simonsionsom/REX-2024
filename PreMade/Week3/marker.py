@@ -135,4 +135,5 @@ while True:
 # Clean up when done
 print(grid)
 cam.stop()
+sleep(10)
 cv2.destroyAllWindows()
