@@ -130,10 +130,10 @@ while True:
     resized_image = cv2.resize(image, (320, 240))
 
     cv2.imshow(WIN_RF, resized_image)
+    sleep(10)
     break
 
 # Clean up when done
 print(grid)
 cam.stop()
-sleep(10)
 cv2.destroyAllWindows()
