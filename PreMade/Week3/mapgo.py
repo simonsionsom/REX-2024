@@ -54,6 +54,17 @@ class GridOccupancyMap(object):
                     if np.linalg.norm(centroid - o) <= r:
                         GridOccupancyMap.grid[i, j] = 1
                         break
+    @staticmethod
+    def update_map_with_markers(tvecs):
+        """
+        Update the occupancy grid map with the positions of detected markers.
+        """
+        for tvec in tvecs:
+            pos = (tvec[0][0], tvec[0][1])  # Extract x, y position from tvec
+            indices = [int((pos[i] - GridOccupancyMap.map_area[0][i]) // GridOccupancyMap.resolution) for i in range(2)]
+            for i, ind in enumerate(indices):
+                if 0 <= ind < GridOccupancyMap.n_grids[i]:
+                    GridOccupancyMap.grid[indices[0], indices[1]] = 1  # Mark the grid as occupied
 
     @staticmethod
     def draw_map():
@@ -61,7 +72,7 @@ class GridOccupancyMap(object):
         plt.imshow(GridOccupancyMap.grid.T, cmap="Greys", origin='lower', vmin=0, vmax=1, extent=GridOccupancyMap.extent, interpolation='none')
 def main():
     map = GridOccupancyMap()
-    map.populate()
+    map.update_map_with_markers()
 
     plt.clf()
     map.draw_map()
