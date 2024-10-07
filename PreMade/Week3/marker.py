@@ -52,7 +52,8 @@ high = (2,2)
 
 map_area = [low, high]    #a rectangular area    
 map_size = np.array([high[0]-low[0], high[1]-low[1]])
-resolution = 0.025
+resolution = 0.020
+gridSize= 5
 
 n_grids = [ int(s//resolution) for s in map_size]
 
@@ -86,7 +87,8 @@ def populate(boxes):
                                      map_area[0][1] + resolution * (j+0.5)])
             for o in boxes:
                     print(f'Her er o: {o},\n Her er centroid: {centroid}')
-                    if np.linalg.norm(centroid - o) <= radius:
+                    if np.linalg.norm(centroid*resolution - o) <= radius:
+                        print('vi gjorde det')
                         grid[i, j] = 1
                         break
 
@@ -94,9 +96,9 @@ def find_Lengths(corners):
     distances = []
     for i in range(len(corners)):
         rvecs, tvecs, objPoints = cv2.aruco.estimatePoseSingleMarkers(corners, real_marker_height, intrinsic_matrix, distortion_coeffs)
-        dist = np.array((tvecs.T[0][0][0],tvecs.T[2][0][0]))
-        print(f'Her er tvec{tvecs.T},\n Her er distancen så ing {dist}')
-        distances.append(dist)
+        dist = np.array((tvecs.T[0][0][0]*100,tvecs.T[2][0][0]*100))
+        #print(f'Her er tvec{tvecs.T},\n Her er distancen så ing {dist}')
+        distances.append(dist/gridSize)
     print(distances)
     return distances
 
@@ -122,7 +124,7 @@ while cv2.waitKey(4) == -1:
     populate(distances)
     
     # Use OpenCV to display the grid map instead of plt
-    #draw_map()
+    draw_map()
 
     # Display the resized image from the camera
     #resized_image = cv2.resize(image, (320, 240))
