@@ -69,7 +69,7 @@ while cv2.waitKey(4) == -1:
         for i in range(len(ids)):
             print("Object ID = ", ids[i], ", Distance = ", tvecs[i], ", angles = ", rvecs[i])
         cv2.aruco.drawDetectedMarkers(image, corners, ids)
-    print(tvecs.T)
+    print(tvecs)
     x = tvecs.T[0]
     for i in range(x):
         map = np.zeros((i,x))
