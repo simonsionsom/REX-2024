@@ -85,7 +85,7 @@ def populate(boxes):
             centroid = np.array([map_area[0][0] + resolution * (i+0.5), 
                                      map_area[0][1] + resolution * (j+0.5)])
             for o in boxes:
-                    print(f'Her er o: {o},\ her er r: {r} \n Her er centroid: {centroid}')
+                    print(f'Her er o: {o},\n Her er centroid: {centroid}')
                     if np.linalg.norm(centroid - o) <= radius:
                         grid[i, j] = 1
                         break
