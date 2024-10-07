@@ -94,7 +94,7 @@ def find_Lengths(corners):
     distances = []
     for i in range(len(corners)):
         rvecs, tvecs, objPoints = cv2.aruco.estimatePoseSingleMarkers(corners, real_marker_height, intrinsic_matrix, distortion_coeffs)
-        dist = np.array((tvecs.T[0][0][0]*resolution,tvecs.T[2][0][0]*resolution))
+        dist = np.array((tvecs.T[0][0][0],tvecs.T[2][0][0]))
         print(f'Her er tvec{tvecs.T},\n Her er distancen så ing {dist}')
         distances.append(dist)
     print(distances)
@@ -122,7 +122,7 @@ while cv2.waitKey(4) == -1:
     populate(distances)
     
     # Use OpenCV to display the grid map instead of plt
-    draw_map()
+    #draw_map()
 
     # Display the resized image from the camera
     #resized_image = cv2.resize(image, (320, 240))
