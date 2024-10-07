@@ -84,12 +84,10 @@ def populate(boxes):
         for j in range(n_grids[1]):
             centroid = np.array([map_area[0][0] + resolution * (i+0.5), 
                                      map_area[0][1] + resolution * (j+0.5)])
-            for o,j in boxes:
-                    print(grid.shape)
-                    print(grid.size)
-                    print(grid[o][j])
-                    if np.linalg.norm(centroid - grid[o][j]) <= radius:
-                        grid[j, i] = 1
+            for o in boxes:
+                    print(f'Her er o: {o},\ her er r: {r} \n Her er centroid: {centroid}')
+                    if np.linalg.norm(centroid - o) <= radius:
+                        grid[i, j] = 1
                         break
 
 def find_Lengths(corners):
@@ -117,14 +115,14 @@ while cv2.waitKey(4) == -1:
     image = cam.capture_array("main")
     gray = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
     corners, ids, rejectedImgPoints = cv2.aruco.detectMarkers(gray, aruco_dict, parameters=parameters)
-    find_Lengths(corners)
+    distances = find_Lengths(corners)
     
     # Find lengths and update grid
     #print(distances)
-    #populate(distances)
+    populate(distances)
     
     # Use OpenCV to display the grid map instead of plt
-    #draw_map()
+    draw_map()
 
     # Display the resized image from the camera
     #resized_image = cv2.resize(image, (320, 240))
