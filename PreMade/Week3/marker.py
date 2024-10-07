@@ -48,7 +48,7 @@ intrinsic_matrix = np.asarray([focal_length, 0, imageSize[0] / 2.0,
 intrinsic_matrix.shape = (3, 3)
 
 low = (0,0)
-high = (5,5)
+high = (2,2)
 
 map_area = [low, high]    #a rectangular area    
 map_size = np.array([high[0]-low[0], high[1]-low[1]])
