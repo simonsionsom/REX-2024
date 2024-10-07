@@ -71,7 +71,7 @@ while cv2.waitKey(4) == -1:
         cv2.aruco.drawDetectedMarkers(image, corners, ids)
     print(tvecs)
     x = tvecs
-    for i in range(x):
+    for i in range(4):
         map = np.zeros((i,x))
         print(map)
     resized_image = cv2.resize(image, (320, 240))
