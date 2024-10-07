@@ -97,7 +97,7 @@ def find_Lengths(corners):
     for i in range(len(corners)):
         rvecs, tvecs, objPoints = cv2.aruco.estimatePoseSingleMarkers(corners, real_marker_height, intrinsic_matrix, distortion_coeffs)
         dist = np.array((tvecs.T[0][0][0]*100,tvecs.T[2][0][0]*100))
-        #print(f'Her er tvec{tvecs.T},\n Her er distancen så ing {dist}')
+        print(f'Her er tvec{tvecs.T},\n Her er distancen så ing {dist}')
         distances.append(dist/gridSize)
     print(distances)
     return distances
