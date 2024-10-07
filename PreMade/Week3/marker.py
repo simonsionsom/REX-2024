@@ -127,9 +127,9 @@ while cv2.waitKey(4) == -1:
     draw_map()
 
     # Display the resized image from the camera
-    #resized_image = cv2.resize(image, (320, 240))
+    resized_image = cv2.resize(image, (320, 240))
 
-    #cv2.imshow(WIN_RF, resized_image)
+    cv2.imshow(WIN_RF, resized_image)
 
 # Clean up when done
 print(grid)
