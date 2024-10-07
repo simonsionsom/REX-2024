@@ -72,7 +72,6 @@ class GridOccupancyMap(object):
         plt.imshow(GridOccupancyMap.grid.T, cmap="Greys", origin='lower', vmin=0, vmax=1, extent=GridOccupancyMap.extent, interpolation='none')
 def main():
     map = GridOccupancyMap()
-    map.update_map_with_markers()
 
     plt.clf()
     map.draw_map()

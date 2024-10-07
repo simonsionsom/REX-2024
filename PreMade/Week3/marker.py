@@ -68,6 +68,7 @@ while cv2.waitKey(4) == -1:
         for i in range(len(ids)):
             print("Object ID = ", ids[i], ", Distance = ", tvecs[i], ", angles = ", rvecs[i])
         cv2.aruco.drawDetectedMarkers(image, corners, ids)
+        mapgo.update_map_with_markers(tvecs)
         mapgo.main()
         
     resized_image = cv2.resize(image, (320, 240))
