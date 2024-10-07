@@ -97,7 +97,7 @@ def find_Lengths(corners):
     for i in range(len(corners)):
         rvecs, tvecs, objPoints = cv2.aruco.estimatePoseSingleMarkers(corners, real_marker_height, intrinsic_matrix, distortion_coeffs)
         dist = np.array((tvecs.T[0][0][0]/resolution,tvecs.T[2][0][0]/resolution))
-        print(dist)
+        print(f'Her er tvec{tvecs},\n Her er distancen så ing {dist}')
         distances.append(dist)
     print(distances)
     return distances
@@ -117,21 +117,21 @@ while cv2.waitKey(4) == -1:
     image = cam.capture_array("main")
     gray = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
     corners, ids, rejectedImgPoints = cv2.aruco.detectMarkers(gray, aruco_dict, parameters=parameters)
-    distances = find_Lengths(corners)
+    find_Lengths(corners)
     
     # Find lengths and update grid
     #print(distances)
-    populate(distances)
+    #populate(distances)
     
     # Use OpenCV to display the grid map instead of plt
-    draw_map()
+    #draw_map()
 
     # Display the resized image from the camera
-    resized_image = cv2.resize(image, (320, 240))
+    #resized_image = cv2.resize(image, (320, 240))
 
-    cv2.imshow(WIN_RF, resized_image)
+    #cv2.imshow(WIN_RF, resized_image)
 
 # Clean up when done
-print(grid)
+#print(grid)
 cam.stop()
 cv2.destroyAllWindows()
