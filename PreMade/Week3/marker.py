@@ -48,15 +48,15 @@ intrinsic_matrix = np.asarray([focal_length, 0, imageSize[0] / 2.0,
 intrinsic_matrix.shape = (3, 3)
 
 low = (0,0)
-high = (2,2)
+high = (5,5)
 
 map_area = [low, high]    #a rectangular area    
 map_size = np.array([high[0]-low[0], high[1]-low[1]])
-resolution = 0.020
+resolution = 0.05
 gridSize= 5
 
 n_grids = [ int(s//resolution) for s in map_size]
-
+print(n_grids)
 grid = np.zeros((n_grids[0], n_grids[1]), dtype=np.uint8)
 
 extent = [map_area[0][0], map_area[1][0], map_area[0][1], map_area[1][1]]
