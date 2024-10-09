@@ -139,9 +139,10 @@ while counter<5:
     
 
 # Clean up when done
-print(grid)
 cam.stop()
 cv2.destroyAllWindows()
+time.sleep(5)
 for grid in grids:
     draw_map(grid)
     plt.show()
+    
