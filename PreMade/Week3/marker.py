@@ -89,7 +89,8 @@ def populate(boxes):
                     print(f'Her er o: {o*resolution},\n Her er centroid: {centroid}')
                     if np.linalg.norm(centroid - o*resolution) <= radius:
                         print(f'vi gjorde det her er normen {np.linalg.norm(centroid - o*resolution)}')
-                        grid[i+49, j] = 1
+                        print(f'Her er o: {o}\n Her er o.shape samt o.size:\n {o.shape} \n{o.size}')
+                        grid[49, j] = 1
                         print(f'{gridSize}')
                         print(f'Her er x: {i} og her er y: {j}')
                         break
