@@ -111,8 +111,8 @@ def draw_map(grid):
     # Show the grid using OpenCV's imshow
     cv2.imshow("Grid Map", resized_grid)
 
-
-while cv2.waitKey(4) == -1:
+counter = 0
+while counter<5:
     grid = np.zeros((n_grids[0], n_grids[1]), dtype=np.uint8)
     image = cam.capture_array("main")
     gray = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
@@ -121,16 +121,18 @@ while cv2.waitKey(4) == -1:
     
     # Find lengths and update grid
     #print(distances)
-    #populate(distances,grid)
+    populate(distances,grid)
     
     # Use OpenCV to display the grid map instead of plt
-    #draw_map(grid)
+    draw_map(grid)
 
     # Display the resized image from the camera
     resized_image = cv2.resize(image, (320, 240))
 
     cv2.imshow(WIN_RF, resized_image)
     time.sleep(10)
+    counter += 1
+    print(counter)
     
 
 # Clean up when done
