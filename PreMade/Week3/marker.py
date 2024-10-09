@@ -104,13 +104,14 @@ def find_Lengths(corners):
 
 
 def draw_map(grid):
-    display_grid = (grid * 255).astype(np.uint8)
+    '''display_grid = (grid * 255).astype(np.uint8)
     
     # Resize the grid to the same size as the image for visualization
     resized_grid = cv2.resize(display_grid, (400,400), interpolation=cv2.INTER_NEAREST)
     
     # Show the grid using OpenCV's imshow
-    cv2.imshow("Grid Map", resized_grid)
+    cv2.imshow("Grid Map", resized_grid)'''
+    plt.imshow(grid.T, cmap="Greys", origin='lower', vmin=0, vmax=1, extent=extent, interpolation='none')
 
 counter = 0
 while counter<5:
@@ -126,12 +127,15 @@ while counter<5:
     
     # Use OpenCV to display the grid map instead of plt
     draw_map(grid)
-
+    plt.show()
+    time.sleep(5)
+    plt.clf()
     # Display the resized image from the camera
     resized_image = cv2.resize(image, (320, 240))
-
     cv2.imshow(WIN_RF, resized_image)
+    cv2.show()
     time.sleep(10)
+    cv2.destroyAllWindows()
     counter += 1
     print(counter)
     
