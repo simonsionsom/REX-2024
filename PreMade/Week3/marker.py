@@ -56,8 +56,8 @@ resolution = 0.05
 gridSize= 5
 
 n_grids = [ int(s//resolution) for s in map_size]
-print(n_grids)
-grid = np.zeros((n_grids[0], n_grids[1]), dtype=np.uint8)
+midP = int(n_grids/2)
+
 
 extent = [map_area[0][0], map_area[1][0], map_area[0][1], map_area[1][1]]
 
@@ -79,20 +79,16 @@ distortion_coeffs = np.asarray([0,0,0,0,0])
         outimg = image
     return outimg'''
 
-def populate(boxes):
+def populate(boxes,grid):
     radius=0.625
     for i in range(n_grids[0]):
         for j in range(n_grids[1]):
             centroid = np.array([map_area[0][0] + resolution * (i+0.5), 
                                      map_area[0][1] + resolution * (j+0.5)])
             for o in boxes:
-                    print(f'Her er o: {o*resolution},\n Her er centroid: {centroid}')
                     if np.linalg.norm(centroid - o*resolution) <= radius:
-                        print(f'vi gjorde det her er normen {np.linalg.norm(centroid - o*resolution)}')
-                        print(f'Her er o: {o}\n Her er o.shape samt o.size:\n {o.shape} \n{o.size}')
-                        grid[49, j] = 1
-                        print(f'{gridSize}')
-                        print(f'Her er x: {i} og her er y: {j}')
+                        print('We did it')
+                        grid[midP+int(o[0]), j] = 1
                         break
 
 def find_Lengths(corners):
@@ -106,7 +102,7 @@ def find_Lengths(corners):
     return distances
 
 
-def draw_map():
+def draw_map(grid):
     display_grid = (grid * 255).astype(np.uint8)
     
     # Resize the grid to the same size as the image for visualization
@@ -117,6 +113,7 @@ def draw_map():
 
 
 while cv2.waitKey(4) == -1:
+    grid = np.zeros((n_grids[0], n_grids[1]), dtype=np.uint8)
     image = cam.capture_array("main")
     gray = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
     corners, ids, rejectedImgPoints = cv2.aruco.detectMarkers(gray, aruco_dict, parameters=parameters)
@@ -124,10 +121,10 @@ while cv2.waitKey(4) == -1:
     
     # Find lengths and update grid
     #print(distances)
-    populate(distances)
+    populate(distances,grid)
     
     # Use OpenCV to display the grid map instead of plt
-    draw_map()
+    draw_map(grid)
 
     # Display the resized image from the camera
     resized_image = cv2.resize(image, (320, 240))
