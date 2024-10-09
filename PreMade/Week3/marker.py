@@ -90,6 +90,7 @@ def populate(boxes,grid):
                         print('We did it')
                         grid[midP+int(o[0]), j] = 1
                         break
+    return grid
 
 def find_Lengths(corners):
     distances = []
@@ -121,7 +122,7 @@ while counter<5:
     
     # Find lengths and update grid
     #print(distances)
-    populate(distances,grid)
+    grid = populate(distances,grid)
     
     # Use OpenCV to display the grid map instead of plt
     draw_map(grid)
