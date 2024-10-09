@@ -96,7 +96,7 @@ while True:
     gray = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
     corners, ids, rejectedImgPoints = cv2.aruco.detectMarkers(gray, aruco_dict, parameters=parameters)
     print('\nHer er ids',ids)
-    print('\nHer er corners.shape',corners.shape)
+    print('\nHer er corners.shape',corners)
     distances = find_Lengths(corners)
     print('\nHer er distances',distances)
     
