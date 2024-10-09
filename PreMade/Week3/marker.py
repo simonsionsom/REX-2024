@@ -77,13 +77,13 @@ def populate(boxes):
             for o in boxes:
                     if np.linalg.norm(centroid - o*resolution) <= radius:
                         print('We did it')
-                        grid[midP+int(o[0]), j] = 1
+                        grid[i+midP+int(o[0]), j] = 1
                         break
 
 def find_Lengths(corners):
     distances = []
-    for i in range(len(corners)):
-        rvecs, tvecs, objPoints = cv2.aruco.estimatePoseSingleMarkers(corners, real_marker_height, intrinsic_matrix, distortion_coeffs)
+    for i in corners:
+        rvecs, tvecs, objPoints = cv2.aruco.estimatePoseSingleMarkers(i, real_marker_height, intrinsic_matrix, distortion_coeffs)
         dist = np.array((tvecs.T[0][0][0]*100,tvecs.T[2][0][0]*100))
         print(f'Her er tvec{tvecs.T},\n Her er distancen så ing {dist}')
         distances.append(dist/gridSize)
