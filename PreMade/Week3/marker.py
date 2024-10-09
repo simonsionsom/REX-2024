@@ -56,6 +56,7 @@ resolution = 0.05
 gridSize= 5
 
 n_grids = [ int(s//resolution) for s in map_size]
+grid = np.zeros((n_grids[0], n_grids[1]), dtype=np.uint8)
 midP = int(n_grids[0]/2)
 
 
@@ -66,20 +67,8 @@ extent = [map_area[0][0], map_area[1][0], map_area[0][1], map_area[1][1]]
 # distortion_coeffs = np.asarray([3.37113443e+00, -5.84490229e+01,
 #        -9.99698589e-02, -2.84566227e-02, 1.18763855e+03], dtype = np.float64)
 distortion_coeffs = np.asarray([0,0,0,0,0])
-'''def draw_aruco_objects(image, corners, ids, rvecs, tvecs,self):
-    """Draws detected ArUco markers and their orientations on the image."""
-    if ids is not None:
-        # Draw the detected markers
-        outimg = cv2.aruco.drawDetectedMarkers(image, corners, ids)
-        # Draw the axis for each detected marker
-        for i in range(len(ids)):
-            outimg = cv2.drawFrameAxes(outimg, intrinsic_matrix,
-                                       distortion_coeffs, rvecs[i], tvecs[i], real_marker_height)
-    else:
-        outimg = image
-    return outimg'''
 
-def populate(boxes,grid):
+def populate(boxes):
     radius=0.625
     for i in range(n_grids[0]):
         for j in range(n_grids[1]):
@@ -90,8 +79,6 @@ def populate(boxes,grid):
                         print('We did it')
                         grid[midP+int(o[0]), j] = 1
                         break
-    print(f'her er grids shape: {grid.shape} \n og her er dens size {grid.size}')
-    return grid
 
 def find_Lengths(corners):
     distances = []
@@ -104,45 +91,19 @@ def find_Lengths(corners):
     return distances
 
 
-def draw_map(grid):
-    '''display_grid = (grid * 255).astype(np.uint8)
-    
-    # Resize the grid to the same size as the image for visualization
-    resized_grid = cv2.resize(display_grid, (400,400), interpolation=cv2.INTER_NEAREST)
-    
-    # Show the grid using OpenCV's imshow
-    cv2.imshow("Grid Map", resized_grid)'''
-    plt.imshow(grid.T, cmap="Greys", origin='lower', vmin=0, vmax=1, extent=extent, interpolation='none')
-
-counter = 0
-grids = []
-while counter<5:
-    grid = np.zeros((n_grids[0], n_grids[1]), dtype=np.uint8)
+while True:
     image = cam.capture_array("main")
     gray = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
     corners, ids, rejectedImgPoints = cv2.aruco.detectMarkers(gray, aruco_dict, parameters=parameters)
     distances = find_Lengths(corners)
     
-    # Find lengths and update grid
-    #print(distances)
-    grids.append(populate(distances,grid))
-    
+    populate(distances)
+    np.save('map.npy',grid)
     # Use OpenCV to display the grid map instead of plt
     #draw_map(grid)
-
-    # Display the resized image from the camera
-    resized_image = cv2.resize(image, (320, 240))
-    cv2.imshow(WIN_RF, resized_image)
-    time.sleep(5)
-    counter += 1
-    print(counter)
+    break
     
 
 # Clean up when done
-cam.stop()
+#cam.stop()
 cv2.destroyAllWindows()
-time.sleep(5)
-for grid in grids:
-    draw_map(grid)
-    plt.show()
-    
