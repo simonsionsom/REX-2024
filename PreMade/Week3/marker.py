@@ -90,6 +90,7 @@ def populate(boxes,grid):
                         print('We did it')
                         grid[midP+int(o[0]), j] = 1
                         break
+    print(f'her er grids shape: {grid.shape} \n og her er dens size {grid.size}')
     return grid
 
 def find_Lengths(corners):
