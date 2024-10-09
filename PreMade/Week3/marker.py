@@ -125,7 +125,7 @@ while counter<5:
     
     # Find lengths and update grid
     #print(distances)
-    grids.append[populate(distances,grid)]
+    grids.append(populate(distances,grid))
     
     # Use OpenCV to display the grid map instead of plt
     #draw_map(grid)
