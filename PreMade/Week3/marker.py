@@ -121,10 +121,10 @@ while cv2.waitKey(4) == -1:
     
     # Find lengths and update grid
     #print(distances)
-    populate(distances,grid)
+    #populate(distances,grid)
     
     # Use OpenCV to display the grid map instead of plt
-    draw_map(grid)
+    #draw_map(grid)
 
     # Display the resized image from the camera
     resized_image = cv2.resize(image, (320, 240))
