@@ -56,7 +56,7 @@ resolution = 0.05
 gridSize= 5
 
 n_grids = [ int(s//resolution) for s in map_size]
-midP = int(n_grids/2)
+midP = int(n_grids[0]/2)
 
 
 extent = [map_area[0][0], map_area[1][0], map_area[0][1], map_area[1][1]]
