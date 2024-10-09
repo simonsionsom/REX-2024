@@ -103,7 +103,7 @@ while True:
     #draw_map(grid)
     break
     
-print('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')
+
 # Clean up when done
 #cam.stop()
 cv2.destroyAllWindows()
