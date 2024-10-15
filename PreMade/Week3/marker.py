@@ -78,7 +78,7 @@ def populate(boxes):
                                      0.5+j])
             for o in boxes:
                     o[0] = o[0]+midP
-                    print(int(o))
+                    #print(int(o))
                     if np.linalg.norm(centroid - o) <= radius:   
                         #if np.linalg.norm(int(o[0])*resolution-high[1]) <= high[1]:
                             #print(f'Her er den nye bokses x-koordinat: {int(o[0])}')
@@ -97,7 +97,8 @@ def find_Lengths(corners):
         dist = np.array((tvecs.T[0][0][0]*100,tvecs.T[2][0][0]*100))
         #print(f'Her er tvec{tvecs.T},\n Her er distancen så ing {dist}')
         distances.append(dist/gridSize)
-    #print(distances)
+        print(dist)
+    print(distances)
     return distances
 
 
