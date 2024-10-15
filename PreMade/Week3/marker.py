@@ -71,13 +71,16 @@ distortion_coeffs = np.asarray([0,0,0,0,0])
 
 def populate(boxes):
     radius=5
-
+    
     for i in range(n_grids[0]):
         for j in range(n_grids[1]):
             centroid = np.array([0.5+i, 
                                      0.5+j])
+            
             for o in boxes:
                     print(midP)
+                    print(boxes)
+                    print(centroid)
                     print(o[0])
                     o[0] = o[0]+midP
                     #print(int(o))
