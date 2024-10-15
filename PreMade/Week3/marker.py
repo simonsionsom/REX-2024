@@ -86,7 +86,7 @@ def populate(boxes):
                             grid[i, j] = 1
                             break
                     else: 
-                        print(f'Skipped den her box: {o}\n med en x-kordinat på {o[0]}')
+                        print(f'Skipped den her box: {int(o)}\n med en x-kordinat på {int(o[0])}')
                         continue
 
 def find_Lengths(corners):
