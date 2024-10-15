@@ -75,10 +75,11 @@ def populate(boxes):
             centroid = np.array([map_area[0][0] + resolution * (i+0.5), 
                                      map_area[0][1] + resolution * (j+0.5)])
             for o in boxes:
-                    if np.linalg.norm(int(o)-high) > 5:
+                    if np.linalg.norm(int(o)*resolution-high) > 5:
+                        print(f'Skipped den her box: {o}')
                         continue
                     else: 
-                        print(int(o[0]))
+                        print(f'Her er den nye bokses x-kordinat: {int(o[0])}')
                         #o[0]=midP+int(o[0])
                         #print(o[0])
                         if np.linalg.norm(centroid - o*resolution) <= radius:
