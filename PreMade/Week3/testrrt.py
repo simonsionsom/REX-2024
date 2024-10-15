@@ -1,14 +1,16 @@
-"""
-
-Path planning with Randomized Rapidly-Exploring Random Trees (RRT)
-
-Adapted from 
-https://github.com/AtsushiSakai/PythonRobotics/blob/master/PathPlanning/RRT/rrt.py
-"""
-
 import numpy as np
 import matplotlib.pyplot as plt
-from matplotlib.animation import FFMpegWriter
+import robot_models
+import marker
+np.set_printoptions(threshold=np.inf)
+
+midpoint = marker.frame_center_x
+nodes = []
+
+a = np.load('map.npy')
+print(a)
+plt.imshow(a)
+plt.show()
 
 class RRT:
     """
@@ -183,48 +185,40 @@ class RRT:
                 return False
         return True
 
-
-import grid_occ, robot_models
-
 def main():
-
+    # Load map from 'map.npy'
     path_res = 0.05
-    map = grid_occ.GridOccupancyMap(low=(-1, 0), high=(1, 2), res=path_res)
+    map_data = np.load('map.npy')
     map.populate()
 
-    robot = robot_models.PointMassModel(ctrl_range=[-path_res, path_res])   #
+    # Define the start and goal positions
+    start = [10, 10]  # Starting position
+    goal = [100, 100]  # Goal position
 
-    rrt = RRT(
-        start=[0, 0],
-        goal=[0, 1.9],
-        robot_model=robot,
-        map=map,
-        expand_dis=0.2,
-        path_resolution=path_res,
-        )
-    
-    show_animation = True
-    metadata = dict(title="RRT Test")
-    writer = FFMpegWriter(fps=15, metadata=metadata)
-    fig = plt.figure()
-    
-    with writer.saving(fig, "rrt_test.mp4", 100):
-        path = rrt.planning(animation=show_animation, writer=writer)
+    # Create an instance of the robot model (assuming it's available from robot_models)
+    robot_model = robot_models.PointMassModel(ctrl_range=[-path_res, path_res])   #
 
-        if path is None:
-            print("Cannot find path")
-        else:
-            print("found path!!")
+    # Create an RRT planner instance with the map and other parameters
+    rrt = RRT(start=start,
+              goal=goal,
+              robot_model=robot_model,
+              map=marker.map_area,
+              expand_dis=5.0,  # How far to extend the tree in each step
+              path_resolution=1.0,  # The resolution of the path steps
+              goal_sample_rate=5,  # Sampling rate of the goal
+              max_iter=500)  # Maximum number of iterations
 
-            # Draw final path
-            if show_animation:
-                rrt.draw_graph()
-                plt.plot([x for (x, y) in path], [y for (x, y) in path], '-r')
-                plt.grid(True)
-                plt.pause(0.01)  # Need for Mac
-                plt.show()
-                writer.grab_frame()
+    # Run the RRT planning
+    path = rrt.planning(animation=True)
 
+    # Plot the final path
+    if path is not None:
+        path = np.array(path)
+        plt.plot(path[:, 0], path[:, 1], '-r')  # Plot the found path in red
+    else:
+        print("No path found.")
 
+    # Show the final result
+    plt.show()
 if __name__ == '__main__':
     main()
