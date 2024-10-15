@@ -56,6 +56,7 @@ resolution = 0.05
 gridSize= 5
 
 n_grids = [ int(s//resolution) for s in map_size]
+print(n_grids)
 grid = np.zeros((n_grids[0], n_grids[1]), dtype=np.uint8)
 midP = int(n_grids[0]/2)
 
@@ -72,20 +73,21 @@ def populate(boxes):
     radius=0.625
     for i in range(n_grids[0]):
         for j in range(n_grids[1]):
-            centroid = np.array([map_area[0][0] + resolution * (i+0.5), 
-                                     map_area[0][1] + resolution * (j+0.5)])
+            centroid = np.array([map_area[0][0] + (i+0.5), 
+                                     map_area[0][1] + (j+0.5)])
             for o in boxes:
-                    if np.linalg.norm(int(o[0])*resolution-high[1]) > 5:
-                        print(f'Skipped den her box: {o}\n med en x-kordinat på {o[0]}')
-                        continue
-                    else: 
+                    o[0] = o[0]+midP
+                    if np.linalg.norm(int(o[0])*resolution-high[1]) <= high[1]:
                         print(f'Her er den nye bokses x-kordinat: {int(o[0])}')
                         #o[0]=midP+int(o[0])
                         #print(o[0])
                         if np.linalg.norm(centroid - o) <= radius:
                             print('We did it')
-                            grid[i+int(o[0]), j] = 1
+                            grid[i, j] = 1
                             break
+                    else: 
+                        print(f'Skipped den her box: {o}\n med en x-kordinat på {o[0]}')
+                        continue
 
 def find_Lengths(corners):
     distances = []
