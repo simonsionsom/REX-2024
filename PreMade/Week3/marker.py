@@ -71,6 +71,7 @@ distortion_coeffs = np.asarray([0,0,0,0,0])
 
 def populate(boxes):
     radius=5
+
     for i in range(n_grids[0]):
         for j in range(n_grids[1]):
             centroid = np.array([i+0.5, 
@@ -78,16 +79,16 @@ def populate(boxes):
             print(centroid)
             for o in boxes:
                     o[0] = o[0]+midP
-                    if np.linalg.norm(int(o[0])*resolution-high[1]) <= high[1]:
-                        print(f'Her er den nye bokses x-koordinat: {int(o[0])}')
-                        #o[0]=midP+int(o[0])
-                        if np.linalg.norm(centroid - o) <= radius:
+                    if np.linalg.norm(centroid - o) <= radius:   
+                        #if np.linalg.norm(int(o[0])*resolution-high[1]) <= high[1]:
+                            #print(f'Her er den nye bokses x-koordinat: {int(o[0])}')
+                            #o[0]=midP+int(o[0])
                             print('We did it')
                             grid[i, j] = 1
                             break
-                    else: 
-                        print(f'Skipped den her box: {int(o)}\n med en x-kordinat på {int(o[0])}')
-                        continue
+                        #else: 
+                            #print(f'Skipped den her box: {int(o)}\n med en x-kordinat på {int(o[0])}')
+                            #continue
 
 def find_Lengths(corners):
     distances = []
