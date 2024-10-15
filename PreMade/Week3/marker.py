@@ -73,16 +73,16 @@ def populate(boxes):
     radius=0.625
     for i in range(n_grids[0]):
         for j in range(n_grids[1]):
-            centroid = np.array([map_area[0][0] + (i+0.5), 
-                                     map_area[0][1] + (j+0.5)])
+            centroid = np.array([i+0.5, 
+                                     j+0.5])
             for o in boxes:
                     o[0] = o[0]+midP
                     if np.linalg.norm(int(o[0])*resolution-high[1]) <= high[1]:
-                        #print(f'Her er den nye bokses x-kordinat: {int(o[0])}')
-                        #o[0]=midP+int(o[0])
-                        #print(o[0])
+                        print(f'Her er den nye bokses x-kordinat: {int(o[0])}')
+                        o[0]=midP+int(o[0])
+                        print(o[0])
                         if np.linalg.norm(centroid - o) <= radius:
-                            #print('We did it')
+                            print('We did it')
                             grid[i, j] = 1
                             break
                     else: 
