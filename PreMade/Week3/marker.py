@@ -58,7 +58,7 @@ gridSize= 5
 n_grids = [ int(s//resolution) for s in map_size]
 print(n_grids,'\n')
 grid = np.zeros((n_grids[0], n_grids[1]), dtype=np.uint8)
-midP = int(n_grids[0]/2)
+#midP = int(n_grids[0]/2)
 
 
 extent = [map_area[0][0], map_area[1][0], map_area[0][1], map_area[1][1]]
@@ -71,7 +71,7 @@ distortion_coeffs = np.asarray([0,0,0,0,0])
 
 def populate(boxes):
     radius=5
-    
+    midP = (int(n_grids[0]/2),0)
     for i in range(n_grids[0]):
         for j in range(n_grids[1]):
             centroid = np.array([0.5+i, 
@@ -82,9 +82,8 @@ def populate(boxes):
                     print(boxes)
                     print(centroid)
                     print(o[0])
-                    o[0] = o[0]+midP
                     #print(int(o))
-                    if np.linalg.norm(centroid - o) <= radius:   
+                    if np.linalg.norm(centroid - (o+midP)) <= radius:   
                         #if np.linalg.norm(int(o[0])*resolution-high[1]) <= high[1]:
                             #print(f'Her er den nye bokses x-koordinat: {int(o[0])}')
                             #o[0]=midP+int(o[0])
