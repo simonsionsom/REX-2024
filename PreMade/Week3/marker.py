@@ -75,9 +75,8 @@ def populate(boxes):
             centroid = np.array([map_area[0][0] + resolution * (i+0.5), 
                                      map_area[0][1] + resolution * (j+0.5)])
             for o in boxes:
-                    o[0]=o[0]+midP
-                    print(o,'Hereftre kommer o0\n')
-                    print(o[0])
+                    o[0]=int(o[0])+midP
+                    print(0[o])
                     if np.linalg.norm(centroid - o*resolution) <= radius:
                         print('We did it')
                         grid[i, j] = 1
