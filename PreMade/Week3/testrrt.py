@@ -189,7 +189,6 @@ def main():
     # Load map from 'map.npy'
     path_res = 0.05
     map_data = np.load('map.npy')
-    map.populate()
 
     # Define the start and goal positions
     start = [10, 10]  # Starting position
