@@ -77,6 +77,8 @@ def populate(boxes):
             centroid = np.array([0.5+i, 
                                      0.5+j])
             for o in boxes:
+                    print(midP)
+                    print(o[0])
                     o[0] = o[0]+midP
                     #print(int(o))
                     if np.linalg.norm(centroid - o) <= radius:   
