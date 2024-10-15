@@ -56,7 +56,7 @@ resolution = 0.05
 gridSize= 5
 
 n_grids = [ int(s//resolution) for s in map_size]
-print(n_grids)
+print(n_grids,'\n')
 grid = np.zeros((n_grids[0], n_grids[1]), dtype=np.uint8)
 midP = int(n_grids[0]/2)
 
@@ -78,15 +78,15 @@ def populate(boxes):
             for o in boxes:
                     o[0] = o[0]+midP
                     if np.linalg.norm(int(o[0])*resolution-high[1]) <= high[1]:
-                        print(f'Her er den nye bokses x-kordinat: {int(o[0])}')
+                        #print(f'Her er den nye bokses x-kordinat: {int(o[0])}')
                         #o[0]=midP+int(o[0])
                         #print(o[0])
                         if np.linalg.norm(centroid - o) <= radius:
-                            print('We did it')
+                            #print('We did it')
                             grid[i, j] = 1
                             break
                     else: 
-                        print(f'Skipped den her box: {o}\n med en x-kordinat på {o[0]}')
+                        #print(f'Skipped den her box: {o}\n med en x-kordinat på {o[0]}')
                         continue
 
 def find_Lengths(corners):
@@ -94,9 +94,9 @@ def find_Lengths(corners):
     for i in corners:
         rvecs, tvecs, objPoints = cv2.aruco.estimatePoseSingleMarkers(i, real_marker_height, intrinsic_matrix, distortion_coeffs)
         dist = np.array((tvecs.T[0][0][0]*100,tvecs.T[2][0][0]*100))
-        print(f'Her er tvec{tvecs.T},\n Her er distancen så ing {dist}')
+        #print(f'Her er tvec{tvecs.T},\n Her er distancen så ing {dist}')
         distances.append(dist/gridSize)
-    print(distances)
+    #print(distances)
     return distances
 
 
@@ -104,10 +104,10 @@ while True:
     image = cam.capture_array("main")
     gray = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
     corners, ids, rejectedImgPoints = cv2.aruco.detectMarkers(gray, aruco_dict, parameters=parameters)
-    print('\nHer er ids',ids)
-    print('\nHer er corners.shape',corners)
+    #print('\nHer er ids',ids)
+    #print('\nHer er corners.shape',corners)
     distances = find_Lengths(corners)
-    print('\nHer er distances',distances)
+    #print('\nHer er distances',distances)
     
     populate(distances)
     np.save('map.npy',grid)
