@@ -76,15 +76,15 @@ def populate(boxes):
                                      map_area[0][1] + resolution * (j+0.5)])
             for o in boxes:
                     if np.linalg.norm(int(o[0])*resolution-high[1]) > 5:
-                        print(f'Skipped den her box: {o}')
+                        print(f'Skipped den her box: {o}\n med en x-kordinat på {o[0]}')
                         continue
                     else: 
                         print(f'Her er den nye bokses x-kordinat: {int(o[0])}')
                         #o[0]=midP+int(o[0])
                         #print(o[0])
-                        if np.linalg.norm(centroid - o*resolution) <= radius:
+                        if np.linalg.norm(centroid - o) <= radius:
                             print('We did it')
-                            grid[i, j] = 1
+                            grid[i+int(o[0]), j] = 1
                             break
 
 def find_Lengths(corners):
