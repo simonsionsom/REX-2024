@@ -74,11 +74,11 @@ def populate(boxes):
 
     for i in range(n_grids[0]):
         for j in range(n_grids[1]):
-            centroid = np.array([i+0.5, 
-                                     j+0.5])
-            print(centroid)
+            centroid = np.array([0.5+i, 
+                                     0.5+j])
             for o in boxes:
                     o[0] = o[0]+midP
+                    print(o)
                     if np.linalg.norm(centroid - o) <= radius:   
                         #if np.linalg.norm(int(o[0])*resolution-high[1]) <= high[1]:
                             #print(f'Her er den nye bokses x-koordinat: {int(o[0])}')
