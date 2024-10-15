@@ -70,6 +70,7 @@ extent = [map_area[0][0], map_area[1][0], map_area[0][1], map_area[1][1]]
 distortion_coeffs = np.asarray([0,0,0,0,0])
 
 def populate(boxes):
+    ahhhh = []
     radius=6
     midP = (int(n_grids[0]/2),0)
     for i in range(n_grids[0]):
@@ -77,7 +78,7 @@ def populate(boxes):
             centroid = np.array([0.5+i, 
                                      0.5+j])
             
-            for o in boxes:
+            for o, f in boxes:
                     #print(int(o))
                     if np.linalg.norm(centroid - (o+midP)) <= radius:   
                         #if np.linalg.norm(int(o[0])*resolution-high[1]) <= high[1]:
@@ -85,18 +86,20 @@ def populate(boxes):
                             #o[0]=midP+int(o[0])
                             print('We did it')
                             grid[i, j] = 1
+                            ahhhh.append(((i,j), f))
                             break
                         #else: 
                             #print(f'Skipped den her box: {int(o)}\n med en x-kordinat på {int(o[0])}')
                             #continue
+    return ahhhh
 
-def find_Lengths(corners):
+def find_Lengths(corners,ids):
     distances = []
     for i in corners:
         rvecs, tvecs, objPoints = cv2.aruco.estimatePoseSingleMarkers(i, real_marker_height, intrinsic_matrix, distortion_coeffs)
         dist = np.array((tvecs.T[0][0][0]*100,tvecs.T[2][0][0]*100))
         #print(f'Her er tvec{tvecs.T},\n Her er distancen så ing {dist}')
-        distances.append(dist/gridSize)
+        distances.append((dist/gridSize),ids[i])
         print(dist)
     print(distances)
     return distances
@@ -108,10 +111,10 @@ while True:
     corners, ids, rejectedImgPoints = cv2.aruco.detectMarkers(gray, aruco_dict, parameters=parameters)
     #print('\nHer er ids',ids)
     #print('\nHer er corners.shape',corners)
-    distances = find_Lengths(corners)
+    distances = find_Lengths(corners,ids)
     #print('\nHer er distances',distances)
     
-    populate(distances)
+    print(populate(distances))
     np.save('map.npy',grid)
     # Use OpenCV to display the grid map instead of plt
     #draw_map(grid)
