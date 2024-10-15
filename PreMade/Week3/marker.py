@@ -78,9 +78,8 @@ def populate(boxes):
             for o in boxes:
                     o[0] = o[0]+midP
                     if np.linalg.norm(int(o[0])*resolution-high[1]) <= high[1]:
-                        print(f'Her er den nye bokses x-kordinat: {int(o[0])}')
-                        o[0]=midP+int(o[0])
-                        print(o[0])
+                        print(f'Her er den nye bokses x-koordinat: {int(o[0])}')
+                        #o[0]=midP+int(o[0])
                         if np.linalg.norm(centroid - o) <= radius:
                             print('We did it')
                             grid[i, j] = 1
