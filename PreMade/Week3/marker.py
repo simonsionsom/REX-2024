@@ -75,7 +75,7 @@ def populate(boxes):
             centroid = np.array([map_area[0][0] + resolution * (i+0.5), 
                                      map_area[0][1] + resolution * (j+0.5)])
             for o in boxes:
-                    if np.linalg.norm(int(o[0])*resolution-map_area[1]) > 5:
+                    if np.linalg.norm(int(o[0])*resolution-high[1]) > 5:
                         print(f'Skipped den her box: {o}')
                         continue
                     else: 
