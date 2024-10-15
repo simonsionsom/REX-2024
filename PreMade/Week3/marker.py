@@ -70,7 +70,7 @@ extent = [map_area[0][0], map_area[1][0], map_area[0][1], map_area[1][1]]
 distortion_coeffs = np.asarray([0,0,0,0,0])
 
 def populate(boxes):
-    radius=5
+    radius=6
     midP = (int(n_grids[0]/2),0)
     for i in range(n_grids[0]):
         for j in range(n_grids[1]):
@@ -78,10 +78,6 @@ def populate(boxes):
                                      0.5+j])
             
             for o in boxes:
-                    print(midP)
-                    print(boxes)
-                    print(centroid)
-                    print(o[0])
                     #print(int(o))
                     if np.linalg.norm(centroid - (o+midP)) <= radius:   
                         #if np.linalg.norm(int(o[0])*resolution-high[1]) <= high[1]:
