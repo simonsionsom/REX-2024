@@ -82,8 +82,8 @@ def populate(boxes):
 
 def find_Lengths(corners):
     distances = []
-    for i in range(len(corners)):
-        rvecs, tvecs, objPoints = cv2.aruco.estimatePoseSingleMarkers(corners, real_marker_height, intrinsic_matrix, distortion_coeffs)
+    for i in corners:
+        rvecs, tvecs, objPoints = cv2.aruco.estimatePoseSingleMarkers(i, real_marker_height, intrinsic_matrix, distortion_coeffs)
         dist = np.array((tvecs.T[0][0][0]*100,tvecs.T[2][0][0]*100))
         print(f'Her er tvec{tvecs.T},\n Her er distancen så ing {dist}')
         distances.append(dist/gridSize)
@@ -96,7 +96,7 @@ while True:
     gray = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
     corners, ids, rejectedImgPoints = cv2.aruco.detectMarkers(gray, aruco_dict, parameters=parameters)
     print('\nHer er ids',ids)
-    print('\nHer er corners.shape',corners.shape)
+    print('\nHer er corners.shape',corners)
     distances = find_Lengths(corners)
     print('\nHer er distances',distances)
     
