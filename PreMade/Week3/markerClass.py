@@ -13,7 +13,7 @@ except ImportError:
 import robot
 
 class Localizer:
-    def __init__(self):
+    def __init__(self, low=(0, 0), high=(5, 5), res=0.05) -> None:
         # Initialize robot and camera
         self.arlo = robot.Robot()
 
@@ -29,9 +29,6 @@ class Localizer:
                                                             queue=False)
         self.cam.configure(picam2_config)
         self.cam.start(show_preview=False)
-
-        # Allow time for the camera to start
-        time.sleep(1)
 
         # ArUco marker settings
         self.WIN_RF = "Aruco Marker Detection"
@@ -55,16 +52,14 @@ class Localizer:
         self.distortion_coeffs = np.asarray([0, 0, 0, 0, 0])
 
         # Grid map setup
-        self.low = (0, 0)
-        self.high = (5, 5)
-        self.map_area = [self.low, self.high]
-        self.map_size = np.array([self.high[0] - self.low[0], self.high[1] - self.low[1]])
-        self.resolution = 0.05
+
+        self.map_area = [low, high]    #a rectangular area    
+        self.map_size = np.array([high[0]-low[0], high[1]-low[1]])
+        self.resolution = res
         self.gridSize = 5
 
         # Number of grids based on resolution
-        self.n_grids = [int(s // self.resolution) for s in self.map_size]
-        print(self.n_grids, '\n')
+        self.n_grids = [ int(s//res) for s in self.map_size]
 
         # Initialize an empty grid
         self.grid = np.zeros((self.n_grids[0], self.n_grids[1]), dtype=np.uint8)
