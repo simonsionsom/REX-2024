@@ -70,11 +70,12 @@ extent = [map_area[0][0], map_area[1][0], map_area[0][1], map_area[1][1]]
 distortion_coeffs = np.asarray([0,0,0,0,0])
 
 def populate(boxes):
-    radius=0.625
+    radius=5
     for i in range(n_grids[0]):
         for j in range(n_grids[1]):
             centroid = np.array([i+0.5, 
                                      j+0.5])
+            print(centroid)
             for o in boxes:
                     o[0] = o[0]+midP
                     if np.linalg.norm(int(o[0])*resolution-high[1]) <= high[1]:
@@ -85,7 +86,7 @@ def populate(boxes):
                             grid[i, j] = 1
                             break
                     else: 
-                        #print(f'Skipped den her box: {o}\n med en x-kordinat på {o[0]}')
+                        print(f'Skipped den her box: {o}\n med en x-kordinat på {o[0]}')
                         continue
 
 def find_Lengths(corners):
