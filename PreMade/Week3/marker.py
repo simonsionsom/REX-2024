@@ -77,7 +77,7 @@ def populate(boxes):
             for o in boxes:
                     if np.linalg.norm(centroid - o*resolution) <= radius:
                         print('We did it')
-                        grid[midP+int(o[0]), j] = 1
+                        grid[i+int(o[0]), j] = 1
                         break
 
 def find_Lengths(corners):
