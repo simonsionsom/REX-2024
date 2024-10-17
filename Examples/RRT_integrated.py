@@ -38,8 +38,8 @@ class RRT:
         self.robot = robot_model
         self.map = map
 
-        #self.min_rand = map.map_area[0]
-        #self.max_rand = map.map_area[1]
+        self.min_rand = map.map_area[0]
+        self.max_rand = map.map_area[1]
 
         self.expand_dis = expand_dis
         self.path_resolution = path_resolution
