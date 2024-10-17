@@ -39,7 +39,7 @@ class RRT:
                  expand_dis=0.2,
                  path_resolution=0.05,
                  goal_sample_rate=5,
-                 max_iter=500,
+                 max_iter=2000,
                  ):
 
         self.start = self.Node(start)
@@ -194,7 +194,7 @@ class MapFromNpy:
         self.extent = [0, self.map_data.shape[1], 0, self.map_data.shape[0]]
 
     def draw_map(self):
-        plt.imshow(self.map_data, cmap='gray', origin='lower', extent=self.extent)
+        plt.imshow(self.map_data, cmap='Blues', origin='lower', extent=self.extent)
 
     def in_collision(self, pos):
         x, y = int(pos[0]), int(pos[1])
