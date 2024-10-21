@@ -1,7 +1,7 @@
 import cv2
-import time
 import numpy as np
-import matplotlib.pyplot as plt
+import time
+import mapgo
 
 try:
     import picamera2
@@ -11,8 +11,6 @@ except ImportError:
     exit(-1)
 
 import robot
-
-np.set_printoptions(threshold=np.inf)
 
 arlo = robot.Robot()
 
@@ -38,13 +36,11 @@ aruco_dict = cv2.aruco.getPredefinedDictionary(cv2.aruco.DICT_6X6_250)
 parameters = cv2.aruco.DetectorParameters()
 
 real_marker_height = 0.15
-
 frame_center_x = imageSize[0] // 2
 center_threshold = 350
-intrinsic_matrix = np.asarray([focal_length, 0, imageSize[0] / 2.0, 
+intrinsic_matrix = np.asarray([ focal_length, 0, imageSize[0] / 2.0, 
                                 0, focal_length, imageSize[1] / 2.0, 
                                 0, 0, 1. ], dtype = np.float64)
-
 intrinsic_matrix.shape = (3, 3)
 
 low = (0,0)
