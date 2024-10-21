@@ -78,7 +78,7 @@ def populate(boxes):
             centroid = np.array([0.5+i, 
                                      0.5+j])
             
-            for o, f in boxes:
+            for o, f, r in boxes:
                     #print(int(o))
                     if np.linalg.norm(centroid - (o+midP)) <= radius:   
                         #if np.linalg.norm(int(o[0])*resolution-high[1]) <= high[1]:
@@ -86,7 +86,7 @@ def populate(boxes):
                             #o[0]=midP+int(o[0])
                             print('We did it')
                             grid[i, j] = 1
-                            ahhhh.append(((i,j), f))
+                            ahhhh.append(((i,j), f,r))
                             break
                         #else: 
                             #print(f'Skipped den her box: {int(o)}\n med en x-kordinat på {int(o[0])}')
@@ -99,7 +99,7 @@ def find_Lengths(corners,ids):
         rvecs, tvecs, objPoints = cv2.aruco.estimatePoseSingleMarkers(corners[i], real_marker_height, intrinsic_matrix, distortion_coeffs)
         dist = np.array((tvecs.T[0][0][0]*100,tvecs.T[2][0][0]*100))
         #print(f'Her er tvec{tvecs.T},\n Her er distancen så ing {dist}')
-        distances.append((dist/gridSize,ids[i]))
+        distances.append((dist/gridSize,ids[i],rvecs))
         print(dist)
     print(distances)
     return distances
@@ -116,6 +116,7 @@ while True:
     
     print(populate(distances))
     np.save('map.npy',grid)
+    
     # Use OpenCV to display the grid map instead of plt
     #draw_map(grid)
     break
