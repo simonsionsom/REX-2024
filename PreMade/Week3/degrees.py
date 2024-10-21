@@ -12,7 +12,7 @@ def rotate():
     sleep(0.41)
     sleep(2)
     print("2 degree ...")
-    print(arlo.go_diff(32, 64, 1, 0))
+    print(arlo.go_diff(32, 64, 0, 1))
     sleep(1)
     print("3 degree ...")
     print(arlo.go_diff(32, 32, 1, 0))
