@@ -9,7 +9,8 @@ def rotate():
     rightSpeed = 32
     print("120 degree ...")
     print(arlo.go_diff(leftSpeed, rightSpeed, 1, 0))  # Spin in one direction
-    sleep(1)
+    sleep(0.41)
+    sleep(2)
     print("2 degree ...")
     print(arlo.go_diff(32, 64, 1, 0))
     sleep(1)
