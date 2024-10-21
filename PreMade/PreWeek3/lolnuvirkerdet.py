@@ -7,7 +7,7 @@ hastighed_drej_r = 35
 
 
 from time import sleep
-import robot
+import PreMade.robot as robot
 
 
 arlo = robot.Robot()
@@ -22,5 +22,5 @@ print("Venstre: {h_left}, Højre: {h_right}")
 print("I {sekunder_drej} sekunder")
 sleep(1)
 print(arlo.go_diff(hastighed_drej_l, hastighed_drej_r, 1, 0))
-sleep(float(1))
+sleep(float(1.2))
 
