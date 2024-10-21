@@ -212,11 +212,11 @@ def main():
     robot = robot_models.PointMassModel(ctrl_range=[-path_res, path_res])
 
     rrt = RRT(
-        start=[0, 0],         # Define your start position
-        goal=[0, 1.9],        # Define your goal position
+        start=[0, 49],         # Define your start position
+        goal=[90, 49],        # Define your goal position
         robot_model=robot,
         map=map,              # Use the map loaded from the file
-        expand_dis=0.2,
+        expand_dis=2.5,
         path_resolution=path_res,
     )
     
