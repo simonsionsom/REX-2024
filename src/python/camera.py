@@ -5,7 +5,7 @@ import sys
 import threading
 import framebuffer
 from pkg_resources import parse_version
-import map
+
 
 gstreamerCameraFound = False
 piCameraFound = False
@@ -45,7 +45,7 @@ def capPropId(prop):
     return getattr(cv2 if OPCV3 else cv2.cv, ("" if OPCV3 else "CV_") + "CAP_PROP_" + prop)
 
 
-def gstreamer_pipeline(capture_width=500, capture_height=200, framerate=30):
+def gstreamer_pipeline(capture_width=1280, capture_height=720, framerate=30):
     """Utility function for setting parameters for the gstreamer camera pipeline"""
     return (
         "libcamerasrc !"
@@ -127,7 +127,7 @@ class Camera(object):
              robottype - specify which robot you are using in order to use the correct camera calibration. 
                          Supported types: arlo, frindo, scribbler, macbookpro"""
 
-        print(f"robottype ={robottype}" )
+        print("robottype =", robottype)
         self.useCaptureThread = useCaptureThread
 
         # TODO: Use this in the different camera configurations
@@ -494,10 +494,7 @@ class Camera(object):
             
         return self.patternFound, self.corners
         
-    path_res = 0.05
-    map = map.GridOccupancyMap(low=(-1, 0), high=(1, 2), res=path_res)
-    map.populate()
-    
+        
     def draw_object(self, img):
         """Draw the object if found into img"""
         cv2.drawChessboardCorners(img, self.patternSize, self.corners, self.patternFound)
@@ -553,15 +550,17 @@ if (__name__=='__main__'):
 
         # Draw detected objects
         cam.draw_aruco_objects(colour)
-        resized_image = cv2.resize(colour, (600, 400))  # Resize to a smaller size
 
-        # Show the frame with detected markers and distance
-        cv2.imshow(WIN_RF1, resized_image)
-
+    
+        # Show frames
+        cv2.imshow(WIN_RF1, colour)
+        
+        # Show frames
+        #cv2.imshow(WIN_RF3, gray)
+        
         
     # Close all windows
     cv2.destroyAllWindows()
 
     # Clean-up capture thread
     cam.terminateCaptureThread()
-
