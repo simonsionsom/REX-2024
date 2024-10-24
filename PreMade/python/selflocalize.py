@@ -67,17 +67,13 @@ def isRunningOnArlo():
     """Return True if we are running on Arlo, otherwise False.
       You can use this flag to switch the code from running on you laptop to Arlo - you need to do the programming here!
     """
-    if onRobot:
-        # XXX: You need to change this path to point to where your robot.py file is located
-        sys.path.append('../Week3')
-        print('Vi har hentet stien')
-        try:
-            from robot import Robot
-            onRobot = True
-            print('Vi fandt den!')
-        except ImportError:
-            print("selflocalize.py: robot module not present - forcing not running on Arlo!")
-            onRobot = False
+    try:
+        from robot import Robot
+        onRobot = True
+        print('Vi fandt den!')
+    except ImportError:
+        print("selflocalize.py: robot module not present - forcing not running on Arlo!")
+        onRobot = False
         
     '''if isRunningOnArlo():
     # XXX: You need to change this path to point to where your robot.py file is located
@@ -92,7 +88,10 @@ def isRunningOnArlo():
 
     return onRobot
 
-
+if onRobot:
+        # XXX: You need to change this path to point to where your robot.py file is located
+        sys.path.append('../Week3')
+        print('Vi har hentet stien')
 
 
 
