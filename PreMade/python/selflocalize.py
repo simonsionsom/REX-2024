@@ -72,7 +72,7 @@ def isRunningOnArlo():
 
 if isRunningOnArlo():
     # XXX: You need to change this path to point to where your robot.py file is located
-    sys.path.append("PreMade\Week3\robot.py")
+    sys.path.append("PreMade\Week3")
 
 
 try:
