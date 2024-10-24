@@ -70,6 +70,7 @@ def isRunningOnArlo():
     if onRobot== True:
         # XXX: You need to change this path to point to where your robot.py file is located
         sys.path.append('../Week3')
+        print('Vi har hentet stien')
         try:
             from robot import Robot
             onRobot = True
