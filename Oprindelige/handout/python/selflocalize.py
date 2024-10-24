@@ -10,7 +10,7 @@ import math
 
 # Flags
 showGUI = True  # Whether or not to open GUI windows
-onRobot = False  # Whether or not we are running on the Arlo robot
+onRobot = True  # Whether or not we are running on the Arlo robot
 
 
 def compute_weight(measured_distance, predicted_distance, sigma):
