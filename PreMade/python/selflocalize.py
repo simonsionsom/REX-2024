@@ -67,7 +67,7 @@ def isRunningOnArlo():
     """Return True if we are running on Arlo, otherwise False.
       You can use this flag to switch the code from running on you laptop to Arlo - you need to do the programming here!
     """
-    if onRobot== True:
+    if onRobot:
         # XXX: You need to change this path to point to where your robot.py file is located
         sys.path.append('../Week3')
         print('Vi har hentet stien')
