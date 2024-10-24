@@ -72,7 +72,7 @@ def isRunningOnArlo():
 
 if isRunningOnArlo():
     # XXX: You need to change this path to point to where your robot.py file is located
-    sys.path.append("/Users/kristianjelsted/Documents/REX/Robot/REX-2024/PreMade/Week3")
+    sys.path.append("/home/pi/Documents/git/REX-2024/PreMade/Week3")
 
 
 try:
