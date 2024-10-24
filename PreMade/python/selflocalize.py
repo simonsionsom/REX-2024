@@ -67,23 +67,35 @@ def isRunningOnArlo():
     """Return True if we are running on Arlo, otherwise False.
       You can use this flag to switch the code from running on you laptop to Arlo - you need to do the programming here!
     """
+    opening = True
+    if opening:
+        # XXX: You need to change this path to point to where your robot.py file is located
+        sys.path.append("PreMade\Week3")
+
+    try:
+        from robot import Robot 
+        onRobot = True
+    except ImportError:
+        print("selflocalize.py: robot module not present - forcing not running on Arlo!")
+        onRobot = False
+
     return onRobot
 
 
-if isRunningOnArlo():
+'''if isRunningOnArlo():
     # XXX: You need to change this path to point to where your robot.py file is located
     sys.path.append("PreMade\Week3")
 
 
 try:
-    import robot
+    import Robot 
     onRobot = True
 except ImportError:
     print("selflocalize.py: robot module not present - forcing not running on Arlo!")
     onRobot = False
 
 
-
+'''
 
 # Some color constants in BGR format
 CRED = (0, 0, 255)
