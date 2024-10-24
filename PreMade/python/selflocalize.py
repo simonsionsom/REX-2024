@@ -67,7 +67,7 @@ def isRunningOnArlo():
     """Return True if we are running on Arlo, otherwise False.
       You can use this flag to switch the code from running on you laptop to Arlo - you need to do the programming here!
     """
-    sys.path.append("../PreMade/Week3")
+    sys.path.append("../Week3")
 
     try:
         from robot import Robot 
