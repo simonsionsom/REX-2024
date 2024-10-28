@@ -368,7 +368,7 @@ try:
     
             # Show frame
             cv2.imshow(WIN_RF1, colour)
-            cv2.resizeWindow(WIN_RF1, 320, 180)
+            cv2.resizeWindow(WIN_RF1, 640, 360)
 
             # Show world
             cv2.imshow(WIN_World, world)
