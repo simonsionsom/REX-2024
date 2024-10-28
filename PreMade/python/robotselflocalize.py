@@ -184,7 +184,7 @@ try:
         WIN_RF1 = "Robot view"
         cv2.namedWindow(WIN_RF1)
         cv2.moveWindow(WIN_RF1, 50, 50)
-        WIN_RF1 = cv2.resizeWindow(WIN_RF1, 320, 160)
+        cv2.resizeWindow(WIN_RF1, 640, 480)
 
         WIN_World = "World view"
         cv2.namedWindow(WIN_World)
