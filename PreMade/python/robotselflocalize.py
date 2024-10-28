@@ -183,8 +183,7 @@ try:
         # Open windows
         WIN_RF1 = "Robot view"
         cv2.namedWindow(WIN_RF1)
-        cv2.moveWindow(WIN_RF1, 500, 50)
-        cv2.resizeWindow("Robot view", 320, 180)
+        cv2.moveWindow(WIN_RF1, 50, 50)
 
         WIN_World = "World view"
         cv2.namedWindow(WIN_World)
@@ -369,6 +368,7 @@ try:
     
             # Show frame
             cv2.imshow(WIN_RF1, colour)
+            cv2.resizeWindow(WIN_RF1, 320, 180)
 
             # Show world
             cv2.imshow(WIN_World, world)
