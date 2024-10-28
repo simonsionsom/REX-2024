@@ -13,9 +13,10 @@ class Map:
           m,n = j 
           self.map[m+k,n+d] = i
     return self.map
+  
   def showMap(self):
     fig, ax = plt.subplots(figsize=(12, 8))
-    cax = ax.imshow(self.map, interpolation='nearest')
+    ax = ax.imshow(self.map, interpolation='nearest')
     ax.xaxis.set_label_position('top')
     ax.xaxis.tick_top()
     plt.show()
