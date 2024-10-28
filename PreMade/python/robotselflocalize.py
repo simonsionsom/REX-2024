@@ -56,7 +56,8 @@ def resample_particles(particles):
             selected_particle.getX(),
             selected_particle.getY(),
             selected_particle.getTheta(),
-            1.0 / num_particles  # Reset weight to uniform
+            # 1.0 / num_particles  # Reset weight to uniform
+            selected_particle.getWeight()
         )
         new_particles.append(new_particle)
 
