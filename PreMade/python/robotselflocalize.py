@@ -320,7 +320,7 @@ try:
             #         if obj_dist < detected_objects[obj_id]["distance"]:
             #             detected_objects[obj_id] = {"distance": obj_dist, "angle": obj_angle}
             # # Now process detected_objects and take action
-            # particle_weights = {}
+            particle_weights = {}
             # for obj_id, info in detected_objects.items():
             #     shortest_distance = info["distance"]
             #     corresponding_angle = info["angle"]
