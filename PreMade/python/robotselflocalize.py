@@ -201,7 +201,7 @@ try:
     angular_velocity = 0.0 # radians/sec
 
     # Initialize the robot (XXX: You do this)
-    robot_pose = particle.Particle(100, 250, 0, 0)
+    robot_pose = particle.Particle(100, 240, 0, 0)
 
     # Allocate space for world map
     world = np.zeros((500,500,3), dtype=np.uint8)
