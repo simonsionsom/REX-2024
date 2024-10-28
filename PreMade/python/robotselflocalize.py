@@ -26,7 +26,7 @@ def compute_angle_difference(angle1, angle2):
         diff -= 2 * np.pi
     while diff < -np.pi:
         diff += 2 * np.pi
-    return diff
+    return -diff
 
 def resample_particles(particles):
     """Resample particles based on their weights using systematic resampling."""
