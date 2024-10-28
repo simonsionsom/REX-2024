@@ -288,24 +288,44 @@ try:
                 obj_id = objectIDs[i]
                 obj_dist = dists[i]
                 obj_angle = angles[i]
-        
+
                 print(f"Object ID = {obj_id}, Distance = {obj_dist}, Angle = {obj_angle}")
-        
+
                 # Check if this object ID has already been detected
                 if obj_id not in detected_objects:
-                    # If it's the first detection of this ID, store the distance and angle
+                # If it's the first detection of this ID, store the distance and angle
                     detected_objects[obj_id] = {"distance": obj_dist, "angle": obj_angle}
                 else:
                     # If the object was detected before, keep the shortest distance
                     if obj_dist < detected_objects[obj_id]["distance"]:
                         detected_objects[obj_id] = {"distance": obj_dist, "angle": obj_angle}
-            # Now process detected_objects and take action
-            particle_weights = {}
+
+                # Final check of detected objects dictionary
+            print("Final detected objects:")
             for obj_id, info in detected_objects.items():
-                shortest_distance = info["distance"]
-                corresponding_angle = info["angle"]
+                print(f"ID: {obj_id}, Distance: {info['distance']}, Angle: {info['angle']}")
+            # for i in range(len(objectIDs)):
+            #     obj_id = objectIDs[i]
+            #     obj_dist = dists[i]
+            #     obj_angle = angles[i]
         
-                print(f"Object ID {obj_id} - Shortest Distance: {shortest_distance}, Corresponding Angle: {corresponding_angle}")
+            #     print(f"Object ID = {obj_id}, Distance = {obj_dist}, Angle = {obj_angle}")
+        
+            #     # Check if this object ID has already been detected
+            #     if obj_id not in detected_objects:
+            #         # If it's the first detection of this ID, store the distance and angle
+            #         detected_objects[obj_id] = {"distance": obj_dist, "angle": obj_angle}
+            #     else:
+            #         # If the object was detected before, keep the shortest distance
+            #         if obj_dist < detected_objects[obj_id]["distance"]:
+            #             detected_objects[obj_id] = {"distance": obj_dist, "angle": obj_angle}
+            # # Now process detected_objects and take action
+            # particle_weights = {}
+            # for obj_id, info in detected_objects.items():
+            #     shortest_distance = info["distance"]
+            #     corresponding_angle = info["angle"]
+        
+            #     print(f"Object ID {obj_id} - Shortest Distance: {shortest_distance}, Corresponding Angle: {corresponding_angle}")
             # Compute particle weights
             # XXX: You do this
             # Compute particle weights based on measured distances
