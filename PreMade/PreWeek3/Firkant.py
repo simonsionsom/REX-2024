@@ -28,17 +28,17 @@ retning = input()'''
 print("Duration: ")
 duration = float(input())
 
-while tændt > 0 :
-  print(arlo.go_diff(63, 63, 1, 1))
-  sleep(3)
-  print(arlo.stop())
-  # Wait a bit before next command
-  sleep(0.041)
-  print(arlo.go_diff(leftSpeed, rightSpeed, 1, 0))
-  sleep(duration)
-  print(arlo.stop())
-  tændt = tændt -1
-  #din mor
+for test_number in range(1, 11):
+    duration = test_number  # Duration in seconds for each test
+    print(f"\nStarting test {test_number} with spin duration {duration} seconds")
+
+    # Start spinning
+    print(arlo.go_diff(leftSpeed, rightSpeed, 1, 0))  # Spins with set speeds
+    sleep(duration)  # Spin for the specified duration
+
+    # Stop the robot after each spin
+    print(arlo.stop())
+    sleep(0.5)  # Short pause before next test
 '''
 if retning == "l":
   sleep(1)
