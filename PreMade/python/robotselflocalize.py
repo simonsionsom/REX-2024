@@ -268,8 +268,8 @@ try:
         # Fetch next frame
         colour = cam.get_next_frame()
         robot_measured_distances = {
-            1: 200.0,  # Example distance to landmark 1
-            2: 300.0   # Example distance to landmark 2
+            3: 200.0,  # Example distance to landmark 1
+            4: 300.0   # Example distance to landmark 2
         }
         sigma = 10
         sigma_angle = 0.15
