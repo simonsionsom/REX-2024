@@ -204,7 +204,7 @@ try:
 
     # Allocate space for world map
     world = np.zeros((500,500,3), dtype=np.uint8)
-    print(est_pose.shape,len(particles),world.shape)
+    print(len(particles),world.shape)
     # Draw map
     draw_world(est_pose, particles, world)
 
