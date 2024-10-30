@@ -71,9 +71,9 @@ def isRunningOnArlo():
     return onRobot
 
 
-if isRunningOnArlo():
+#if isRunningOnArlo():
     # XXX: You need to change this path to point to where your robot.py file is located
-    sys.path.append("./Week5")
+    #sys.path.append("./Week5")
 
 
 '''try:
