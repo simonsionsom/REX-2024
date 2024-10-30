@@ -222,7 +222,7 @@ try:
     angular_velocity = 0.0 # radians/sec
 
     # Initialize the robot (XXX: You do this)
-    robot_pose = particle.Particle(150, 100, 0, 0)
+    #robot_pose = particle.Particle(150, 100, 0, 0)
 
     # Allocate space for world map
     world = np.zeros((500,500,3), dtype=np.uint8)
@@ -262,6 +262,8 @@ try:
             elif action == ord('d'): # Right
                 angular_velocity -= 0.2
         
+
+        robot_pose = particle.estimate_pose(particles) # The estimate of the robots current pose
         dt = 0.1
         for p in particles:
             delta_theta = angular_velocity * dt
@@ -270,7 +272,7 @@ try:
             # delta_x = velocity * dt * np.cos(est_pose.getTheta())
             # delta_y = velocity * dt * np.sin(est_pose.getTheta())
             particle.move_particle(p, delta_x, delta_y, delta_theta)
-
+        
         
         delta_theta_robot = angular_velocity * dt
         delta_x_robot = velocity * dt * np.cos(robot_pose.getTheta())
