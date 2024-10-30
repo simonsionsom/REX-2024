@@ -402,7 +402,7 @@ try:
           angles.append(info["angle"])
 
 
-        diff_angle = angle_difference(angles[0], angles[1])
+        diff_angle = angle_difference(float(angles[0]), float(angles[1]))
         drive_straight(diff_angle=diff_angle)
 
         if showGUI:
