@@ -23,23 +23,21 @@ else :
   print(arlo.stop())
   sleep(1)
 
-print("Drej: d | Eller ligeud: l")
-retning = input()
+'''print("Drej: d | Eller ligeud: l")
+retning = input()'''
 print("Duration: ")
 duration = float(input())
 
-'''while tændt > 0 :
-  print(arlo.go_diff(63, 63, 1, 1))
-  sleep(3)
-  print(arlo.stop())
+while tændt > 0 :
   # Wait a bit before next command
   sleep(0.041)
   print(arlo.go_diff(leftSpeed, rightSpeed, 1, 0))
   sleep(duration)
   print(arlo.stop())
   tændt = tændt -1
-  #din mor'''
+  #din mor
 
+'''
 if retning == "l":
   sleep(1)
   print(arlo.go_diff(leftSpeed, rightSpeed, 1, 1))
@@ -76,3 +74,4 @@ else :
   sleep(1)
 
 
+'''
