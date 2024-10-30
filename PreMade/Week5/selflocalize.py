@@ -72,7 +72,7 @@ def resample_particles(particles):
     new_particles = []
     i = 0
     for j in range(num_particles):
-        r = np.random.uniform(0, 1.0) # / num_particles
+        r = np.random.uniform(0, 1.0/ num_particles) # 
         u = r + j * (1.0 / num_particles)
         while u > cumulative_sum[i]:
             i += 1
