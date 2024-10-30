@@ -212,10 +212,11 @@ try:
     if isRunningOnArlo():
         #cam = camera.Camera(0, robottype='arlo', useCaptureThread=True)
         cam = camera.Camera(0, robottype='arlo', useCaptureThread=False)
+        print('Duer')
     else:
         #cam = camera.Camera(0, robottype='macbookpro', useCaptureThread=True)
         cam = camera.Camera(0, robottype='macbookpro', useCaptureThread=False)
-
+        print('Duer ikke')
     while True:
 
         
