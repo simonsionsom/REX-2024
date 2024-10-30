@@ -345,7 +345,7 @@ try:
             # og udkommenter 313 og 334 :)
             for p in particles:
                 # particle_weights[p] = 1.0
-                particle_weights[p] = 0.0  # Initialize with neutral weight
+                particle_weights[p] = 1.0  # Initialize with neutral weight
 
                 for obj_id, info in detected_objects.items():
                     # Get measured distance and corresponding angle
@@ -366,7 +366,7 @@ try:
 
                     combined_weight = weight_distance * weight_angle
                     # particle_weights[p] *= weight_distance * weight_angle
-                    particle_weights[p] += combined_weight
+                    particle_weights[p] *= combined_weight
 
             # Normalize the particle weights so they sum to 1
             total_weight = sum(particle_weights.values())
