@@ -1,4 +1,4 @@
-import PreMade.robot as robot
+import robot
 import curses
 from time import sleep
 
