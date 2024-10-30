@@ -83,7 +83,7 @@ except ImportError:
     print("selflocalize.py: robot module not present - forcing not running on Arlo!")
     onRobot = False
 
-
+print(onRobot)
 
 
 # Some color constants in BGR format
@@ -204,7 +204,7 @@ try:
 
     # Allocate space for world map
     world = np.zeros((500,500,3), dtype=np.uint8)
-
+    print(est_pose.shape,len(particles),world.shape)
     # Draw map
     draw_world(est_pose, particles, world)
 
