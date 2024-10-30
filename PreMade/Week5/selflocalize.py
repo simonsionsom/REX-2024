@@ -48,9 +48,9 @@ def compute_weight(measured_distance, predicted_distance, sigma):
 def compute_angle_difference(angle1, angle2):
     """Compute the difference between two angles, ensuring it wraps within [-pi, pi]."""
     diff = angle1 - angle2
-    while diff > np.pi:
+    if diff > np.pi:
         diff -= 2 * np.pi
-    while diff < -np.pi:
+    elif diff < -np.pi:
         diff += 2 * np.pi
     return diff
 
@@ -60,18 +60,19 @@ def resample_particles(particles):
     
     # Step 1: Normalize the weights
     weights = np.array([p.getWeight() for p in particles])
-    weights /= np.sum(weights)  # Normalize weights so they sum to 1
+    #weights /= np.sum(weights)  # Normalize weights so they sum to 1
 
     # Step 2: Compute the cumulative sum of the weights
     cumulative_sum = np.cumsum(weights)
 
     # Step 3: Generate random starting point between 0 and 1/num_particles
-    r = np.random.uniform(0, 1.0 / num_particles)
+    
 
     # Step 4: Systematic resampling
     new_particles = []
     i = 0
     for j in range(num_particles):
+        r = np.random.uniform(0, 1.0) # / num_particles
         u = r + j * (1.0 / num_particles)
         while u > cumulative_sum[i]:
             i += 1
