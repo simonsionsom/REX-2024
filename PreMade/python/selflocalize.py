@@ -10,7 +10,7 @@ import math
 
 # Flags
 showGUI = True  # Whether or not to open GUI windows
-onRobot = False  # Whether or not we are running on the Arlo robot
+onRobot = True  # Whether or not we are running on the Arlo robot
 
 
 def compute_weight(measured_distance, predicted_distance, sigma):
@@ -67,12 +67,17 @@ def isRunningOnArlo():
     """Return True if we are running on Arlo, otherwise False.
       You can use this flag to switch the code from running on you laptop to Arlo - you need to do the programming here!
     """
-    return onRobot
-
-
-if isRunningOnArlo():
+    try:
+        from robot import Robot
+        onRobot = True
+        print('Vi fandt den!')
+    except ImportError:
+        print("selflocalize.py: robot module not present - forcing not running on Arlo!")
+        onRobot = False
+        
+    '''if isRunningOnArlo():
     # XXX: You need to change this path to point to where your robot.py file is located
-    sys.path.append("../../../../Arlo/python")
+    sys.path.append("PreMade\Week3")
 
 
 try:
@@ -97,10 +102,10 @@ CBLACK = (0, 0, 0)
 
 # Landmarks.
 # The robot knows the position of 2 landmarks. Their coordinates are in the unit centimeters [cm].
-landmarkIDs = [1, 4]
+landmarkIDs = [5, 3]
 landmarks = {
     1: (0.0, 0.0),  # Coordinates for landmark 1
-    4: (300.0, 0.0)  # Coordinates for landmark 2
+    2: (300.0, 0.0)  # Coordinates for landmark 2
 }
 landmark_colors = [CRED, CGREEN] # Colors used when drawing the landmarks
 

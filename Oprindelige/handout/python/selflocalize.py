@@ -19,10 +19,10 @@ def isRunningOnArlo():
     return onRobot
 
 
-if isRunningOnArlo():
+'''if isRunningOnArlo():
     # XXX: You need to change this path to point to where your robot.py file is located
-    sys.path.append("../../../../Arlo/python")
-
+    sys.path.append("../")
+'''
 
 try:
     import robot
@@ -46,7 +46,7 @@ CBLACK = (0, 0, 0)
 
 # Landmarks.
 # The robot knows the position of 2 landmarks. Their coordinates are in the unit centimeters [cm].
-landmarkIDs = [1, 2]
+landmarkIDs = [5, 3]
 landmarks = {
     1: (0.0, 0.0),  # Coordinates for landmark 1
     2: (300.0, 0.0)  # Coordinates for landmark 2
