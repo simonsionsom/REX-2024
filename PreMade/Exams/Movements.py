@@ -34,6 +34,7 @@ while tændt > 0 :
   print(arlo.go_diff(leftSpeed, rightSpeed, 1, 0))
   sleep(duration)
   print(arlo.stop())
+  sleep(3)
   tændt = tændt -1
   #din mor
 
