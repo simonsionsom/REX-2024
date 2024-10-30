@@ -211,13 +211,13 @@ try:
     print("Opening and initializing camera")
     if onRobot:
         print('Duer')
-        #cam = camera.Camera(0, robottype='arlo', useCaptureThread=True)
-        cam = camera.Camera(0, robottype='arlo', useCaptureThread=False)
+        cam = camera.Camera(0, robottype='arlo', useCaptureThread=True)
+        #cam = camera.Camera(0, robottype='arlo', useCaptureThread=False)
         
     else:
         print('Duer ikke')
-        #cam = camera.Camera(0, robottype='macbookpro', useCaptureThread=True)
-        cam = camera.Camera(0, robottype='macbookpro', useCaptureThread=False)
+        cam = camera.Camera(0, robottype='macbookpro', useCaptureThread=True)
+        #cam = camera.Camera(0, robottype='macbookpro', useCaptureThread=False)
         
     while True:
 
