@@ -13,6 +13,42 @@ import robot
 showGUI = True  # Whether or not to open GUI windows
 onRobot = True  # Whether or not we are running on the Arlo robot
 
+def drive_straight(MIN_SPEED=30, DEFAULT_LEFT_SPEED=58, DEFAULT_RIGHT_SPEED=64):
+  # XXX: Make the robot drive
+
+  # Current speeds for both wheels
+  left_speed = DEFAULT_LEFT_SPEED
+  right_speed = DEFAULT_RIGHT_SPEED
+
+  # Compute midpoint of the two boxes:
+  x_landmark_1, y_landmark_1 = landmarks[3]
+  x_landmark_2, y_landmark_2 = landmarks[5]
+  x_mid, y_mid = ((x_landmark_1+x_landmark_2)/2, (y_landmark_1+y_landmark_2)/2)
+  angles = []
+  for obj_id, info in detected_objects.items():
+    angles.append(info["angle"])
+
+
+    diff_angle = angle_difference(angles[0], angles[1])
+
+
+    if (diff_angle > 0.3 and math.pi < diff_angle):
+        print(arlo.go_diff(DEFAULT_LEFT_SPEED, DEFAULT_RIGHT_SPEED, 0, 1))
+        time.sleep(0.55)
+        print(arlo.stop())
+    elif (diff_angle > math.pi and math.pi*2 < diff_angle):
+        arlo.go_diff(DEFAULT_LEFT_SPEED, DEFAULT_RIGHT_SPEED, 1, 0)
+        time.sleep(0.55)
+        print(arlo.stop())
+    else:
+        print(arlo.go_diff(DEFAULT_LEFT_SPEED, DEFAULT_RIGHT_SPEED, 1, 1))
+        time.sleep(2)
+        print(arlo.stop())
+        # Use motor controls to update particles
+        arlo.stop()
+
+
+
 
 def compute_weight(measured_distance, predicted_distance, sigma):
     """Computes the weight based on a Gaussian distribution."""
@@ -262,44 +298,6 @@ try:
 
 
         # XXX: Make the robot drive
-
-        # Set the minimum speed for safety
-        MIN_SPEED = 30
-        DEFAULT_LEFT_SPEED = 58
-        DEFAULT_RIGHT_SPEED = 64
-
-        # Current speeds for both wheels
-        left_speed = DEFAULT_LEFT_SPEED
-        right_speed = DEFAULT_RIGHT_SPEED
-
-        # Compute midpoint of the two boxes:
-        x_landmark_1, y_landmark_1 = landmarks[3]
-        x_landmark_2, y_landmark_2 = landmarks[5]
-        x_mid, y_mid = ((x_landmark_1+x_landmark_2)/2, (y_landmark_1+y_landmark_2)/2)
-        angles = []
-        for obj_id, info in detected_objects.items():
-            angles.append(info["angle"])
-
-
-        diff_angle = angle_difference(angles[0], angles[1])
-
-
-        if (diff_angle > 0.3 and math.pi < diff_angle):
-            print(arlo.go_diff(DEFAULT_LEFT_SPEED, DEFAULT_RIGHT_SPEED, 0, 1))
-            time.sleep(0.55)
-            print(arlo.stop())
-        elif (diff_angle > math.pi and math.pi*2 < diff_angle):
-            arlo.go_diff(DEFAULT_LEFT_SPEED, DEFAULT_RIGHT_SPEED, 1, 0)
-            time.sleep(0.55)
-            print(arlo.stop())
-        else:
-            print(arlo.go_diff(DEFAULT_LEFT_SPEED, DEFAULT_RIGHT_SPEED, 1, 1))
-            time.sleep(2)
-            print(arlo.stop())
-        # Use motor controls to update particles
-        arlo.stop()
-        particle.move_particle(robot_pose, delta_x_robot, delta_y_robot, delta_theta_robot)
-
         # XXX: You do this
 
 
@@ -406,6 +404,7 @@ try:
 
     
         est_pose = particle.estimate_pose(particles) # The estimate of the robots current pose
+        drive_straight()
 
         if showGUI:
             # Draw map
