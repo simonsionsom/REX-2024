@@ -1,6 +1,6 @@
 from time import sleep
 
-import PreMade.robot as robot
+import Week3.robot as robot
 
 # Create a robot object and initialize
 def rotate():
