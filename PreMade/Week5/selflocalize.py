@@ -273,8 +273,8 @@ try:
         right_speed = DEFAULT_RIGHT_SPEED
 
         # Compute midpoint of the two boxes:
-        x_landmark_1, y_landmark_1 = landmarks["first"]
-        x_landmark_2, y_landmark_2 = landmarks["second"]
+        x_landmark_1, y_landmark_1 = landmarks[3]
+        x_landmark_2, y_landmark_2 = landmarks[5]
         x_mid, y_mid = ((x_landmark_1+x_landmark_2)/2, (y_landmark_1+y_landmark_2)/2)
         angles = []
         for obj_id, info in detected_objects.items():
