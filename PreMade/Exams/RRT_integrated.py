@@ -1,17 +1,13 @@
+"""
+
+Path planning with Randomized Rapidly-Exploring Random Trees (RRT)
+
+Adapted from 
+https://github.com/AtsushiSakai/PythonRobotics/blob/master/PathPlanning/RRT/rrt.py
+"""
+
 import numpy as np
 import matplotlib.pyplot as plt
-import marker
-import RRT_integrated
-import robot
-from time import sleep
-
-
-arlo = robot.Robot()
-print("Running robot...")
-
-leftSpeed = 44
-rightSpeed = 44
-thresholdDistance = 300
 from matplotlib.animation import FFMpegWriter
 
 class RRT:
@@ -187,62 +183,6 @@ class RRT:
                 return False
         return True
     
-def stop_robot():
-    arlo.stop()
-    sleep(0.041)
-
-def turn_left():
-    print("Turning left")
-    print(arlo.go_diff(leftSpeed, rightSpeed, 0, 1))
-    sleep(1.2)
-    stop_robot()
-
-def turn_right():
-    print("Turning right")
-    print(arlo.go_diff(leftSpeed, rightSpeed, 1, 0))
-    sleep(1.2)
-    stop_robot()
-
-def go_forward():
-    print("Going forwards")
-    print(arlo.go_diff(leftSpeed, rightSpeed, 1, 1))
-    sleep(0.041)
-
-def go_backward():
-    print("Going backwards")
-    print(arlo.go_diff(leftSpeed, rightSpeed, 0, 0))
-    sleep(1)
-    stop_robot()
-
-def navigate_to_waypoints(path):
-    for i in range(len(path) - 1):
-        current_pos = np.array(path[i])
-        next_pos = np.array(path[i + 1])
-
-        direction = next_pos - current_pos
-        distance = np.linalg.norm(direction)
-        unit_direction = direction / distance  # Normalize to get direction only
-
-        # Rotate to face the next waypoint
-        angle_to_turn = np.arctan2(unit_direction[1], unit_direction[0])
-        rotate_to_angle(angle_to_turn)
-
-        # Move forward to the waypoint
-        while np.linalg.norm(current_pos - next_pos) > thresholdDistance:
-            go_forward()
-            current_pos += unit_direction * leftSpeed * 0.041  # Adjust by speed and time to simulate movement
-
-        stop_robot()
-
-def rotate_to_angle(target_angle):
-    # Dummy implementation of rotation to target angle
-    # This function would ideally include code to measure the robot's current orientation
-    print(f"Rotating to angle: {target_angle}")
-    if target_angle > 0:
-        turn_right()
-    else:
-        turn_left()
-    stop_robot()
 class MapFromNpy:
     """
     Map class that loads and processes map from 'mapGod.npy' file
@@ -292,7 +232,6 @@ def main():
             print("Cannot find path")
         else:
             print("found path!!")
-            navigate_to_waypoints(path)
 
             # Draw final path
             if show_animation:
