@@ -13,7 +13,7 @@ import robot
 showGUI = True  # Whether or not to open GUI windows
 onRobot = True  # Whether or not we are running on the Arlo robot
 
-def drive_straight(MIN_SPEED=30, DEFAULT_LEFT_SPEED=58, DEFAULT_RIGHT_SPEED=64, diff_angle):
+def drive_straight(MIN_SPEED=30, DEFAULT_LEFT_SPEED=58, DEFAULT_RIGHT_SPEED=64, diff_angle=0):
   # XXX: Make the robot drive
 
   # Current speeds for both wheels
@@ -403,7 +403,7 @@ try:
 
 
         diff_angle = angle_difference(angles[0], angles[1])
-        drive_straight(diff_angle)
+        drive_straight(diff_angle=diff_angle)
 
         if showGUI:
             # Draw map
