@@ -209,14 +209,16 @@ try:
     draw_world(est_pose, particles, world)
 
     print("Opening and initializing camera")
-    if isRunningOnArlo():
+    if onRobot:
+        print('Duer')
         #cam = camera.Camera(0, robottype='arlo', useCaptureThread=True)
         cam = camera.Camera(0, robottype='arlo', useCaptureThread=False)
-        print('Duer')
+        
     else:
+        print('Duer ikke')
         #cam = camera.Camera(0, robottype='macbookpro', useCaptureThread=True)
         cam = camera.Camera(0, robottype='macbookpro', useCaptureThread=False)
-        print('Duer ikke')
+        
     while True:
 
         
