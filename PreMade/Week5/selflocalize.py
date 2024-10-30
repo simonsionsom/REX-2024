@@ -174,16 +174,16 @@ def draw_world(est_pose, particles, world):
         cv2.circle(world, lm, 5, landmark_colors[i], 2)
 
     # Draw estimated robot pose
-    # a = (int(est_pose.getX())+offsetX, ymax-(int(est_pose.getY())+offsetY))
-    # b = (int(est_pose.getX() + 15.0*np.cos(est_pose.getTheta()))+offsetX, 
-    #                              ymax-(int(est_pose.getY() + 15.0*np.sin(est_pose.getTheta()))+offsetY))
-    # cv2.circle(world, a, 5, CMAGENTA, 2)
-    # cv2.line(world, a, b, CMAGENTA, 2)
-    a_robot = (int(robot_pose.getX()) + offsetX, ymax - (int(robot_pose.getY()) + offsetY))
-    b_robot = (int(robot_pose.getX() + 15.0 * np.cos(robot_pose.getTheta())) + offsetX, 
-           ymax - (int(robot_pose.getY() + 15.0 * np.sin(robot_pose.getTheta())) + offsetY))
-    cv2.circle(world, a_robot, 5, CYELLOW, 2)  # Draw robot with a different color (yellow, for example)
-    cv2.line(world, a_robot, b_robot, CYELLOW, 2)
+    a = (int(est_pose.getX())+offsetX, ymax-(int(est_pose.getY())+offsetY))
+    b = (int(est_pose.getX() + 15.0*np.cos(est_pose.getTheta()))+offsetX, 
+                                 ymax-(int(est_pose.getY() + 15.0*np.sin(est_pose.getTheta()))+offsetY))
+    cv2.circle(world, a, 5, CMAGENTA, 2)
+    cv2.line(world, a, b, CMAGENTA, 2)
+    #a_robot = (int(robot_pose.getX()) + offsetX, ymax - (int(robot_pose.getY()) + offsetY))
+    #b_robot = (int(robot_pose.getX() + 15.0 * np.cos(robot_pose.getTheta())) + offsetX, 
+    #       ymax - (int(robot_pose.getY() + 15.0 * np.sin(robot_pose.getTheta())) + offsetY))
+    #cv2.circle(world, a_robot, 5, CYELLOW, 2)  # Draw robot with a different color (yellow, for example)
+    #cv2.line(world, a_robot, b_robot, CYELLOW, 2)
 
 
 
