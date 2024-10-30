@@ -397,13 +397,13 @@ try:
         x_landmark_1, y_landmark_1 = landmarks[3]
         x_landmark_2, y_landmark_2 = landmarks[5]
         x_mid, y_mid = ((x_landmark_1+x_landmark_2)/2, (y_landmark_1+y_landmark_2)/2)
-"""         angles = []
-        for obj_id, info in detected_objects.items():
-          angles.append(info["angle"])
+        #angles = []
+        #for obj_id, info in detected_objects.items():
+        #  angles.append(info["angle"])
 
 
-        diff_angle = angle_difference(float(angles[0]), float(angles[1]))
-        drive_straight(diff_angle=diff_angle) """
+        #diff_angle = angle_difference(float(angles[0]), float(angles[1]))
+        #drive_straight(diff_angle=diff_angle)
 
         if showGUI:
             # Draw map
