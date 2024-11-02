@@ -6,37 +6,11 @@ import time
 from timeit import default_timer as timer
 import sys
 import math
-import pile
-import robot
+
 
 # Flags
 showGUI = True  # Whether or not to open GUI windows
 onRobot = True  # Whether or not we are running on the Arlo robot
-
-def drive_straight(MIN_SPEED=30, DEFAULT_LEFT_SPEED=58, DEFAULT_RIGHT_SPEED=64, diff_angle=0):
-  # XXX: Make the robot drive
-
-  # Current speeds for both wheels
-  left_speed = DEFAULT_LEFT_SPEED
-  right_speed = DEFAULT_RIGHT_SPEED
-
-
-  if (diff_angle > 0.3 and math.pi < diff_angle):
-      print(arlo.go_diff(DEFAULT_LEFT_SPEED, DEFAULT_RIGHT_SPEED, 0, 1))
-      time.sleep(0.55)
-      print(arlo.stop())
-  elif (diff_angle > math.pi and math.pi*2 < diff_angle):
-      arlo.go_diff(DEFAULT_LEFT_SPEED, DEFAULT_RIGHT_SPEED, 1, 0)
-      time.sleep(0.55)
-      print(arlo.stop())
-  else:
-      print(arlo.go_diff(DEFAULT_LEFT_SPEED, DEFAULT_RIGHT_SPEED, 1, 1))
-      time.sleep(2)
-      print(arlo.stop())
-      # Use motor controls to update particles
-      arlo.stop()
-
-
 
 
 def compute_weight(measured_distance, predicted_distance, sigma):
@@ -48,11 +22,11 @@ def compute_weight(measured_distance, predicted_distance, sigma):
 def compute_angle_difference(angle1, angle2):
     """Compute the difference between two angles, ensuring it wraps within [-pi, pi]."""
     diff = angle1 - angle2
-    if diff > np.pi:
+    while diff > np.pi:
         diff -= 2 * np.pi
-    elif diff < -np.pi:
+    while diff < -np.pi:
         diff += 2 * np.pi
-    return diff
+    return -diff
 
 def resample_particles(particles):
     """Resample particles based on their weights using systematic resampling."""
@@ -60,19 +34,18 @@ def resample_particles(particles):
     
     # Step 1: Normalize the weights
     weights = np.array([p.getWeight() for p in particles])
-    #weights /= np.sum(weights)  # Normalize weights so they sum to 1
+    weights /= np.sum(weights)  # Normalize weights so they sum to 1
 
     # Step 2: Compute the cumulative sum of the weights
     cumulative_sum = np.cumsum(weights)
 
     # Step 3: Generate random starting point between 0 and 1/num_particles
-    
+    r = np.random.uniform(0, 1.0 / num_particles)
 
     # Step 4: Systematic resampling
     new_particles = []
     i = 0
     for j in range(num_particles):
-        r = np.random.uniform(0, 1.0/ num_particles) # 
         u = r + j * (1.0 / num_particles)
         while u > cumulative_sum[i]:
             i += 1
@@ -83,7 +56,8 @@ def resample_particles(particles):
             selected_particle.getX(),
             selected_particle.getY(),
             selected_particle.getTheta(),
-            1.0 / num_particles  # Reset weight to uniform
+            # 1.0 / num_particles  # Reset weight to uniform
+            selected_particle.getWeight()
         )
         new_particles.append(new_particle)
 
@@ -97,6 +71,11 @@ def isRunningOnArlo():
     return onRobot
 
 
+# if isRunningOnArlo():
+#     # XXX: You need to change this path to point to where your robot.py file is located
+#     #sys.path.append("../../../../Arlo/python")
+#     sys.path.append("../Week3")
+
 
 try:
     import robot
@@ -105,7 +84,7 @@ except ImportError:
     print("selflocalize.py: robot module not present - forcing not running on Arlo!")
     onRobot = False
 
-print(onRobot)
+
 
 
 # Some color constants in BGR format
@@ -123,10 +102,10 @@ CBLACK = (0, 0, 0)
 landmarkIDs = [3, 4]
 landmarks = {
     3: (0.0, 0.0),  # Coordinates for landmark 1
-    4: (300.0, 0.0)  # Coordinates for landmark 2
+    4: (100.0, 0.0)  # Coordinates for landmark 2
 }
+landmark_colors = [CRED, CGREEN] # Colors used when drawing the landmarks
 
-landmark_colors = [CRED, CGREEN, CBLACK, CYELLOW] # Colors used when drawing the landmarks
 
 
 
@@ -175,16 +154,16 @@ def draw_world(est_pose, particles, world):
         cv2.circle(world, lm, 5, landmark_colors[i], 2)
 
     # Draw estimated robot pose
-    a = (int(est_pose.getX())+offsetX, ymax-(int(est_pose.getY())+offsetY))
-    b = (int(est_pose.getX() + 15.0*np.cos(est_pose.getTheta()))+offsetX, 
-                                 ymax-(int(est_pose.getY() + 15.0*np.sin(est_pose.getTheta()))+offsetY))
-    cv2.circle(world, a, 5, CMAGENTA, 2)
-    cv2.line(world, a, b, CMAGENTA, 2)
-    #a_robot = (int(robot_pose.getX()) + offsetX, ymax - (int(robot_pose.getY()) + offsetY))
-    #b_robot = (int(robot_pose.getX() + 15.0 * np.cos(robot_pose.getTheta())) + offsetX, 
-    #       ymax - (int(robot_pose.getY() + 15.0 * np.sin(robot_pose.getTheta())) + offsetY))
-    #cv2.circle(world, a_robot, 5, CYELLOW, 2)  # Draw robot with a different color (yellow, for example)
-    #cv2.line(world, a_robot, b_robot, CYELLOW, 2)
+    # a = (int(est_pose.getX())+offsetX, ymax-(int(est_pose.getY())+offsetY))
+    # b = (int(est_pose.getX() + 15.0*np.cos(est_pose.getTheta()))+offsetX, 
+    #                              ymax-(int(est_pose.getY() + 15.0*np.sin(est_pose.getTheta()))+offsetY))
+    # cv2.circle(world, a, 5, CMAGENTA, 2)
+    # cv2.line(world, a, b, CMAGENTA, 2)
+    a_robot = (int(robot_pose.getX()) + offsetX, ymax - (int(robot_pose.getY()) + offsetY))
+    b_robot = (int(robot_pose.getX() + 15.0 * np.cos(robot_pose.getTheta())) + offsetX, 
+           ymax - (int(robot_pose.getY() + 15.0 * np.sin(robot_pose.getTheta())) + offsetY))
+    cv2.circle(world, a_robot, 5, CYELLOW, 2)  # Draw robot with a different color (yellow, for example)
+    cv2.line(world, a_robot, b_robot, CYELLOW, 2)
 
 
 
@@ -204,7 +183,7 @@ try:
     if showGUI:
         # Open windows
         WIN_RF1 = "Robot view"
-        cv2.namedWindow(WIN_RF1)
+        cv2.namedWindow(WIN_RF1, cv2.WINDOW_NORMAL)
         cv2.moveWindow(WIN_RF1, 50, 50)
 
         WIN_World = "World view"
@@ -223,25 +202,22 @@ try:
     angular_velocity = 0.0 # radians/sec
 
     # Initialize the robot (XXX: You do this)
-    #robot_pose = particle.Particle(150, 100, 0, 0)
+    robot_pose = particle.Particle(100, 240, 0, 0)
 
     # Allocate space for world map
     world = np.zeros((500,500,3), dtype=np.uint8)
-    print(len(particles),world.shape)
+
     # Draw map
     draw_world(est_pose, particles, world)
 
     print("Opening and initializing camera")
-    if onRobot:
-        print('Duer')
+    if isRunningOnArlo():
         #cam = camera.Camera(0, robottype='arlo', useCaptureThread=True)
         cam = camera.Camera(0, robottype='arlo', useCaptureThread=False)
-        
     else:
-        print('Duer ikke')
         #cam = camera.Camera(0, robottype='macbookpro', useCaptureThread=True)
         cam = camera.Camera(0, robottype='macbookpro', useCaptureThread=False)
-        
+
     while True:
 
         
@@ -263,8 +239,6 @@ try:
             elif action == ord('d'): # Right
                 angular_velocity -= 0.2
         
-
-        robot_pose = particle.estimate_pose(particles) # The estimate of the robots current pose
         dt = 0.1
         for p in particles:
             delta_theta = angular_velocity * dt
@@ -273,7 +247,7 @@ try:
             # delta_x = velocity * dt * np.cos(est_pose.getTheta())
             # delta_y = velocity * dt * np.sin(est_pose.getTheta())
             particle.move_particle(p, delta_x, delta_y, delta_theta)
-        
+
         
         delta_theta_robot = angular_velocity * dt
         delta_x_robot = velocity * dt * np.cos(robot_pose.getTheta())
@@ -286,30 +260,17 @@ try:
             
 
 
-        arlo = robot.Robot()
-
-
-
+        
+        # Use motor controls to update particles
         # XXX: Make the robot drive
         # XXX: You do this
-        
-
-
-
-        
-
-
 
 
         # Fetch next frame
         colour = cam.get_next_frame()
         robot_measured_distances = {
-            3: 400.0,  # Example distance to landmark 1
-            4: 300.0,   # Example distance to landmark 2
-            5: 250.0,
-            6: 200.0
-            
-
+            3: 200.0,  # Example distance to landmark 1
+            4: 300.0   # Example distance to landmark 2
         }
         sigma = 10
         sigma_angle = 0.15
@@ -351,8 +312,8 @@ try:
             # Har ikke fået testet på 2 landmarks med denne her kode. Fjern 314 og 335 for at ændre koden tilbage hvis ikke det her virker
             # og udkommenter 313 og 334 :)
             for p in particles:
-                # particle_weights[p] = 1.0
-                particle_weights[p] = 1.0  # Initialize with neutral weight
+                particle_weights[p] = 1.0
+                # particle_weights[p] = 0.0  # Initialize with neutral weight
 
                 for obj_id, info in detected_objects.items():
                     # Get measured distance and corresponding angle
@@ -372,8 +333,8 @@ try:
                     weight_angle = compute_weight(measured_angle, angle_difference, sigma_angle)
 
                     combined_weight = weight_distance * weight_angle
-                    # particle_weights[p] *= weight_distance * weight_angle
-                    particle_weights[p] *= combined_weight
+                    particle_weights[p] *= weight_distance * weight_angle
+                    # particle_weights[p] += combined_weight
 
             # Normalize the particle weights so they sum to 1
             total_weight = sum(particle_weights.values())
@@ -401,17 +362,6 @@ try:
 
     
         est_pose = particle.estimate_pose(particles) # The estimate of the robots current pose
-          # Compute midpoint of the two boxes:
-        x_landmark_1, y_landmark_1 = landmarks[3]
-        x_landmark_2, y_landmark_2 = landmarks[4]
-        x_mid, y_mid = ((x_landmark_1+x_landmark_2)/2, (y_landmark_1+y_landmark_2)/2)
-        #angles = []
-        #for obj_id, info in detected_objects.items():
-        #  angles.append(info["angle"])
-
-
-        #diff_angle = angle_difference(float(angles[0]), float(angles[1]))
-        #drive_straight(diff_angle=diff_angle)
 
         if showGUI:
             # Draw map
@@ -419,6 +369,7 @@ try:
     
             # Show frame
             cv2.imshow(WIN_RF1, colour)
+            cv2.resizeWindow(WIN_RF1, 640, 360)
 
             # Show world
             cv2.imshow(WIN_World, world)
@@ -432,4 +383,3 @@ finally:
 
     # Clean-up capture thread
     cam.terminateCaptureThread()
-
