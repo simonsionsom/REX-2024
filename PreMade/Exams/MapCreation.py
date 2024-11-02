@@ -20,17 +20,13 @@ class Map:
           m,n = j 
           self.map[m+k,n+d] = i
   
-  def drawObject(self,y,x,ID):
+  def UpdateRobotPos(self,y,x):
     self.ResetMap()
     for k in range(self.RoboSize):
       for d in range(self.RoboSize):
         if self.map[y+(5-k)][x+(5-d)] == 0:
-          if ID == []:
             self.map[y+(5-k),x+(5-d)] = -1
             self.RoboCoords.append((x,y)) 
-          else:
-            self.map[y+(5-k),x+(5-d)] = -1
-            self.EnemyBoxes.append((ID,(y,x)))
 
   def showMap(self):
     fig, ax = plt.subplots(figsize=(12, 8))
