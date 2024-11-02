@@ -22,5 +22,5 @@ def drej(seconds, left, right):
     sleep(0.041)
     print(arlo.go_diff(left, right, 1, 0))
     sleep(seconds)
-  
-lige_ud(seconds, leftSpeed, rightSpeed)
+for i in range (2):
+  lige_ud(seconds, leftSpeed, rightSpeed)
