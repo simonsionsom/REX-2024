@@ -399,7 +399,7 @@ try:
         est_pose = particle.estimate_pose(particles) # The estimate of the robots current pose
           # Compute midpoint of the two boxes:
         x_landmark_1, y_landmark_1 = landmarks[3]
-        x_landmark_2, y_landmark_2 = landmarks[5]
+        x_landmark_2, y_landmark_2 = landmarks[4]
         x_mid, y_mid = ((x_landmark_1+x_landmark_2)/2, (y_landmark_1+y_landmark_2)/2)
         #angles = []
         #for obj_id, info in detected_objects.items():
