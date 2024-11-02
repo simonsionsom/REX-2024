@@ -211,7 +211,7 @@ try:
 
         WIN_World = "World view"
         cv2.namedWindow(WIN_World,cv2.WINDOW_AUTOSIZE)
-        cv2.moveWindow(WIN_World, 500, 50)
+        cv2.moveWindow(WIN_World,cv2.WINDOW_AUTOSIZE)
 
 
     # Initialize particles
