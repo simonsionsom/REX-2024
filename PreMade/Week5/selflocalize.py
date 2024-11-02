@@ -147,8 +147,8 @@ def draw_world(est_pose, particles, world):
     This functions draws robots position in the world coordinate system."""
 
     # Fix the origin of the coordinate system
-    offsetX = 100
-    offsetY = 250
+    offsetX = 0 # ændret her for at teste lørdag aften
+    offsetY = 0 # ændret her for at teste lørdag aften
 
     # Constant needed for transforming from world coordinates to screen coordinates (flip the y-axis)
     ymax = world.shape[0]
@@ -210,7 +210,7 @@ try:
         cv2.moveWindow(WIN_RF1, 50, 50)
 
         WIN_World = "World view"
-        cv2.namedWindow(WIN_World)
+        cv2.namedWindow(WIN_World,cv2.WINDOW_AUTOSIZE)
         cv2.moveWindow(WIN_World, 500, 50)
 
 
@@ -228,7 +228,7 @@ try:
     #robot_pose = particle.Particle(150, 100, 0, 0)
 
     # Allocate space for world map
-    world = np.zeros((1000,1000,3), dtype=np.uint8)
+    world = np.zeros((600,600,3), dtype=np.uint8)
     print(len(particles),world.shape)
     # Draw map
     draw_world(est_pose, particles, world)
