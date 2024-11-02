@@ -120,12 +120,15 @@ CBLACK = (0, 0, 0)
 
 # Landmarks.
 # The robot knows the position of 2 landmarks. Their coordinates are in the unit centimeters [cm].
-landmarkIDs = [3, 5]
+landmarkIDs = [3, 4, 2, 6]
 landmarks = {
     3: (0.0, 0.0),  # Coordinates for landmark 1
-    5: (300.0, 0.0)  # Coordinates for landmark 2
+    4: (300.0, 0.0),  # Coordinates for landmark 2 
+    2: (300.0, 400.0), # Coordinates for landmark 3
+    6: (0.0, 400.0) # Coordinates for landmark 4
 }
-landmark_colors = [CRED, CGREEN] # Colors used when drawing the landmarks
+
+landmark_colors = [CRED, CGREEN, CBLACK, CYELLOW] # Colors used when drawing the landmarks
 
 
 
@@ -291,7 +294,7 @@ try:
 
         # XXX: Make the robot drive
         # XXX: You do this
-
+        
 
 
 
@@ -303,8 +306,11 @@ try:
         # Fetch next frame
         colour = cam.get_next_frame()
         robot_measured_distances = {
-            3: 200.0,  # Example distance to landmark 1
-            4: 300.0   # Example distance to landmark 2
+            3: 400.0,  # Example distance to landmark 1
+            4: 300.0,   # Example distance to landmark 2
+            5: 250.0,
+            6: 200.0
+            
 
         }
         sigma = 10
