@@ -207,6 +207,7 @@ try:
         # Open windows
         WIN_RF1 = "Robot view"
         cv2.namedWindow(WIN_RF1,cv2.WINDOW_AUTOSIZE)
+        cv2.resizeWindow(WIN_RF1, 600, 400) 
         cv2.moveWindow(WIN_RF1, 50, 50)
 
         WIN_World = "World view"
