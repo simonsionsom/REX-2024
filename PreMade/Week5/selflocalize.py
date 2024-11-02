@@ -228,7 +228,7 @@ try:
     #robot_pose = particle.Particle(150, 100, 0, 0)
 
     # Allocate space for world map
-    world = np.zeros((500,500,3), dtype=np.uint8)
+    world = np.zeros((5000,5000,3), dtype=np.uint8)
     print(len(particles),world.shape)
     # Draw map
     draw_world(est_pose, particles, world)
@@ -404,9 +404,9 @@ try:
     
         est_pose = particle.estimate_pose(particles) # The estimate of the robots current pose
           # Compute midpoint of the two boxes:
-        x_landmark_1, y_landmark_1 = landmarks[3]
-        x_landmark_2, y_landmark_2 = landmarks[5]
-        x_mid, y_mid = ((x_landmark_1+x_landmark_2)/2, (y_landmark_1+y_landmark_2)/2)
+        #x_landmark_1, y_landmark_1 = landmarks[3]
+        #x_landmark_2, y_landmark_2 = landmarks[5]
+        #x_mid, y_mid = ((x_landmark_1+x_landmark_2)/2, (y_landmark_1+y_landmark_2)/2)
         #angles = []
         #for obj_id, info in detected_objects.items():
         #  angles.append(info["angle"])
