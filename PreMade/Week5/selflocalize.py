@@ -226,7 +226,7 @@ try:
     #robot_pose = particle.Particle(150, 100, 0, 0)
 
     # Allocate space for world map
-    world = np.zeros((500,500,3), dtype=np.uint8)
+    world = np.zeros((5000,5000,3), dtype=np.uint8)
     print(len(particles),world.shape)
     # Draw map
     draw_world(est_pose, particles, world)
