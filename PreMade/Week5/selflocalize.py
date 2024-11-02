@@ -124,8 +124,8 @@ landmarkIDs = [3, 4]
 landmarks = {
     3: (0.0, 0.0),  # Coordinates for landmark 1
     4: (300.0, 0.0),  # Coordinates for landmark 2
-    5: (300.0, 400.0),
-    6: (0.0, 400.0)
+    #5: (300.0, 400.0),
+    #6: (0.0, 400.0)
 }
 
 landmark_colors = [CRED, CGREEN, CBLACK, CYELLOW] # Colors used when drawing the landmarks
@@ -308,8 +308,8 @@ try:
         robot_measured_distances = {
             3: 400.0,  # Example distance to landmark 1
             4: 300.0,   # Example distance to landmark 2
-            5: 250.0,
-            6: 200.0
+            #5: 250.0,
+            #6: 200.0
             
 
         }
