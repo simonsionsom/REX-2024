@@ -123,7 +123,9 @@ CBLACK = (0, 0, 0)
 landmarkIDs = [3, 4]
 landmarks = {
     3: (0.0, 0.0),  # Coordinates for landmark 1
-    4: (300.0, 0.0)  # Coordinates for landmark 2
+    4: (300.0, 0.0),  # Coordinates for landmark 2
+    5: (300.0, 400.0),
+    6: (0.0, 400.0)
 }
 
 landmark_colors = [CRED, CGREEN, CBLACK, CYELLOW] # Colors used when drawing the landmarks
