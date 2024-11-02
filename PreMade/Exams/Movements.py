@@ -3,7 +3,8 @@ from time import sleep
 import robot
 
 arlo = robot.Robot()
-
+print("Seconds: ")
+seconds = float(input())
 print("Left wheel: ")
 leftSpeed = float(input())
 print("Right wheel: ")
@@ -16,9 +17,10 @@ def lige_ud(seconds, left, right):
     sleep(seconds)
 
 def drej(seconds, left, right):
-    print("Drejer med hastighederne: ")
     print("Venstre: {left}, Højre: {right}")
     print("I {seconds} sekunder")
     sleep(0.041)
     print(arlo.go_diff(left, right, 1, 0))
     sleep(seconds)
+  
+lige_ud(seconds, leftSpeed, rightSpeed)
