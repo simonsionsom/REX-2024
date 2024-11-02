@@ -123,7 +123,7 @@ CBLACK = (0, 0, 0)
 landmarkIDs = [3, 4]
 landmarks = {
     3: (0.0, 0.0),  # Coordinates for landmark 1
-    4: (300.0, 0.0),  # Coordinates for landmark 2
+    4: (300.0, 0.0)  # Coordinates for landmark 2
     #5: (300.0, 400.0),
     #6: (0.0, 400.0)
 }
@@ -307,7 +307,7 @@ try:
         colour = cam.get_next_frame()
         robot_measured_distances = {
             3: 400.0,  # Example distance to landmark 1
-            4: 300.0,   # Example distance to landmark 2
+            4: 300.0   # Example distance to landmark 2
             #5: 250.0,
             #6: 200.0
             
@@ -404,9 +404,9 @@ try:
     
         est_pose = particle.estimate_pose(particles) # The estimate of the robots current pose
           # Compute midpoint of the two boxes:
-        #x_landmark_1, y_landmark_1 = landmarks[3]
-        #x_landmark_2, y_landmark_2 = landmarks[5]
-        #x_mid, y_mid = ((x_landmark_1+x_landmark_2)/2, (y_landmark_1+y_landmark_2)/2)
+        x_landmark_1, y_landmark_1 = landmarks[3]
+        x_landmark_2, y_landmark_2 = landmarks[4]
+        x_mid, y_mid = ((x_landmark_1+x_landmark_2)/2, (y_landmark_1+y_landmark_2)/2)
         #angles = []
         #for obj_id, info in detected_objects.items():
         #  angles.append(info["angle"])
