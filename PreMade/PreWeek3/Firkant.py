@@ -36,7 +36,7 @@ while tændt > 0 :
   print(arlo.stop())
   # Wait a bit before next command
   sleep(0.041)
-  print(arlo.go_diff(leftSpeed, rightSpeed, 1, 0))
+  print(arlo.go_diff(leftSpeed, rightSpeed, 1, 1))
   sleep(duration)
   print(arlo.stop())
   tændt = tændt -1
