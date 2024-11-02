@@ -27,6 +27,8 @@ else :
 retning = input()'''
 print("Duration: ")
 duration = float(input())
+print('Hvor mange gange?')
+tændt = float(input())
 
 while tændt > 0 :
   '''print(arlo.go_diff(63, 63, 1, 1))'''
