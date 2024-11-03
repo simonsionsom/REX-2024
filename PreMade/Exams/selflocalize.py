@@ -416,7 +416,7 @@ try:
 
 
         
-
+        print(f"Current Object ID:{objectIDs[n]}")
         if objectIDs[n] not in visited:
             
             if (0.1 < corresponding_angle) or (-0.1 > corresponding_angle):
@@ -427,6 +427,7 @@ try:
             else:
                 visited.append(objectIDs[n]) 
                 n+=1
+                print("n ={n}")
         else:
             move.drej(0.8)
           # Compute midpoint of the two boxes:
