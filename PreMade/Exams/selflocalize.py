@@ -297,12 +297,9 @@ try:
 
         # XXX: Make the robot drive
         # XXX: You do this
-        go = True
-        while go:
-            time.sleep(5)
-            Movements.lige_ud(arlo,1,32,32)
-            go = False
-
+        time.sleep(5)
+        print('burde køre nu')
+        Movements.lige_ud(arlo,1,32,32)
 
 
         
