@@ -17,10 +17,10 @@ class RobotMovement:
 
 
   def drej(self):
-    print(f"Venstre: {self.left}, Højre: {self.right}")
+    print(f"Venstre: {self.leftSpeed}, Højre: {self.rightSpeed}")
     print(f"I {self.seconds} sekunder")
     sleep(0.041)
-    print(self.arlo.go_diff(self.left, self.right, 1, 0))
+    print(self.arlo.go_diff(self.leftSpeed, self.rightSpeed, 1, 0))
     sleep(self.seconds)
     self.robot.stop()
 
@@ -46,5 +46,5 @@ class RobotMovement:
     print("Right wheel: ")
     self.rightSpeed = float(input())
 
-    self.degrees = float(input("Degrees to turn: "))
-    self.speed = float(input("Speed for turning wheel: "))
+    # self.degrees = float(input("Degrees to turn: "))
+    # self.speed = float(input("Speed for turning wheel: "))
