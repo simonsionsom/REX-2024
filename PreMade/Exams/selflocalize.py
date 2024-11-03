@@ -427,7 +427,7 @@ try:
             else:
                 visited.append(objectIDs[n]) 
                 n+=1
-                print("n ={n}")
+                print(f"n = {n}")
         else:
             move.drej(0.8)
           # Compute midpoint of the two boxes:
