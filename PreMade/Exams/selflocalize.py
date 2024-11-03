@@ -218,8 +218,9 @@ try:
         cv2.moveWindow(WIN_World, 500, 50)
 
     arlo = robot.Robot()
-    drej(0.5)
-    lige_ud(1000)
+    Movements.RobotMovement(arlo, 0, 32, 34)
+    Movements.drej(0.5)
+    Movements.lige_ud(1000)
 
     # Initialize particles
     num_particles = 320
