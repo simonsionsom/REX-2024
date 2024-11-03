@@ -299,7 +299,8 @@ try:
         # XXX: You do this
         go = True
         while go:
-            lige_ud(1,32,32)
+            time.sleep(5)
+            lige_ud(arlo,1,32,32)
             go = False
 
 
