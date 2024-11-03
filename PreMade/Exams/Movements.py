@@ -17,10 +17,10 @@ class RobotMovement:
   def drej(self, vinkel):
     sekunder = (vinkel/0.28)*0.3
     if vinkel > 0:
-      print(self.arlo.go_diff(self.left, self.right, 0, 1))
+      print(self.robot.go_diff(self.left, self.right, 0, 1))
       sleep(sekunder)
     else:
-      print(self.arlo.go_diff(self.left, self.right, 1, 0))
+      print(self.robot.go_diff(self.left, self.right, 1, 0))
       sleep(sekunder)
 
 
