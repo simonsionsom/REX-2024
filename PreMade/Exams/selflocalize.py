@@ -7,7 +7,8 @@ from timeit import default_timer as timer
 import sys
 import math
 import robot
-import Movements
+from Movements import lige_ud
+from Movements import drej
 
 # Flags
 showGUI = True  # Whether or not to open GUI windows
@@ -323,7 +324,7 @@ try:
 
             time.sleep(5)
             print('burde køre nu')
-            Movements.lige_ud(arlo,1,32,32)
+            lige_ud(arlo,1,32,32)
 
             detected_objects = {}
             # List detected objects
