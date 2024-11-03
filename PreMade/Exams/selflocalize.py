@@ -426,10 +426,11 @@ try:
                 move.lige_ud(300)
 
             else:
-                move.drej(2.5)
                 visited.append(landmarkIDs[n]) 
                 n+=1
                 print(f"n = {n}")
+
+            move.drej(2.5)
                 
           # Compute midpoint of the two boxes:
         #x_landmark_1, y_landmark_1 = landmarks[3]
