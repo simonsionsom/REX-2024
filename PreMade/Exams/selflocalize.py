@@ -406,31 +406,31 @@ try:
             cam.draw_aruco_objects(colour)
         else:
             # No observation - reset weights to uniform distribution
+            
             for p in particles:
                 p.setWeight(1.0/num_particles)
 
         arlo = robot.Robot()
+        move = Movements.RobotMovement(arlo, 0, 32, 34)
         est_pose = particle.estimate_pose(particles) # The estimate of the robots current pose
 
 
-        listelort = objectIDs 
+        
         if objectIDs[n] not in visited:
 
             if not detected_objects:
-                move = Movements.RobotMovement(arlo, 0, 32, 34)
                 move.drej(0.3)
             
             if (0.1 < corresponding_angle) or (-0.1 > corresponding_angle):
-                move = Movements.RobotMovement(arlo, 0, 32, 34)
                 move.drej(corresponding_angle)
 
             if (40 < shortest_distance) and (corresponding_angle <= 0.1):
-                move = Movements.RobotMovement(arlo, 0, 32, 34)
                 move.lige_ud(300)
             else:
-                visited.append(listelort[n])
+                visited.append(objectIDs[n])
                 n+=1
-        
+        else:
+            move.drej(0.8)
           # Compute midpoint of the two boxes:
         #x_landmark_1, y_landmark_1 = landmarks[3]
         #x_landmark_2, y_landmark_2 = landmarks[4]
