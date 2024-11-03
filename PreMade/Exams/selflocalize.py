@@ -422,14 +422,14 @@ try:
             if (0.2 < corresponding_angle) or (-0.2 > corresponding_angle):
                 move.drej(corresponding_angle)
 
-            elif (80 < shortest_distance):
+            elif (80 < shortest_distance) and ((0.2 < corresponding_angle) or (-0.2 > corresponding_angle)):
                 move.lige_ud(300)
 
             else:
                 visited.append(landmarkIDs[n]) 
                 n+=1
                 print(f"n = {n}")
-
+        else:
             move.drej(2.5)
                 
           # Compute midpoint of the two boxes:
