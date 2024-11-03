@@ -34,7 +34,7 @@ class RobotMovement:
     print(f"Expected time to turn: {self.time_to_turn} seconds")
 
     # Execute turn by setting one wheel to 0 or in reverse for tighter turns
-    self.arlo.go_diff(32, 34, 1, 0)  # Adjust directions as needed
+    self.arlo.go_diff(32, 34, 0, 1)  # Adjust directions as needed
     sleep(time_to_turn)
     self.arlo.stop()
 
