@@ -437,6 +437,8 @@ try:
             move.drej(2.5)
             n+=1
             print(f"n = {n}")
+        else:
+            move.drej(0.5)
                 
           # Compute midpoint of the two boxes:
         #x_landmark_1, y_landmark_1 = landmarks[3]
