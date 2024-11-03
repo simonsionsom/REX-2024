@@ -35,13 +35,13 @@ class RobotMovement:
     sleep(time_to_turn)
     self.arlo.stop()
 
-    def setData(self):
-      print("Seconds: ")
-      self.seconds = float(input())
-      print("Left wheel: ")
-      self.leftSpeed = float(input())
-      print("Right wheel: ")
-      self.rightSpeed = float(input())
+  def setData(self):
+    print("Seconds: ")
+    self.seconds = float(input())
+    print("Left wheel: ")
+    self.leftSpeed = float(input())
+    print("Right wheel: ")
+    self.rightSpeed = float(input())
 
-      self.degrees = float(input("Degrees to turn: "))
-      self.speed = float(input("Speed for turning wheel: "))
+    self.degrees = float(input("Degrees to turn: "))
+    self.speed = float(input("Speed for turning wheel: "))
