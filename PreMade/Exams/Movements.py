@@ -5,8 +5,8 @@ class RobotMovement:
   def __init__(self, robot, sec,left,right):
     self.robot = robot
     self.seconds = sec
-    self.left = left
-    self.right = right
+    self.leftSpeed = left
+    self.rightSpeed = right
     
   def lige_ud(self):
     print("Kører lige ud: ")
