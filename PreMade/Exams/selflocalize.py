@@ -128,7 +128,8 @@ landmarks = {
     2: (400.0,500.0), 
     7: (100.0,500.0)
 }
-
+visited = []
+n = 0
 landmark_colors = [CRED, CGREEN, CBLACK, CYELLOW] # Colors used when drawing the landmarks
 
 
@@ -410,18 +411,25 @@ try:
 
         arlo = robot.Robot()
         est_pose = particle.estimate_pose(particles) # The estimate of the robots current pose
-        if not detected_objects:
-            move = Movements.RobotMovement(arlo, 0, 32, 34)
-            move.drej(0.3)
 
 
-        if (0.1 < corresponding_angle) or (-0.1 > corresponding_angle):
-            move = Movements.RobotMovement(arlo, 0, 32, 34)
-            move.drej(corresponding_angle)
+        listelort = objectIDs 
+        if objectIDs[n] not in visited:
 
-        if (40 < shortest_distance) and (corresponding_angle <= 0.1):
-            move = Movements.RobotMovement(arlo, 0, 32, 34)
-            move.lige_ud(300)
+            if not detected_objects:
+                move = Movements.RobotMovement(arlo, 0, 32, 34)
+                move.drej(0.3)
+            
+            if (0.1 < corresponding_angle) or (-0.1 > corresponding_angle):
+                move = Movements.RobotMovement(arlo, 0, 32, 34)
+                move.drej(corresponding_angle)
+
+            if (40 < shortest_distance) and (corresponding_angle <= 0.1):
+                move = Movements.RobotMovement(arlo, 0, 32, 34)
+                move.lige_ud(300)
+            else:
+                visited.append(listelort[n])
+                n+=1
         
           # Compute midpoint of the two boxes:
         #x_landmark_1, y_landmark_1 = landmarks[3]
