@@ -6,8 +6,8 @@ import time
 from timeit import default_timer as timer
 import sys
 import math
-import pile
 import robot
+import Movements
 
 # Flags
 showGUI = True  # Whether or not to open GUI windows
@@ -297,7 +297,10 @@ try:
 
         # XXX: Make the robot drive
         # XXX: You do this
-        
+        go = True
+        while go:
+            lige_ud(1,32,32)
+            go = False
 
 
 
