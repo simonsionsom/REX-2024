@@ -1,6 +1,6 @@
 from time import sleep
 
-import PreMade.robot as robot
+import robot 
 
 # Create a robot object and initialize
 arlo = robot.Robot()
@@ -27,18 +27,20 @@ else :
 retning = input()'''
 print("Duration: ")
 duration = float(input())
+print('Hvor mange gange?')
+tændt = float(input())
 
 while tændt > 0 :
-  print(arlo.go_diff(63, 63, 1, 1))
+  '''print(arlo.go_diff(63, 63, 1, 1))'''
   sleep(3)
   print(arlo.stop())
   # Wait a bit before next command
   sleep(0.041)
-  print(arlo.go_diff(leftSpeed, rightSpeed, 1, 0))
+  print(arlo.go_diff(leftSpeed, rightSpeed, 1, 1))
   sleep(duration)
   print(arlo.stop())
   tændt = tændt -1
-  #din mor
+  #din mor'''
 '''
 if retning == "l":
   sleep(1)
@@ -74,6 +76,6 @@ else :
   print(arlo.stop())
   print("Finished")
   sleep(1)
+
+
 '''
-
-

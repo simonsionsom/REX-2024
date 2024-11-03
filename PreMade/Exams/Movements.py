@@ -24,5 +24,3 @@ def drej(seconds, left, right):
     sleep(seconds)
 
 lige_ud(seconds, leftSpeed, rightSpeed)
-
-
