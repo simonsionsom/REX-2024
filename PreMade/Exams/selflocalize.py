@@ -419,7 +419,7 @@ try:
         print(f"Current landmark ID:{landmarkIDs[n]}")
         if landmarkIDs[n] not in visited:
             
-            if (0.1 < corresponding_angle) or (-0.1 > corresponding_angle):
+            if (0.2 < corresponding_angle) or (-0.2 > corresponding_angle):
                 move.drej(corresponding_angle)
 
             elif (80 < shortest_distance) and (corresponding_angle <= 0.1):
