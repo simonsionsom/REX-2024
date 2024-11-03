@@ -297,9 +297,7 @@ try:
 
         # XXX: Make the robot drive
         # XXX: You do this
-        time.sleep(5)
-        print('burde køre nu')
-        Movements.lige_ud(arlo,1,32,32)
+        
 
 
         
@@ -322,6 +320,10 @@ try:
         # Detect objects
         objectIDs, dists, angles = cam.detect_aruco_objects(colour)
         if not isinstance(objectIDs, type(None)):
+
+            time.sleep(5)
+            print('burde køre nu')
+            Movements.lige_ud(arlo,1,32,32)
 
             detected_objects = {}
             # List detected objects
