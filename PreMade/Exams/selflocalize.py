@@ -8,6 +8,7 @@ import sys
 import math
 import pile
 import robot
+import Movements
 
 # Flags
 showGUI = True  # Whether or not to open GUI windows
@@ -216,6 +217,9 @@ try:
         cv2.namedWindow(WIN_World,cv2.WINDOW_AUTOSIZE)
         cv2.moveWindow(WIN_World, 500, 50)
 
+    arlo = robot.Robot()
+    drej(0.5)
+    lige_ud(1000)
 
     # Initialize particles
     num_particles = 320
