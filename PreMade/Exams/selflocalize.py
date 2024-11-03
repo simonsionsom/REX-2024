@@ -128,7 +128,7 @@ landmarks = {
     2: (400.0,500.0), 
     7: (100.0,500.0)
 }
-visited = [0, 0, 0, 0]
+visited = []
 n = 0
 landmark_colors = [CRED, CGREEN, CBLACK, CYELLOW] # Colors used when drawing the landmarks
 
@@ -415,16 +415,17 @@ try:
         est_pose = particle.estimate_pose(particles) # The estimate of the robots current pose
 
 
+        
         print(f"Current landmark ID:{landmarkIDs[n]}")
-        if visited[n] != 1:
+        if landmarkIDs[n] not in visited:
             
             if (0.1 < corresponding_angle) or (-0.1 > corresponding_angle):
                 move.drej(corresponding_angle)
 
-            if (80 < shortest_distance) and (corresponding_angle <= 0.1):
+            elif (80 < shortest_distance) and (corresponding_angle <= 0.1):
                 move.lige_ud(300)
             else:
-                visited[n] = 1
+                visited.append(landmarkIDs[n]) 
                 n+=1
                 print(f"n = {n}")
         else:
