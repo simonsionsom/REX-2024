@@ -16,7 +16,7 @@ class RobotMovement:
     print(self.robot.stop())
 
   def drej(self, vinkel):
-    sekunder = (vinkel/0.28)*0.3
+    sekunder = abs((vinkel/0.28)*0.3)
     if vinkel > 0:
       print(self.robot.go_diff(self.left, self.right, 0, 1))
       sleep(sekunder)
