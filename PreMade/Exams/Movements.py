@@ -10,7 +10,7 @@ class RobotMovement:
     
   def lige_ud(self):
     print("Kører lige ud: ")
-    print(self.robot.go_diff(self.left, self.right, 1, 1))
+    print(self.robot.go_diff(self.leftSpeed, self.rightSpeed, 1, 1))
     print(f"Distance traveled {self.seconds/2}")
     sleep(self.seconds)
 
