@@ -120,12 +120,12 @@ CBLACK = (0, 0, 0)
 
 # Landmarks.
 # The robot knows the position of 2 landmarks. Their coordinates are in the unit centimeters [cm].
-landmarkIDs = [3, 4,2,6]
+landmarkIDs = [6, 3,2,6]
 landmarks = {
-    3: (100.0, 100.0),  # Coordinates for landmark 1
-    4: (400.0, 100.0),  # Coordinates for landmark 2
+    6: (100.0, 100.0),  # Coordinates for landmark 1
+    3: (400.0, 100.0),  # Coordinates for landmark 2
     2: (400.0,500.0), 
-    6: (100.0,500.0)
+    7: (100.0,500.0)
 }
 
 landmark_colors = [CRED, CGREEN, CBLACK, CYELLOW] # Colors used when drawing the landmarks
@@ -147,8 +147,9 @@ def draw_world(est_pose, particles, world):
     This functions draws robots position in the world coordinate system."""
 
     # Fix the origin of the coordinate system
-    offsetX = 0 # ændret her for at teste lørdag aften
-    offsetY = 0 # ændret her for at teste lørdag aften
+    offsetX = 100
+    offsetY = 100
+
 
     # Constant needed for transforming from world coordinates to screen coordinates (flip the y-axis)
     ymax = world.shape[0]
@@ -175,6 +176,7 @@ def draw_world(est_pose, particles, world):
         ID = landmarkIDs[i]
         lm = (int(landmarks[ID][0] + offsetX), int(ymax - (landmarks[ID][1] + offsetY)))
         cv2.circle(world, lm, 5, landmark_colors[i], 2)
+        cv2.putText(world, f"{ID}", lm, fontFace = cv2.FONT_HERSHEY_DUPLEX, fontScale=1.0,color = (125, 246, 55), thickness = 3)
 
     # Draw estimated robot pose
     a = (int(est_pose.getX())+offsetX, ymax-(int(est_pose.getY())+offsetY))
@@ -216,7 +218,7 @@ try:
 
 
     # Initialize particles
-    num_particles = 1000
+    num_particles = 320
     particles = initialize_particles(num_particles)
 
     est_pose = particle.estimate_pose(particles) # The estimate of the robots current pose
@@ -405,9 +407,9 @@ try:
     
         est_pose = particle.estimate_pose(particles) # The estimate of the robots current pose
           # Compute midpoint of the two boxes:
-        x_landmark_1, y_landmark_1 = landmarks[3]
-        x_landmark_2, y_landmark_2 = landmarks[4]
-        x_mid, y_mid = ((x_landmark_1+x_landmark_2)/2, (y_landmark_1+y_landmark_2)/2)
+        #x_landmark_1, y_landmark_1 = landmarks[3]
+        #x_landmark_2, y_landmark_2 = landmarks[4]
+        #x_mid, y_mid = ((x_landmark_1+x_landmark_2)/2, (y_landmark_1+y_landmark_2)/2)
         #angles = []
         #for obj_id, info in detected_objects.items():
         #  angles.append(info["angle"])
