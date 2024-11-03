@@ -299,15 +299,7 @@ try:
 
         # XXX: Make the robot drive
         # XXX: You do this
-        arlo = robot.Robot()
-        if detected_objects is not None:
-            if 0.1 < corresponding_angle:
-                move = Movements.RobotMovement(arlo, 0, 32, 34)
-                move.drej(0.3)
-                objectIDs, dists,
-            if (40 < shortest_distance) and (corresponding_angle <= 0.1):
-                move = Movements.RobotMovement(arlo, 0, 32, 34)
-                move.lige_ud(30)
+
     
         
 
@@ -416,8 +408,16 @@ try:
             for p in particles:
                 p.setWeight(1.0/num_particles)
 
-    
+        arlo = robot.Robot()
         est_pose = particle.estimate_pose(particles) # The estimate of the robots current pose
+        if 0.1 < corresponding_angle:
+            move = Movements.RobotMovement(arlo, 0, 32, 34)
+            move.drej(0.3)
+
+        if (40 < shortest_distance) and (corresponding_angle <= 0.1):
+            move = Movements.RobotMovement(arlo, 0, 32, 34)
+            move.lige_ud(30)
+        
           # Compute midpoint of the two boxes:
         #x_landmark_1, y_landmark_1 = landmarks[3]
         #x_landmark_2, y_landmark_2 = landmarks[4]
