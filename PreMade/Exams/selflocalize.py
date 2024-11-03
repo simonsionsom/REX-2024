@@ -431,7 +431,7 @@ try:
                 continue
 
 
-        if landmarkIDs in visited:
+        if landmarkIDs[n] in visited:
 
             move.drej(2.5)
             n+=1
