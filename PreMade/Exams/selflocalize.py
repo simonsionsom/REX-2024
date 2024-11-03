@@ -417,9 +417,6 @@ try:
 
         
         if landmarkIDs[n] not in visited:
-
-            if not detected_objects:
-                move.drej(0.3)
             
             if (0.1 < corresponding_angle) or (-0.1 > corresponding_angle):
                 move.drej(corresponding_angle)
@@ -427,7 +424,7 @@ try:
             if (80 < shortest_distance) and (corresponding_angle <= 0.1):
                 move.lige_ud(300)
             else:
-                visited.append(landmarkIDs[n])
+                visited.append(landmarkIDs[n]) 
                 n+=1
         else:
             move.drej(0.8)
