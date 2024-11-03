@@ -415,7 +415,7 @@ try:
             move.drej(0.3)
 
 
-        if 0.1 < corresponding_angle:
+        if (0.1 < corresponding_angle) and (-0.1 > corresponding_angle):
             move = Movements.RobotMovement(arlo, 0, 32, 34)
             move.drej(corresponding_angle)
 
