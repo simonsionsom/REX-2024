@@ -20,7 +20,7 @@ class RobotMovement:
     print(f"Venstre: {self.leftSpeed}, Højre: {self.rightSpeed}")
     print(f"I {self.seconds} sekunder")
     sleep(0.041)
-    print(self.robot.go_diff(self.leftSpeed, self.rightSpeed, 1, 0))
+    print(self.robot.go_diff(self.leftSpeed, self.rightSpeed, 0, 1))
     sleep(self.seconds)
     self.robot.stop()
 
