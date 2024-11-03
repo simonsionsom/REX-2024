@@ -416,7 +416,7 @@ try:
 
         if (40 < shortest_distance) and (corresponding_angle <= 0.1):
             move = Movements.RobotMovement(arlo, 0, 32, 34)
-            move.lige_ud(30)
+            move.lige_ud(300)
         
           # Compute midpoint of the two boxes:
         #x_landmark_1, y_landmark_1 = landmarks[3]
