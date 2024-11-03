@@ -13,7 +13,7 @@ class RobotMovement:
     print(self.robot.go_diff(self.leftSpeed, self.rightSpeed, 1, 1))
     print(f"Distance traveled {self.seconds/2}")
     sleep(self.seconds)
-    self.arlo.stop()
+    self.robot.stop()
 
 
   def drej(self):
@@ -22,7 +22,7 @@ class RobotMovement:
     sleep(0.041)
     print(self.arlo.go_diff(self.left, self.right, 1, 0))
     sleep(self.seconds)
-    self.arlo.stop()
+    self.robot.stop()
 
   def turn_degrees(self, degrees, speed, wheelbase):
     # Convert degrees to radians and calculate arc length
