@@ -410,9 +410,14 @@ try:
 
         arlo = robot.Robot()
         est_pose = particle.estimate_pose(particles) # The estimate of the robots current pose
-        if 0.1 < corresponding_angle:
+        if not detected_objects:
             move = Movements.RobotMovement(arlo, 0, 32, 34)
             move.drej(0.3)
+
+
+        if 0.1 < corresponding_angle:
+            move = Movements.RobotMovement(arlo, 0, 32, 34)
+            move.drej(corresponding_angle)
 
         if (40 < shortest_distance) and (corresponding_angle <= 0.1):
             move = Movements.RobotMovement(arlo, 0, 32, 34)
