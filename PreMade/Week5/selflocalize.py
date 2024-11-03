@@ -125,7 +125,7 @@ landmarks = {
     6: (100.0, 100.0),  # Coordinates for landmark 1
     3: (400.0, 100.0),  # Coordinates for landmark 2
     2: (400.0,500.0), 
-    6: (100.0,500.0)
+    7: (100.0,500.0)
 }
 
 landmark_colors = [CRED, CGREEN, CBLACK, CYELLOW] # Colors used when drawing the landmarks
