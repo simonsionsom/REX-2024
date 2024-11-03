@@ -217,10 +217,7 @@ try:
         cv2.namedWindow(WIN_World,cv2.WINDOW_AUTOSIZE)
         cv2.moveWindow(WIN_World, 500, 50)
 
-    arlo = robot.Robot()
-    move = Movements.RobotMovement(arlo, 0, 32, 34)
-    move.drej(0.5)
-    move.lige_ud(1000)
+
 
     # Initialize particles
     num_particles = 320
@@ -296,12 +293,16 @@ try:
             
 
 
-        arlo = robot.Robot()
+        
 
 
 
         # XXX: Make the robot drive
         # XXX: You do this
+        arlo = robot.Robot()
+        move = Movements.RobotMovement(arlo, 0, 32, 34)
+        move.drej(0.5)
+        move.lige_ud(1000)    
         
 
 
