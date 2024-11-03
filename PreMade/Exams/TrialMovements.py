@@ -6,4 +6,5 @@ Move = Movements.RobotMovement(arlo, 0, 0 , 0)
 Move.setData()
 Move.lige_ud()
 Move.setData()
-Move.drej()
+for i in range(6):
+  Move.drej()
