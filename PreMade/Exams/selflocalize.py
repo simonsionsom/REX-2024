@@ -428,6 +428,7 @@ try:
             else:
                 visited.append(landmarkIDs[n]) 
                 print(f"n = {n}")
+                continue
 
 
         if landmarkIDs in visited:
