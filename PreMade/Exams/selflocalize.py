@@ -300,7 +300,7 @@ try:
         go = True
         while go:
             time.sleep(5)
-            lige_ud(arlo,1,32,32)
+            Movements.lige_ud(arlo,1,32,32)
             go = False
 
 
