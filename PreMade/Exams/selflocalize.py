@@ -429,7 +429,10 @@ try:
                 visited.append(landmarkIDs[n]) 
                 n+=1
                 print(f"n = {n}")
-        else:
+
+                
+        if landmarkIDs in visited:
+
             move.drej(2.5)
                 
           # Compute midpoint of the two boxes:
