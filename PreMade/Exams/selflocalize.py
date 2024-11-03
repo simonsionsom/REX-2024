@@ -415,21 +415,20 @@ try:
         est_pose = particle.estimate_pose(particles) # The estimate of the robots current pose
 
 
-        
-        #print(f"Current landmark ID:{landmarkIDs[n]}")
-        #if landmarkIDs[n] not in visited:
+        print(f"Current landmark ID:{landmarkIDs[n]}")
+        if (landmarkIDs[n] != visited[n-1]) and landmarkIDs not in visited:
             
-        #    if (0.1 < corresponding_angle) or (-0.1 > corresponding_angle):
-        #        move.drej(corresponding_angle)
+            if (0.1 < corresponding_angle) or (-0.1 > corresponding_angle):
+                move.drej(corresponding_angle)
 
-       #     if (80 < shortest_distance) and (corresponding_angle <= 0.1):
-         #       move.lige_ud(300)
-          #  else:
-           #     visited.append(landmarkIDs[n]) 
-            #    n+=1
-             #   print(f"n = {n}")
-        #else:
-         #   move.drej(0.8)
+            if (80 < shortest_distance) and (corresponding_angle <= 0.1):
+                move.lige_ud(300)
+            else:
+                visited.append(landmarkIDs[n]) 
+                n+=1
+                print(f"n = {n}")
+        else:
+            move.drej(0.8)
           # Compute midpoint of the two boxes:
         #x_landmark_1, y_landmark_1 = landmarks[3]
         #x_landmark_2, y_landmark_2 = landmarks[4]
