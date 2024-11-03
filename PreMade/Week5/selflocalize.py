@@ -120,12 +120,12 @@ CBLACK = (0, 0, 0)
 
 # Landmarks.
 # The robot knows the position of 2 landmarks. Their coordinates are in the unit centimeters [cm].
-landmarkIDs = [3, 4]
+landmarkIDs = [3, 4,2,6]
 landmarks = {
-    3: (0.0, 0.0),  # Coordinates for landmark 1
-    4: (300.0, 0.0)  # Coordinates for landmark 2
-    #5: (300.0, 400.0),
-    #6: (0.0, 400.0)
+    3: (100.0, 100.0),  # Coordinates for landmark 1
+    4: (400.0, 100.0),  # Coordinates for landmark 2
+    2: (400.0,500.0), 
+    6: (100.0,500.0)
 }
 
 landmark_colors = [CRED, CGREEN, CBLACK, CYELLOW] # Colors used when drawing the landmarks
@@ -147,8 +147,8 @@ def draw_world(est_pose, particles, world):
     This functions draws robots position in the world coordinate system."""
 
     # Fix the origin of the coordinate system
-    offsetX = 100
-    offsetY = 250
+    offsetX = 0 # ændret her for at teste lørdag aften
+    offsetY = 0 # ændret her for at teste lørdag aften
 
     # Constant needed for transforming from world coordinates to screen coordinates (flip the y-axis)
     ymax = world.shape[0]
@@ -206,11 +206,12 @@ try:
     if showGUI:
         # Open windows
         WIN_RF1 = "Robot view"
-        cv2.namedWindow(WIN_RF1)
+        cv2.namedWindow(WIN_RF1,cv2.WINDOW_AUTOSIZE)
+        cv2.resizeWindow(WIN_RF1, 600, 400) 
         cv2.moveWindow(WIN_RF1, 50, 50)
 
         WIN_World = "World view"
-        cv2.namedWindow(WIN_World)
+        cv2.namedWindow(WIN_World,cv2.WINDOW_AUTOSIZE)
         cv2.moveWindow(WIN_World, 500, 50)
 
 
@@ -228,7 +229,7 @@ try:
     #robot_pose = particle.Particle(150, 100, 0, 0)
 
     # Allocate space for world map
-    world = np.zeros((5000,5000,3), dtype=np.uint8)
+    world = np.zeros((600,600,3), dtype=np.uint8)
     print(len(particles),world.shape)
     # Draw map
     draw_world(est_pose, particles, world)
