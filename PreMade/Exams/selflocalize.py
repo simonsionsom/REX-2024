@@ -128,7 +128,7 @@ landmarks = {
     2: (400.0,500.0), 
     7: (100.0,500.0)
 }
-visited = []
+visited = [0, 0, 0, 0]
 n = 0
 landmark_colors = [CRED, CGREEN, CBLACK, CYELLOW] # Colors used when drawing the landmarks
 
@@ -416,7 +416,7 @@ try:
 
 
         print(f"Current landmark ID:{landmarkIDs[n]}")
-        if (landmarkIDs[n] != visited[n-1]) and landmarkIDs not in visited:
+        if visited[n] != 1:
             
             if (0.1 < corresponding_angle) or (-0.1 > corresponding_angle):
                 move.drej(corresponding_angle)
@@ -424,7 +424,7 @@ try:
             if (80 < shortest_distance) and (corresponding_angle <= 0.1):
                 move.lige_ud(300)
             else:
-                visited.append(landmarkIDs[n]) 
+                visited[n] = 1
                 n+=1
                 print(f"n = {n}")
         else:
