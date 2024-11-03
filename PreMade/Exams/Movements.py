@@ -8,18 +8,21 @@ class RobotMovement:
     self.left = left
     self.right = right
     
-  def lige_ud(self):
+  def lige_ud(self, længde):
+    sekunder = længde/1000*5.6
     print("Kører lige ud: ")
     print(self.robot.go_diff(self.left, self.right, 1, 1))
-    print(f"Distance traveled {self.seconds/2}")
-    sleep(self.seconds)
+    sleep(sekunder)
 
-  def drej(self):
-    print(f"Venstre: {self.left}, Højre: {self.right}")
-    print(f"I {self.seconds} sekunder")
-    sleep(0.041)
-    print(self.arlo.go_diff(self.left, self.right, 1, 0))
-    sleep(self.seconds)
+  def drej(self, vinkel):
+    sekunder = (vinkel/0.28)*0.3
+    if vinkel > 0:
+      print(self.arlo.go_diff(self.left, self.right, 0, 1))
+      sleep(sekunder)
+    else:
+      print(self.arlo.go_diff(self.left, self.right, 1, 0))
+      sleep(sekunder)
+
 
   def turn_degrees(self, degrees, speed, wheelbase):
     # Convert degrees to radians and calculate arc length
