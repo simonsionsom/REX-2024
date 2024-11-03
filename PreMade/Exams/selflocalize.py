@@ -300,9 +300,15 @@ try:
         # XXX: Make the robot drive
         # XXX: You do this
         arlo = robot.Robot()
-        move = Movements.RobotMovement(arlo, 0, 32, 34)
-        move.drej(0.5)
-        move.lige_ud(1000)    
+        if detected_objects is not None:
+            if 0.1 < corresponding_angle:
+                move = Movements.RobotMovement(arlo, 0, 32, 34)
+                move.drej(0.3)
+                objectIDs, dists,
+            if (40 < shortest_distance) and (corresponding_angle <= 0.1):
+                move = Movements.RobotMovement(arlo, 0, 32, 34)
+                move.lige_ud(30)
+    
         
 
 
