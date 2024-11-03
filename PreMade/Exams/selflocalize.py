@@ -7,8 +7,7 @@ from timeit import default_timer as timer
 import sys
 import math
 import robot
-from Movements import lige_ud
-from Movements import drej
+import Movements
 
 # Flags
 showGUI = True  # Whether or not to open GUI windows
@@ -218,6 +217,7 @@ try:
         cv2.moveWindow(WIN_World, 500, 50)
 
 
+
     # Initialize particles
     num_particles = 320
     particles = initialize_particles(num_particles)
@@ -292,13 +292,16 @@ try:
             
 
 
-        arlo = robot.Robot()
+        
 
 
 
         # XXX: Make the robot drive
         # XXX: You do this
+
+    
         
+
 
 
         
@@ -408,8 +411,21 @@ try:
             for p in particles:
                 p.setWeight(1.0/num_particles)
 
-    
+        arlo = robot.Robot()
         est_pose = particle.estimate_pose(particles) # The estimate of the robots current pose
+        if not detected_objects:
+            move = Movements.RobotMovement(arlo, 0, 32, 34)
+            move.drej(0.3)
+
+
+        if (0.1 < corresponding_angle) or (-0.1 > corresponding_angle):
+            move = Movements.RobotMovement(arlo, 0, 32, 34)
+            move.drej(corresponding_angle)
+
+        if (40 < shortest_distance) and (corresponding_angle <= 0.1):
+            move = Movements.RobotMovement(arlo, 0, 32, 34)
+            move.lige_ud(300)
+        
           # Compute midpoint of the two boxes:
         #x_landmark_1, y_landmark_1 = landmarks[3]
         #x_landmark_2, y_landmark_2 = landmarks[4]
