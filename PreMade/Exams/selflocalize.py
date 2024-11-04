@@ -417,7 +417,7 @@ try:
 
         
         print(f"Current landmark ID:{landmarkIDs[n]}")
-        if (landmarkIDs[n] not in visited) and (detected_objects is not None):
+        if (landmarkIDs[n] not in visited) and (objectIDs is not None):
             
             if (0.2 < corresponding_angle) or (-0.2 > corresponding_angle):
                 move.drej(corresponding_angle)
