@@ -121,12 +121,12 @@ CBLACK = (0, 0, 0)
 
 # Landmarks.
 # The robot knows the position of 2 landmarks. Their coordinates are in the unit centimeters [cm].
-landmarkIDs = [1, 3, 2, 7]
+landmarkIDs = [1, 2, 3, 4]
 landmarks = {
     1: (100.0, 100.0),  # Coordinates for landmark 1
-    3: (400.0, 100.0),  # Coordinates for landmark 2
-    2: (400.0,500.0), 
-    7: (100.0,500.0)
+    2: (400.0, 100.0),  # Coordinates for landmark 2
+    3: (400.0,500.0), 
+    4: (100.0,500.0)
 }
 visited = []
 n = 0
@@ -437,8 +437,7 @@ try:
             move.drej(2.5)
             n+=1
             print(f"n = {n}")
-        else:
-            move.drej(0.5)
+        
                 
           # Compute midpoint of the two boxes:
         #x_landmark_1, y_landmark_1 = landmarks[3]
