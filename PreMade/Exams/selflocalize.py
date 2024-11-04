@@ -436,9 +436,10 @@ try:
                     print(f"n = {n}")
                     print(f"VISITED LIST: {visited}")
                     print(f"{landmarkIDs[n]}")
-            else:
-                move.drej(0.5)
-                move.lige_ud(300)
+            
+            if landmarkIDs[n] not in objectIDs:
+                move.drej(2.5)
+                move.lige_ud(600)
 
                 
                 
