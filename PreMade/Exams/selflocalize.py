@@ -428,6 +428,7 @@ try:
             else:
                 visited.append(landmarkIDs[n]) 
                 print(f"n = {n}")
+                print(visited)
                 
         else:
             move.drej(1.0)
