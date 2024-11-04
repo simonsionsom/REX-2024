@@ -121,12 +121,12 @@ CBLACK = (0, 0, 0)
 
 # Landmarks.
 # The robot knows the position of 2 landmarks. Their coordinates are in the unit centimeters [cm].
-landmarkIDs = [1, 2, 3, 4]
+landmarkIDs = [1, 2, 3, 6]
 landmarks = {
     1: (100.0, 100.0),  # Coordinates for landmark 1
     2: (400.0, 100.0),  # Coordinates for landmark 2
     3: (400.0,500.0), 
-    4: (100.0,500.0)
+    6: (100.0,500.0)
 }
 visited = []
 n = 0
@@ -422,7 +422,7 @@ try:
             if (0.2 < corresponding_angle) or (-0.2 > corresponding_angle):
                 move.drej(corresponding_angle)
 
-            elif (80 < shortest_distance):
+            elif (60 < shortest_distance):
                 move.lige_ud(300)
 
             else:
