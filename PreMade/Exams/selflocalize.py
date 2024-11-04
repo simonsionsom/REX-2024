@@ -314,7 +314,7 @@ try:
         # Fetch next frame
         colour = cam.get_next_frame()
         robot_measured_distances = {
-            3: 400.0,  # Example distance to landmark 1
+            1: 400.0,  # Example distance to landmark 1
             4: 300.0   # Example distance to landmark 2
             #5: 250.0,
             #6: 200.0
