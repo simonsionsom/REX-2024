@@ -437,7 +437,7 @@ try:
                 if (0.2 < corresponding_angle) or (-0.2 > corresponding_angle):
                     move.drej(corresponding_angle)
 
-                elif (60 < shortest_distance):
+                elif (80 < shortest_distance):
                     move.lige_ud(300)
 
                 else:
