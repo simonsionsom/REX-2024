@@ -418,6 +418,16 @@ try:
         if objectIDs is None:
             move.drej(1)
         
+        elif len(visited)==4 and landmarkIDs[0] in objectIDs:
+
+            if (0.2 < corresponding_angle) or (-0.2 > corresponding_angle):
+                move.drej(corresponding_angle)
+
+            elif (45 < shortest_distance):
+                move.lige_ud(200)
+            else:
+                print("Finished")
+
             
         else:
             print(f"Current landmark ID:{landmarkIDs[n]}")
