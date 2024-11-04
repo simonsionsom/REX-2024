@@ -416,29 +416,28 @@ try:
 
 
         
-        print(f"Current landmark ID:{landmarkIDs[n]}")
-        if (landmarkIDs[n] != visited[n-1]) and objectIDs is not None:
+    print(f"Current landmark ID:{landmarkIDs[n]}")
+    if (landmarkIDs[n] not in visited) and objectIDs is not None:
             
-            if (0.2 < corresponding_angle) or (-0.2 > corresponding_angle):
-                move.drej(corresponding_angle)
+        if (0.2 < corresponding_angle) or (-0.2 > corresponding_angle):
+            move.drej(corresponding_angle)
+        elif (60 < shortest_distance):
+            move.lige_ud(300)
 
-            elif (60 < shortest_distance):
-                move.lige_ud(300)
-
-            else:
-                visited.append(landmarkIDs[n]) 
-                print(f"n = {n}")
-                print(f"VISITED LIST: {visited}")
-                print(f"VISITED LIST: {visited}")
-                print(f"VISITED LIST: {visited}")
-                print(f"VISITED LIST: {visited}")
-                print(f"VISITED LIST: {visited}")
-                print(f"VISITED LIST: {visited}")
-                print(f"VISITED LIST: {visited}")
-                n+=1
-                
         else:
-            move.drej(1.0)
+            visited.append(landmarkIDs[n]) 
+            print(f"n = {n}")
+            print(f"VISITED LIST: {visited}")
+            print(f"VISITED LIST: {visited}")
+            print(f"VISITED LIST: {visited}")
+            print(f"VISITED LIST: {visited}")
+            print(f"VISITED LIST: {visited}")
+            print(f"VISITED LIST: {visited}")
+            print(f"VISITED LIST: {visited}")
+            n+=1
+            
+    else:
+        move.drej(1.0)
 
        # if landmarkIDs[n] in visited:
 #
