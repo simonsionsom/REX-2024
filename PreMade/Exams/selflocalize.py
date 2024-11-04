@@ -415,37 +415,31 @@ try:
         est_pose = particle.estimate_pose(particles) # The estimate of the robots current pose
 
 
+        if objectIDs is None:
+            move.drej(1)
         
-        print(f"Current landmark ID:{landmarkIDs[n]}")
-        if landmarkIDs[n] not in visited and landmarkIDs[n] in objectIDs:
-        #if (landmarkIDs[n] not in visited) and objectIDs is not None:
-            
-            if (0.2 < corresponding_angle) or (-0.2 > corresponding_angle):
-                move.drej(corresponding_angle)
-
-            elif (60 < shortest_distance):
-                move.lige_ud(300)
-
-            else:
-                visited.append(landmarkIDs[n]) 
-                n+=1
-                print(f"n = {n}")
-                print(f"VISITED LIST: {visited}")
-                print(f"{landmarkIDs[n]}")
-
-                
-                
-        #elif landmarkIDs[n] in visited:
-        #    n+=1
             
         else:
-            move.drej(1.0)
+            print(f"Current landmark ID:{landmarkIDs[n]}")
+            if landmarkIDs[n] not in visited and landmarkIDs[n] in objectIDs:
+            #if (landmarkIDs[n] not in visited) and objectIDs is not None:
+            
+                if (0.2 < corresponding_angle) or (-0.2 > corresponding_angle):
+                    move.drej(corresponding_angle)
 
-       # if landmarkIDs[n] in visited:
-#
- #           move.drej(2.5)
-  #          
-   #         print(f"n = {n}")
+                elif (60 < shortest_distance):
+                    move.lige_ud(300)
+
+                else:
+                    visited.append(landmarkIDs[n]) 
+                    n+=1
+                    print(f"n = {n}")
+                    print(f"VISITED LIST: {visited}")
+                    print(f"{landmarkIDs[n]}")
+
+                
+                
+
             
         
                 
