@@ -11,7 +11,7 @@ import robot
 import Movements
 
 # Flags
-showGUI = False  # Whether or not to open GUI windows
+showGUI = True  # Whether or not to open GUI windows
 onRobot = True  # Whether or not we are running on the Arlo robot
 
 def drive_straight(MIN_SPEED=30, DEFAULT_LEFT_SPEED=58, DEFAULT_RIGHT_SPEED=64, diff_angle=0):
