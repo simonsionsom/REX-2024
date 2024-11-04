@@ -11,7 +11,7 @@ import robot
 import Movements
 
 # Flags
-showGUI = True  # Whether or not to open GUI windows
+showGUI = False  # Whether or not to open GUI windows
 onRobot = True  # Whether or not we are running on the Arlo robot
 
 def drive_straight(MIN_SPEED=30, DEFAULT_LEFT_SPEED=58, DEFAULT_RIGHT_SPEED=64, diff_angle=0):
@@ -123,7 +123,7 @@ CBLACK = (0, 0, 0)
 # The robot knows the position of 2 landmarks. Their coordinates are in the unit centimeters [cm].
 landmarkIDs = [6, 3,2,6]
 landmarks = {
-    6: (100.0, 100.0),  # Coordinates for landmark 1
+    1: (100.0, 100.0),  # Coordinates for landmark 1
     3: (400.0, 100.0),  # Coordinates for landmark 2
     2: (400.0,500.0), 
     7: (100.0,500.0)
@@ -428,7 +428,7 @@ try:
             else:
                 visited.append(landmarkIDs[n]) 
                 print(f"n = {n}")
-                continue
+                
         else:
             move.drej(1.0)
 
