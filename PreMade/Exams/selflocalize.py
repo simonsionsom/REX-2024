@@ -427,8 +427,8 @@ try:
                 if (0.2 < corresponding_angle) or (-0.2 > corresponding_angle):
                     move.drej(corresponding_angle)
 
-                elif (60 < shortest_distance):
-                    move.lige_ud(300)
+                elif (45 < shortest_distance):
+                    move.lige_ud(200)
 
                 else:
                     visited.append(landmarkIDs[n]) 
