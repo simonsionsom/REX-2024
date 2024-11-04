@@ -417,7 +417,8 @@ try:
 
         
         print(f"Current landmark ID:{landmarkIDs[n]}")
-        if (landmarkIDs[n] not in visited) and objectIDs is not None:
+        if landmarkIDs[n] not in visited and landmarkIDs[n] in objectIDs:
+        #if (landmarkIDs[n] not in visited) and objectIDs is not None:
             
             if (0.2 < corresponding_angle) or (-0.2 > corresponding_angle):
                 move.drej(corresponding_angle)
@@ -427,14 +428,15 @@ try:
 
             else:
                 visited.append(landmarkIDs[n]) 
+                n+=1
                 print(f"n = {n}")
                 print(f"VISITED LIST: {visited}")
                 print(f"{landmarkIDs[n]}")
 
                 
                 
-        elif landmarkIDs[n] in visited:
-            n+=1
+        #elif landmarkIDs[n] in visited:
+        #    n+=1
             
         else:
             move.drej(1.0)
