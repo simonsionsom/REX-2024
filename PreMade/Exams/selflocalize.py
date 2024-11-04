@@ -438,7 +438,7 @@ try:
                     move.drej(corresponding_angle)
 
                 elif (45 < shortest_distance):
-                    move.lige_ud(200)
+                    move.lige_ud(300)
 
                 else:
                     visited.append(landmarkIDs[n]) 
