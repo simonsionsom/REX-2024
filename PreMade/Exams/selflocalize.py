@@ -11,7 +11,7 @@ import robot
 import Movements
 
 # Flags
-showGUI = False  # Whether or not to open GUI windows
+showGUI = True  # Whether or not to open GUI windows
 onRobot = True  # Whether or not we are running on the Arlo robot
 
 def drive_straight(MIN_SPEED=30, DEFAULT_LEFT_SPEED=58, DEFAULT_RIGHT_SPEED=64, diff_angle=0):
@@ -428,7 +428,6 @@ try:
             else:
                 visited.append(landmarkIDs[n]) 
                 print(f"n = {n}")
-                n+=1
                 
         else:
             move.drej(1.0)
@@ -436,7 +435,9 @@ try:
         if landmarkIDs[n] in visited:
 
             move.drej(2.5)
+            n+=1
             print(f"n = {n}")
+            
         
                 
           # Compute midpoint of the two boxes:
